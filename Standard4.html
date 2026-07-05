@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>شرح معيار 4 — أول 5 أسئلة | محمد السواط</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;800;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+ --blue:#084B8C; --blue-deep:#054084; --gold:#E8AD28; --gold-l:#F4B12C;
+ --green:#059548; --red:#D64541; --ink:#16233C; --muted:#5B6B85; --line:#E9EDF3;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Tajawal',sans-serif;color:var(--ink);background:#fff;font-size:18px;line-height:1.8}
+h1,h2,.brand,.tab,.qnum,.btn{font-family:'Cairo',sans-serif}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+/* ترويسة */
+header{background:var(--blue);color:#fff;padding:12px 0;box-shadow:0 2px 10px rgba(8,75,140,.2)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+.hrow{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.logo{height:64px;width:auto;background:#fff;border-radius:12px;padding:5px 12px;box-shadow:0 3px 10px rgba(0,0,0,.18);display:block}
+.brand{text-align:right;line-height:1.35}
+.brand .nm{font-weight:900;font-size:1.05rem}
+.brand .sub{font-size:.72rem;color:#cfe0f2;font-family:'Tajawal'}
+.tab{background:var(--gold);color:var(--blue-deep);font-weight:800;font-size:.9rem;padding:4px 16px;border-radius:8px 8px 8px 0}
+
+/* الشريحة */
+.slide{display:none;padding:26px 0 90px}
+.slide.on{display:block}
+.qbar{display:flex;gap:14px;align-items:flex-start;margin-bottom:6px}
+.qnum{flex:none;background:var(--blue);color:#fff;font-weight:800;width:46px;height:46px;display:grid;place-items:center;border-radius:12px 12px 0 12px;font-size:1.2rem}
+.qtext{font-weight:700;font-size:clamp(1.15rem,2.6vw,1.5rem);position:relative;padding-inline-start:14px}
+.qtext::before{content:"";position:absolute;inset-inline-start:0;top:8px;bottom:8px;width:5px;background:var(--gold);border-radius:5px}
+
+/* تخطيط: خيارات + لوحة رسم */
+.grid{display:grid;grid-template-columns:1fr;gap:18px;margin-top:14px}
+@media(min-width:900px){.grid.open{grid-template-columns:1fr 1.1fr;align-items:start}}
+
+.opts{display:grid;gap:12px}
+.opt{text-align:right;width:100%;border:2px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;gap:12px;align-items:center;background:#fff;font-size:1.1rem;transition:.15s}
+.opt:hover{border-color:var(--blue)}
+.opt .letter{flex:none;width:36px;height:36px;border-radius:50%;background:var(--blue);color:#fff;font-family:'Cairo';font-weight:800;display:grid;place-items:center}
+.opt.x{background:#FBF2F1;border-color:#EBC7C4}
+.opt.x .letter{background:var(--red)}
+.opt.x span:last-child{text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:2.5px;color:var(--muted)}
+.opt.ok{background:#F0FAF4;border-color:var(--green);box-shadow:0 0 0 4px rgba(5,149,72,.15)}
+.opt.ok .letter{background:var(--green)}
+
+/* زر إظهار الرسم */
+.showbtn{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--blue-deep);font-family:'Cairo';font-weight:800;font-size:1rem;padding:11px 26px;border-radius:12px;box-shadow:0 6px 16px rgba(232,173,40,.35);margin-top:16px;transition:.15s}
+.showbtn:hover{transform:translateY(-2px)}
+.showbtn.hide{display:none}
+
+/* لوحة الرسم */
+.panel{display:none;background:#FAFCFE;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 10px 28px rgba(8,75,140,.08)}
+.panel.on{display:block;animation:pop .3s}
+@keyframes pop{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
+.panel h2{color:var(--blue);font-size:1rem;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.panel h2::before{content:"";width:14px;height:14px;background:var(--gold);border-radius:4px}
+.diagrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.diagrid.one{grid-template-columns:1fr}
+.dcard{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px;text-align:center;transition:.2s}
+.dcard .lbl{font-family:'Cairo';font-weight:800;font-size:.9rem;color:var(--blue);margin-top:6px}
+.dcard.dim{opacity:.28;filter:grayscale(.6)}
+.dcard.hero{border-color:var(--green);box-shadow:0 0 0 3px rgba(5,149,72,.18)}
+.dcard svg{width:100%;height:auto;display:block}
+.notecard{background:#fff;border:1.5px solid var(--line);border-inline-start:4px solid var(--gold);border-radius:12px;padding:14px 16px;font-size:.98rem;line-height:1.9}
+
+/* تنقل سفلي */
+.nav{position:fixed;bottom:0;inset-inline:0;background:var(--blue);color:#fff;padding:10px 0;z-index:5}
+.nav::before{content:"";position:absolute;top:-14px;inset-inline-start:0;border-inline-start:36px solid var(--gold);border-top:14px solid transparent}
+.nrow{display:flex;justify-content:space-between;align-items:center}
+.nbtn{background:rgba(255,255,255,.14);color:#fff;font-family:'Cairo';font-weight:800;padding:8px 22px;border-radius:10px;font-size:.95rem}
+.nbtn:hover{background:rgba(255,255,255,.25)}
+.pg{font-size:.9rem;color:#cfe0f2}
+.reset{background:none;color:#9db9d6;font-size:.8rem;text-decoration:underline;text-underline-offset:3px}
+</style>
+</head>
+<body>
+
+<header><div class="wrap hrow">
+ <span class="tab">معيار 4 · الشبكات</span>
+ <img class="logo" src="data:image/jpeg;base64,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" alt="محمد السواط — مدرب الرخصة المهنية حاسب آلي">
+</div></header>
+
+<main class="wrap" id="host"></main>
+
+<div class="nav"><div class="wrap nrow">
+ <button class="nbtn" onclick="move(1)">السؤال التالي</button>
+ <span class="pg" id="pg"></span>
+ <div style="display:flex;gap:14px;align-items:center">
+   <button class="reset" onclick="resetSlide()">إعادة السؤال</button>
+   <button class="nbtn" onclick="move(-1)">السابق</button>
+ </div>
+</div></div>
+
+<script>
+"use strict";
+/* ======== رسوم SVG بهوية العلامة ======== */
+const C={b:"#084B8C",g:"#E8AD28",gr:"#059548",r:"#D64541",l:"#E9EDF3",m:"#5B6B85"};
+const node=(x,y,r=13,f=C.b)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${f}"/><circle cx="${x}" cy="${y}" r="${r-5}" fill="#fff" opacity=".25"/>`;
+
+const SVG={
+bus:`<svg viewBox="0 0 300 150">
+ <line x1="20" y1="75" x2="280" y2="75" stroke="${C.b}" stroke-width="6" stroke-linecap="round"/>
+ ${[60,115,170,225].map(x=>`<line x1="${x}" y1="75" x2="${x}" y2="45" stroke="${C.m}" stroke-width="3"/>`+node(x,35)).join("")}
+ <rect x="10" y="63" width="14" height="24" rx="3" fill="${C.g}"/>
+ <rect x="276" y="63" width="14" height="24" rx="3" fill="${C.g}"/>
+ <path d="M95 105 h60 m-8,-7 8,7 -8,7 M215 105 h-60 m8,-7 -8,7 8,7" stroke="${C.gr}" stroke-width="3" fill="none"/>
+</svg>`,
+ring:`<svg viewBox="0 0 300 150">
+ <circle cx="150" cy="75" r="52" fill="none" stroke="${C.b}" stroke-width="6"/>
+ ${node(150,23)}${node(150,127)}${node(98,75)}${node(202,75)}
+ <path d="M 185 40 A 52 52 0 0 1 202 68" fill="none" stroke="${C.gr}" stroke-width="4"/>
+ <path d="M 197 58 l 6 12 -13 -2 z" fill="${C.gr}"/>
+</svg>`,
+star:`<svg viewBox="0 0 300 150">
+ ${[[150,20],[60,75],[240,75],[95,130],[205,130]].map(p=>`<line x1="150" y1="75" x2="${p[0]}" y2="${p[1]}" stroke="${C.m}" stroke-width="3"/>`).join("")}
+ <rect x="128" y="57" width="44" height="36" rx="8" fill="${C.g}"/>
+ <text x="150" y="80" text-anchor="middle" font-size="13" font-weight="bold" fill="${C.b}" font-family="Cairo">Hub</text>
+ ${[[150,20],[60,75],[240,75],[95,130],[205,130]].map(p=>node(p[0],p[1])).join("")}
+</svg>`,
+mesh:`<svg viewBox="0 0 300 150">
+ ${(()=>{const P=[[150,18],[55,70],[245,70],[100,132],[200,132]];let s="";
+  for(let i=0;i<P.length;i++)for(let j=i+1;j<P.length;j++)s+=`<line x1="${P[i][0]}" y1="${P[i][1]}" x2="${P[j][0]}" y2="${P[j][1]}" stroke="${C.m}" stroke-width="2.5"/>`;
+  return s+P.map(p=>node(p[0],p[1])).join("")})()}
+</svg>`,
+term:`<svg viewBox="0 0 300 150">
+ <line x1="25" y1="75" x2="275" y2="75" stroke="${C.b}" stroke-width="7" stroke-linecap="round"/>
+ ${[95,150,205].map(x=>`<line x1="${x}" y1="75" x2="${x}" y2="47" stroke="${C.m}" stroke-width="3"/>`+node(x,37)).join("")}
+ <rect x="12" y="59" width="18" height="32" rx="4" fill="${C.g}" stroke="${C.b}" stroke-width="2"/>
+ <rect x="270" y="59" width="18" height="32" rx="4" fill="${C.g}" stroke="${C.b}" stroke-width="2"/>
+ <path d="M 250 108 q -25 20 -50 0" fill="none" stroke="${C.r}" stroke-width="3.5" stroke-dasharray="6 5"/>
+ <line x1="200" y1="95" x2="245" y2="122" stroke="${C.r}" stroke-width="4"/>
+ <line x1="245" y1="95" x2="200" y2="122" stroke="${C.r}" stroke-width="4"/>
+</svg>`,
+osi:(hl,span)=>{const L=["التطبيقات","العرض","الجلسة","النقل","الشبكة","ربط البيانات","الفيزيائية"];
+ return `<svg viewBox="0 0 300 238">${L.map((n,i)=>{
+  const y=6+i*33, active=(hl===i)||(span&&i>=span[0]&&i<=span[1]);
+  return `<rect x="30" y="${y}" width="240" height="28" rx="6" fill="${active?C.g:"#fff"}" stroke="${active?C.b:C.l}" stroke-width="${active?2.5:1.5}"/>
+  <text x="150" y="${y+19}" text-anchor="middle" font-size="14" font-family="Tajawal" font-weight="${active?700:500}" fill="${active?C.b:"#5B6B85"}">${7-i} — ${n}</text>`}).join("")}
+ </svg>`},
+wep:`<svg viewBox="0 0 300 195" direction="ltr">
+ <rect x="12" y="8" width="276" height="80" rx="12" fill="#fff" stroke="${C.gr}" stroke-width="2.5"/>
+ <text x="278" y="34" text-anchor="end" font-size="15" font-family="Cairo" font-weight="800" fill="${C.gr}" direction="ltr">WEP 128</text>
+ <rect x="22" y="16" width="52" height="24" rx="6" fill="${C.g}"/>
+ <text x="48" y="33" text-anchor="middle" font-size="14" font-family="Cairo" font-weight="800" fill="${C.b}" direction="ltr">26</text>
+ <text x="150" y="70" text-anchor="middle" font-size="12" font-family="monospace" font-weight="bold" fill="${C.b}" direction="ltr">1A2B:3C4D:5E6F:7A8B:9C0D:1E2F:3A</text>
+ <rect x="12" y="104" width="276" height="80" rx="12" fill="#FBFBFC" stroke="${C.l}" stroke-width="2"/>
+ <text x="278" y="130" text-anchor="end" font-size="15" font-family="Cairo" font-weight="800" fill="${C.m}" direction="ltr">WEP 64</text>
+ <rect x="22" y="112" width="52" height="24" rx="6" fill="${C.l}"/>
+ <text x="48" y="129" text-anchor="middle" font-size="14" font-family="Cairo" font-weight="800" fill="${C.m}" direction="ltr">10</text>
+ <text x="150" y="166" text-anchor="middle" font-size="13" font-family="monospace" font-weight="bold" fill="${C.m}" letter-spacing="1" direction="ltr">1A2B:3C4D:5E</text>
+</svg>`,
+share:`<svg viewBox="0 0 300 160">
+ <line x1="30" y1="118" x2="270" y2="118" stroke="${C.b}" stroke-width="6" stroke-linecap="round"/>
+ ${[75,150,225].map(x=>`<line x1="${x}" y1="118" x2="${x}" y2="88" stroke="${C.m}" stroke-width="3"/>`).join("")}
+ <rect x="53" y="50" width="44" height="26" rx="5" fill="${C.b}"/><rect x="61" y="38" width="28" height="16" rx="2" fill="#fff" stroke="${C.b}" stroke-width="2"/><rect x="61" y="68" width="28" height="12" rx="2" fill="${C.g}"/>
+ <rect x="128" y="58" width="44" height="18" rx="6" fill="${C.b}"/><line x1="134" y1="67" x2="166" y2="67" stroke="${C.g}" stroke-width="3"/>
+ <rect x="205" y="48" width="40" height="28" fill="${C.b}"/><ellipse cx="225" cy="48" rx="20" ry="7" fill="${C.g}"/><ellipse cx="225" cy="76" rx="20" ry="7" fill="${C.b}"/>
+ <text x="75" y="145" text-anchor="middle" font-size="12" font-family="Tajawal" font-weight="700" fill="${C.m}">طابعة</text>
+ <text x="150" y="145" text-anchor="middle" font-size="12" font-family="Tajawal" font-weight="700" fill="${C.m}">ماسح ضوئي</text>
+ <text x="225" y="145" text-anchor="middle" font-size="12" font-family="Tajawal" font-weight="700" fill="${C.m}">وحدة تخزين</text>
+</svg>`,
+nos:`<svg viewBox="0 0 300 160">
+ <rect x="158" y="14" width="130" height="132" rx="12" fill="#FBFBFC" stroke="${C.l}" stroke-width="2"/>
+ <text x="223" y="40" text-anchor="middle" font-size="13" font-family="Tajawal" font-weight="700" fill="${C.m}">أنظمة مكتبية</text>
+ <text x="223" y="70" text-anchor="middle" font-size="13" font-family="monospace" font-weight="bold" fill="${C.m}" direction="ltr">Windows</text>
+ <text x="223" y="94" text-anchor="middle" font-size="13" font-family="monospace" font-weight="bold" fill="${C.m}" direction="ltr">MAC</text>
+ <text x="223" y="126" text-anchor="middle" font-size="11" font-family="Tajawal" fill="${C.m}">للاستخدام الشخصي</text>
+ <rect x="12" y="14" width="130" height="132" rx="12" fill="#fff" stroke="${C.gr}" stroke-width="2.5"/>
+ <text x="77" y="40" text-anchor="middle" font-size="13" font-family="Tajawal" font-weight="700" fill="${C.gr}">نظام شبكات</text>
+ <text x="77" y="66" text-anchor="middle" font-size="12.5" font-family="monospace" font-weight="bold" fill="${C.b}" direction="ltr">Windows NT</text>
+ <rect x="57" y="78" width="40" height="34" rx="4" fill="${C.b}"/><line x1="63" y1="89" x2="91" y2="89" stroke="${C.g}" stroke-width="3"/><line x1="63" y1="100" x2="91" y2="100" stroke="${C.g}" stroke-width="3"/>
+ <text x="77" y="132" text-anchor="middle" font-size="11" font-family="Tajawal" fill="${C.m}">لإدارة الخوادم والشبكات</text>
+</svg>`,
+rtr2:`<svg viewBox="0 0 300 155">
+ ${[[262,42],[262,102],[232,72]].map(p=>`<rect x="${p[0]-11}" y="${p[1]-11}" width="22" height="22" rx="4" fill="${C.b}"/>`).join("")}
+ ${[[38,42],[38,102],[68,72]].map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="11" fill="${C.g}"/>`).join("")}
+ <line x1="85" y1="72" x2="122" y2="72" stroke="${C.m}" stroke-width="3"/>
+ <line x1="178" y1="72" x2="215" y2="72" stroke="${C.m}" stroke-width="3"/>
+ <rect x="122" y="52" width="56" height="40" rx="9" fill="${C.b}"/>
+ <text x="150" y="77" text-anchor="middle" font-size="11" font-family="monospace" font-weight="bold" fill="#fff" direction="ltr">Router</text>
+ <text x="250" y="138" text-anchor="middle" font-size="11.5" font-family="Tajawal" font-weight="700" fill="${C.b}">شبكة بعنونة أولى</text>
+ <text x="52" y="138" text-anchor="middle" font-size="11.5" font-family="Tajawal" font-weight="700" fill="#B07E0F">شبكة بعنونة مختلفة</text>
+</svg>`,
+brdg:`<svg viewBox="0 0 300 155">
+ ${[[38,42],[38,102],[68,72]].map(p=>node(p[0],p[1],11)).join("")}
+ ${[[262,42],[262,102],[232,72]].map(p=>node(p[0],p[1],11)).join("")}
+ <line x1="85" y1="72" x2="125" y2="72" stroke="${C.m}" stroke-width="3"/>
+ <line x1="175" y1="72" x2="215" y2="72" stroke="${C.m}" stroke-width="3"/>
+ <rect x="125" y="55" width="50" height="34" rx="8" fill="${C.g}"/>
+ <text x="150" y="77" text-anchor="middle" font-size="13" font-family="Tajawal" font-weight="800" fill="${C.b}">جسر</text>
+ <text x="150" y="132" text-anchor="middle" font-size="12" font-family="Tajawal" font-weight="700" fill="${C.m}">شبكتان متشابهتان (متجانستان)</text>
+</svg>`,
+lanwan:`<svg viewBox="0 0 300 155">
+ <line x1="250" y1="72" x2="288" y2="38" stroke="${C.m}" stroke-width="3"/>
+ <line x1="250" y1="72" x2="288" y2="108" stroke="${C.m}" stroke-width="3"/>
+ <line x1="250" y1="72" x2="244" y2="26" stroke="${C.m}" stroke-width="3"/>
+ <rect x="232" y="59" width="36" height="26" rx="6" fill="${C.g}"/>
+ ${node(288,38,9)}${node(288,108,9)}${node(244,26,9)}
+ <line x1="232" y1="72" x2="178" y2="72" stroke="${C.m}" stroke-width="3"/>
+ <rect x="122" y="52" width="56" height="40" rx="9" fill="${C.b}"/>
+ <text x="150" y="77" text-anchor="middle" font-size="11" font-family="monospace" font-weight="bold" fill="#fff" direction="ltr">Router</text>
+ <line x1="122" y1="72" x2="92" y2="72" stroke="${C.m}" stroke-width="3"/>
+ <path d="M 30 88 q -14 -16 6 -24 q 0 -16 20 -14 q 8 -14 24 -6 q 18 -6 18 12 q 16 8 4 22 q 2 12 -14 10 z" fill="#EAF1F9" stroke="${C.b}" stroke-width="2.5"/>
+ <text x="58" y="78" text-anchor="middle" font-size="10.5" font-family="monospace" font-weight="bold" fill="${C.b}" direction="ltr">Internet</text>
+ <text x="255" y="138" text-anchor="middle" font-size="11.5" font-family="Tajawal" font-weight="700" fill="${C.b}">شبكة محلية</text>
+ <text x="58" y="128" text-anchor="middle" font-size="11.5" font-family="Tajawal" font-weight="700" fill="${C.m}">شبكة موسعة</text>
+</svg>`,
+sizes:`<svg viewBox="0 0 300 170">
+ ${[["WAN","بين المدن والدول",260,"#084B8C"],["MAN","مدينة كاملة",205,"#0A5CA8"],["LAN","مبنى أو حي",150,"#B07E0F"],["PAN","شخصية",95,"#C88F13"]].map((r,i)=>{
+ const y=12+i*38,w=r[2],x=(300-w)/2;
+ return `<rect x="${x}" y="${y}" width="${w}" height="30" rx="8" fill="${i<2?'#EAF1F9':'#FFF7E6'}" stroke="${r[3]}" stroke-width="2"/>
+ <text x="${300-x-10}" y="${y+20}" text-anchor="end" font-size="12" font-family="Tajawal" font-weight="700" fill="${r[3]}">${r[1]}</text>
+ <text x="${x+10}" y="${y+20}" font-size="12" font-family="monospace" font-weight="bold" fill="${r[3]}" direction="ltr">${r[0]}</text>`}).join("")}
+</svg>`,
+cast:`<svg viewBox="0 0 300 165">
+ ${[[50,"Unicast","لواحد",[0]],[150,"Multicast","لمجموعة",[0,1]],[250,"Broadcast","للجميع",[0,1,2,3]]].map(g=>{
+ const cx=g[0],t=g[3],T=[-33,-11,11,33];
+ return node(cx,26,10)
+ +T.map((dx,i)=>`<line x1="${cx}" y1="36" x2="${cx+dx}" y2="84" stroke="${t.includes(i)?'#059548':'#D8DEE8'}" stroke-width="${t.includes(i)?3:1.5}"/>`).join("")
+ +T.map((dx,i)=>node(cx+dx,93,8,t.includes(i)?'#084B8C':'#C7CFDB')).join("")
+ +`<text x="${cx}" y="126" text-anchor="middle" font-size="10.5" font-family="monospace" font-weight="bold" fill="#084B8C" direction="ltr">${g[1]}</text>
+ <text x="${cx}" y="146" text-anchor="middle" font-size="11" font-family="Tajawal" font-weight="700" fill="#5B6B85">${g[2]}</text>`}).join("")}
+</svg>`,
+clisrv:`<svg viewBox="0 0 300 160">
+ <rect x="125" y="12" width="50" height="44" rx="6" fill="${C.b}"/>
+ <line x1="132" y1="26" x2="168" y2="26" stroke="${C.g}" stroke-width="3"/><line x1="132" y1="38" x2="168" y2="38" stroke="${C.g}" stroke-width="3"/>
+ <text x="150" y="74" text-anchor="middle" font-size="12" font-family="Tajawal" font-weight="700" fill="${C.b}">الخادم</text>
+ ${[[60,116],[150,124],[240,116]].map(p=>`<line x1="150" y1="56" x2="${p[0]}" y2="${p[1]-12}" stroke="${C.m}" stroke-width="2.5"/>`).join("")}
+ ${[[60,116],[150,124],[240,116]].map(p=>node(p[0],p[1],11)).join("")}
+ <text x="150" y="152" text-anchor="middle" font-size="11.5" font-family="Tajawal" font-weight="700" fill="${C.m}">العملاء يطلبون والخادم يخدم</text>
+</svg>`,
+ipvs:`<svg viewBox="0 0 300 175">
+ <rect x="12" y="8" width="276" height="74" rx="12" fill="#fff" stroke="${C.b}" stroke-width="2.5"/>
+ <text x="278" y="32" text-anchor="end" font-size="15" font-family="Cairo" font-weight="800" fill="${C.b}" direction="ltr">IPv4</text>
+ <text x="60" y="32" text-anchor="middle" font-size="11" font-family="Tajawal" font-weight="700" fill="${C.b}">32 بت عشري</text>
+ <text x="150" y="66" text-anchor="middle" font-size="14" font-family="monospace" font-weight="bold" fill="${C.b}" direction="ltr">192.168.1.1</text>
+ <rect x="12" y="94" width="276" height="74" rx="12" fill="#FBFBFC" stroke="${C.g}" stroke-width="2.5"/>
+ <text x="278" y="118" text-anchor="end" font-size="15" font-family="Cairo" font-weight="800" fill="#B07E0F" direction="ltr">IPv6</text>
+ <text x="66" y="118" text-anchor="middle" font-size="11" font-family="Tajawal" font-weight="700" fill="#B07E0F">128 بت ست عشري</text>
+ <text x="150" y="152" text-anchor="middle" font-size="12.5" font-family="monospace" font-weight="bold" fill="#B07E0F" direction="ltr">2001:0DB8:85A3::8A2E</text>
+</svg>`,
+ports:`<svg viewBox="0 0 300 150">
+ ${[["SMTP","25","إرسال البريد",10],["POP","110","استقبال البريد",108],["HTTP","80","صفحات الويب",206]].map(c=>{
+ const x=c[3];
+ return `<rect x="${x}" y="14" width="84" height="112" rx="12" fill="#fff" stroke="${C.l}" stroke-width="2"/>
+ <text x="${x+42}" y="40" text-anchor="middle" font-size="13" font-family="monospace" font-weight="bold" fill="${C.b}" direction="ltr">${c[0]}</text>
+ <rect x="${x+22}" y="52" width="40" height="26" rx="7" fill="${C.g}"/>
+ <text x="${x+42}" y="70" text-anchor="middle" font-size="13" font-family="Cairo" font-weight="800" fill="${C.b}" direction="ltr">${c[1]}</text>
+ <text x="${x+42}" y="108" text-anchor="middle" font-size="10.5" font-family="Tajawal" font-weight="700" fill="${C.m}">${c[2]}</text>`}).join("")}
+</svg>`,
+classes:`<svg viewBox="0 0 300 160">
+ ${[["Class A","1 - 126",0,18],["Class B","128 - 191",1,64],["Class C","192 - 223",0,110]].map(r=>{
+ const y=r[3],hot=r[2];
+ return `<rect x="16" y="${y}" width="268" height="38" rx="9" fill="${hot?'#FFF9EC':'#FBFBFC'}" stroke="${hot?'#E8AD28':'#E1E6EE'}" stroke-width="${hot?2.5:1.5}"/>
+ <text x="272" y="${y+25}" text-anchor="end" font-size="13" font-family="monospace" font-weight="bold" fill="${hot?'#B07E0F':'#5B6B85'}" direction="ltr">${r[0]}</text>
+ <text x="30" y="${y+25}" font-size="13" font-family="monospace" font-weight="bold" fill="${hot?'#B07E0F':'#5B6B85'}" direction="ltr">${r[1]}</text>`}).join("")}
+ <text x="150" y="152" text-anchor="middle" font-size="11.5" font-family="Tajawal" font-weight="700" fill="${C.m}">العبرة بأول رقم في العنوان</text>
+</svg>`
+};
+
+/* ======== بيانات الشرائح (المفتاح متحقق بصريًا) ======== */
+const S=[
+{n:1,text:"مجموعة من الأجهزة المتصلة مع بعضها بالتوالي، والإشارة تسير في اتجاهين هي:",
+ opts:[["أ","الخطية bus",1],["ب","الحلقية ring",0],["ج","النجمية star",0],["د","الشبكية Mesh",0]],
+ panel:"تصاميم الشبكات الأربعة",
+ diagrams:[["bus","الخطية Bus — خط واحد واتجاهان"],["ring","الحلقية Ring — اتجاه واحد"],["star","النجمية Star — نقطة مركزية"],["mesh","الشبكية Mesh — الكل بالكل"]],
+ map:{0:0,1:1,2:2,3:3}},
+{n:2,text:"تُستخدم أداة Terminator في الشبكات من أجل:",
+ opts:[["أ","استقبال البيانات",0],["ب","إرسال البيانات",0],["ج","تقوية الإشارة",0],["د","منع ارتداد الإشارة",1]],
+ panel:"الـ Terminator في طرفي الشبكة الخطية",
+ diagrams:[["term","القطعتان الذهبيتان تمتصان الإشارة فلا ترتد"]],one:true},
+{n:3,text:"يُستخدم العنوان المنطقي (Logical Address) في طبقة:",
+ opts:[["أ","الفيزيائية",0],["ب","الشبكة",1],["ج","البيانات",0],["د","النقل",0]],
+ panel:"طبقات OSI — والعنوان المنطقي IP",
+ osi:{hl:4},one:true},
+{n:4,text:"عدد الخانات التي يستخدمها نظام تشفير الشبكات اللاسلكية WEP 128 هو:",
+ opts:[["أ","26 خانة",1],["ب","10 خانات",0],["ج","64 خانة",0],["د","24 خانة",0]],
+ panel:"قارن المفتاحين بنفسك",
+ diagrams:[["wep","الفخ: الـ 10 خانات تخص WEP 64<br><span style='font-family:Tajawal;font-weight:500;font-size:.82rem;color:#5B6B85'>ملاحظة: الخانة الست عشرية تكون رقمًا (0-9) أو حرفًا (A-F)، وكل خانة تساوي 4 بت. الـ 26 خانة تعطي 104 بت، ويضيف الجهاز تلقائيًا 24 بت فيكتمل الرقم 128 في الاسم.</span>"]],one:true},
+{n:5,text:"يُستخدم بروتوكول الإيثرنت (Ethernet) في طبقة:",
+ opts:[["أ","Physical + datalink",1],["ب","Network",0],["ج","Application",0],["د","Session",0]],
+ panel:"الإيثرنت يعيش في الطبقتين السفليتين",
+ osi:{span:[5,6]},one:true},
+{n:6,text:"المقصود بالمشاركة في الأجهزة هو:",
+ opts:[["أ","المشاركة في عملية التخزين في الأطراف المتصلة بالشبكة",0],["ب","المشاركة في الطابعات",0],["ج","المشاركة في الماسح الضوئي",0],["د","جميع ما سبق",1]],
+ panel:"المشاركة تشمل كل الأجهزة على الشبكة",
+ diagrams:[["share","تخزين + طابعة + ماسح = كل خيار صحيح لوحده، فالجواب يجمعها"]],one:true},
+{n:7,text:"لتشغيل أنظمة شبكات الحاسب نستخدم نظام التشغيل:",
+ opts:[["أ","Windows",0],["ب","MS Office",0],["ج","MAC",0],["د","Windows NT",1]],
+ panel:"نظام مكتبي أم نظام شبكات؟",
+ diagrams:[["nos","الفخ: Windows العادي للاستخدام الشخصي — والمطلوب نظام مخصص للشبكات"]],one:true},
+{n:8,text:"الجهاز الذي يربط بين شبكتين تختلفان في أسلوب العنونة وحجم الرسالة هو:",
+ opts:[["أ","الجسر",0],["ب","المجمع",0],["ج","الموجه ROUTER",1],["د","المكرر",0]],
+ panel:"شبكتان مختلفتان تحتاجان مترجمًا يوجّه بينهما",
+ diagrams:[["rtr2","عندما تختلف الشبكتان في العنونة أو حجم الرسالة، فإن الجسر لا يكفي، ويكون الجهاز المناسب هو الموجه (Router) وليس الجسر"]],one:true},
+{n:9,text:"لتوصيل الشبكات المتكاملة يتم استخدام:",
+ opts:[["أ","البوابة",0],["ب","الجسر",1],["ج","الراوتر",0],["د","المكرر",0]],
+ panel:"أي جهاز؟ يعتمد على كلمة غائبة من السؤال",
+ diagrams:[["brdg","الإجابة المرجحة: الجسر (Bridge)<br><span style='font-family:Tajawal;font-weight:500;font-size:.82rem;color:#5B6B85'>تنبيه علمي: عبارة «الشبكات المتكاملة» الواردة في بعض التجميعات صياغة غير دقيقة ولا تُعتمد دون تحديد المقصود. يُرجح أن المقصود الشبكات المتجانسة (Homogeneous Networks) التي تستخدم نفس التقنية ومعيار الاتصال، مثل ربط إيثرنت بإيثرنت، ولذلك تكون الإجابة الجسر. أما الشبكات المتكاملة (Converged Networks) فهي بنية تدمج الصوت والبيانات والفيديو في بنية تحتية واحدة، ولا يوجد جهاز واحد مخصص لربطها. وتُثبَّت الإجابة بعد اكتمال صياغة السؤال وتحديد نوع الشبكات.</span>"]],one:true},
+{n:10,text:"الجهاز الذي يربط شبكة محلية بشبكة موسعة أو الإنترنت هو:",
+ opts:[["أ","المحول (الموجه) ROUTER",1],["ب","الجسر",0],["ج","المودم",0],["د","المبدل",0]],
+ panel:"الموجّه بوابة الشبكة المحلية إلى العالم",
+ diagrams:[["lanwan","المبدل والجسر يشتغلان داخل المحلية، والموجّه هو اللي يطلع فيها للخارج"]],one:true},
+{n:11,text:"البروتوكول الذي يحول أسماء المواقع إلى عناوين IP هو:",opts:[["أ","SRI",0],["ب","DNS",1],["ج","IMTP",0],["د","POP",0]],panel:"دليل الهاتف للإنترنت",note:"DNS يحوّل اسم الموقع إلى عنوان IP — مثل دليل الهاتف. الفخ: POP للبريد، والبقية أسماء مموّهة لا وجود لها."},
+{n:12,text:"بروتوكول إنترنت طوله 32 بت، ويتم تمثيله بالنظام العشري هو:",opts:[["أ","SSL",0],["ب","IPv6",0],["ج","IMTP",0],["د","IPv4",1]],panel:"قارن النسختين بنفسك",diagrams:[["ipvs","32 بت وتمثيل عشري بالنقاط تعني IPv4"]],one:true},
+{n:13,text:"في التوصيل الذي تُربط فيه الحاسبات عبر مبدل (Switch) يسمى التوصيل:",opts:[["أ","الخطي",0],["ب","النجمي",1],["ج","الشجري",0],["د","الهرمي",0]],panel:"نقطة مركزية = نجمي",diagrams:[["star","أي ربط عبر نقطة مركزية مثل المبدل يكون توصيلًا نجميًا"]],one:true},
+{n:14,text:"في أي طبقة يتم تحديد آلية الإرسال (TCP / UDP) وتخصيص أرقام المنافذ؟",opts:[["أ","Physical Layer",0],["ب","Transport Layer",1],["ج","Network Layer",0],["د","Data Link",0]],panel:"مكان النقل في الهرم",osi:{hl:3,lbl:"آلية الإرسال وأرقام المنافذ مسؤولية طبقة النقل"},one:true},
+{n:15,text:"الاختصار DNS يعني:",opts:[["أ","dynamic name system",0],["ب","dynamic network system",0],["ج","domain name system",1],["د","domain network service",0]],panel:"طابق حرفًا حرفًا",note:"DNS هو نظام أسماء النطاقات. فخ أسئلة الاختصارات دائمًا كلمة واحدة مبدّلة — طابق كل حرف بكلمته ولا تقرأ بشكل عام."},
+{n:16,text:"الشبكة التي تربط بين مدينتي جدة والرياض تُصنف ضمن:",opts:[["أ","WAN",1],["ب","LAN",0],["ج","Internet",0],["د","MAN",0]],panel:"سلم أحجام الشبكات",diagrams:[["sizes","بين مدينتين = شبكة واسعة"]],one:true},
+{n:17,text:"من أنواع أسلاك الشبكات المستخدمة:",opts:[["أ","الأسلاك المحورية، الأسلاك البصرية",0],["ب","الأسلاك الملتوية، المحورية، البصرية",1],["ج","الأسلاك الملتوية، الأسلاك المحورية",0],["د","لا شيء مما سبق",0]],panel:"القاعدة",note:"أسلاك الشبكات ثلاثة: الملتوية والمحورية والبصرية — والخيار الأكمل هو الصحيح. الفخ: الخيارات الناقصة صحيحة جزئيًا فقط."},
+{n:18,text:"البروتوكول الذي طوله 128 بت ويُكتب بالنظام السداسي عشر (Hexadecimal) هو:",opts:[["أ","Tip",0],["ب","IPv4",0],["ج","Rip",0],["د","IPv6",1]],panel:"قارن النسختين بنفسك",diagrams:[["ipvs","الطول 128 بت والكتابة الست عشرية تعني IPv6"]],one:true},
+{n:19,text:"أي من التالي يُعد بروتوكولًا موجهًا (Routing Protocol)؟",opts:[["أ","Tip",0],["ب","Voip",0],["ج","Rip",1],["د","Sip",0]],panel:"القاعدة",note:"RIP بروتوكول توجيه معروف تتبادل به الموجهات جداولها. الفخ: SIP وVOIP بروتوكولات صوت لا توجيه."},
+{n:20,text:"الطبقة التي تُحدد فيها المواصفات الميكانيكية والكهربائية هي:",opts:[["أ","Physical Layer",1],["ب","Application Layer",0],["ج","Network Layer",0],["د","Data Link",0]],panel:"أسفل الهرم",osi:{hl:6,lbl:"الكهرباء والموصلات والمواصفات الميكانيكية كلها في الطبقة الفيزيائية"},one:true},
+{n:21,text:"تُسمى البيانات في طبقة الشبكة (Network Layer) باسم:",opts:[["أ","Packet",1],["ب","Frame",0],["ج","Segment",0],["د","Data",0]],panel:"اسم البيانات يتغير بين الطبقات",osi:{hl:4,lbl:"التدرج: Segment في النقل، ثم Packet في الشبكة، ثم Frame في ربط البيانات"},one:true},
+{n:22,text:"الجهاز الذي يتحكم في موارد الشبكة ويزوّد المستخدمين بالخدمات هو:",opts:[["أ","الجهاز العميل",0],["ب","جهاز الرسم",0],["ج","الجهاز الخادم",1],["د","الطابعة",0]],panel:"من يخدم من؟",diagrams:[["clisrv","الخادم يدير الموارد ويقدم الخدمات، والعميل يطلبها فقط"]],one:true},
+{n:23,text:"عند استلام ......... رسالة من أحد المنافذ، يقوم بإرسالها إلى جميع المنافذ الأخرى.",opts:[["أ","Repeater مكرر",0],["ب","Hub موزع",1],["ج","Router موجه",0],["د","switch مبدل",0]],panel:"الفرق الجوهري",note:"الموزع (Hub) جهاز بسيط: يستقبل من منفذ ويكرر للجميع بلا تمييز. الفخ: المبدل (Switch) الأذكى يرسل للمنفذ المقصود فقط — وهذا أشهر فرق في أسئلة الأجهزة."},
+{n:24,text:"الشبكة التي تربط أجهزة الحاسب بين المدن والبلدان هي:",opts:[["أ","TAN",0],["ب","LAN",0],["ج","NIC",0],["د","WAN",1]],panel:"سلم أحجام الشبكات",diagrams:[["sizes","بين المدن والبلدان = شبكة واسعة"]],one:true},
+{n:25,text:"البروتوكول المستخدم في تشفير البيانات هو:",opts:[["أ","SSL",1],["ب","IMTP",0],["ج","SMTP",0],["د","POP",0]],panel:"القاعدة",note:"SSL بروتوكول تشفير البيانات وتأمينها. الفخ: SMTP وPOP بروتوكولا بريد لا تشفير."},
+{n:26,text:"الشخص المسؤول عن صيانة وتشغيل الشبكات التي تربط أجهزة الحاسب هو:",opts:[["أ","فني شبكات",1],["ب","مسؤول أمن المعلومات",0],["ج","فني حاسب",0],["د","مطوّر برمجيات",0]],panel:"القاعدة",note:"الوصف يطابق المسمى حرفيًا: صيانة وتشغيل الشبكات وظيفة فني الشبكات. الفخ: فني الحاسب للأجهزة عمومًا لا للشبكات خاصة."},
+{n:27,text:"البروتوكول المستخدم لجمع معلومات المستخدمين وعناوين البريد الإلكتروني هو:",opts:[["أ","IMAP",0],["ب","BOOTP",0],["ج","LDAP",1],["د","SNMP",0]],panel:"القاعدة",note:"LDAP دليل مركزي لمعلومات المستخدمين وعناوينهم. الفخ: IMAP يجلب رسائل البريد نفسها، وSNMP يراقب أجهزة الشبكة."},
+{n:28,text:"الفرق بين الإيثرنت و الإنترنت هو أن:",opts:[["أ","الإثرنت محلية (داخلية) والإنترنت عالمية (داخلية)",0],["ب","الإثرنت محلية (خارجية) والإنترنت عالمية (خارجية)",0],["ج","الإثرنت محلية (داخلية) والإنترنت عالمية (خارجية)",1],["د","الإثرنت محلية (خارجية) والإنترنت عالمية (داخلية)",0]],panel:"اقرأ بتركيز",note:"القاعدة: الإيثرنت شبكة محلية داخلية، والإنترنت شبكة عالمية خارجية. الفخ: بقية الخيارات تقلب الكلمتين عمدًا — السؤال يختبر تركيزك قبل معلوماتك."},
+{n:29,text:"تقوم بمهمة مشابهة للجسر ولكن على طبقات متعددة هي:",opts:[["أ","الموجه",0],["ب","المبدل",0],["ج","الموزع",0],["د","البوابة",1]],panel:"الجسر الأوسع",note:"البوابة (Gateway) تعمل عمل الجسر لكن عبر طبقات متعددة وبين بنى وبروتوكولات مختلفة — مترجم شامل لا مجرد موصل."},
+{n:30,text:"أي من العناوين التالية ينتمي إلى الفئة (Class B)؟",opts:[["أ","128.31.170.102",1],["ب","192.168.150.90",0],["ج","10.15.210.80",0],["د","90.198.120.40",0]],panel:"فئات العناوين",diagrams:[["classes","الرقم 128 يقع في مدى الفئة الثانية، بينما 192 من الثالثة و10 و90 من الأولى"]],one:true},
+{n:31,text:"مجموعة أجهزة متصلة بالشبكة تتشارك صفحة الويب والطابعة، أحد الأجهزة لا يمكنه الاتصال بالطابعة واتضح أنه يحتاج إلى:",opts:[["أ","DHCP",1],["ب","FTP",0],["ج","HTML",0],["د","SMTP",0]],panel:"القاعدة",note:"جهاز لا يتواصل داخل الشبكة غالبًا بلا عنوان IP — والبروتوكول الذي يوزع العناوين تلقائيًا هو DHCP. الفخ: بقية الخيارات لا علاقة لها بالعنونة."},
+{n:32,text:"البروتوكول المسؤول عن تخصيص عناوين الأجهزة في الشبكة هو:",opts:[["أ","SSL",0],["ب","NTP",0],["ج","DHCP",1],["د","POP",0]],panel:"القاعدة",note:"DHCP هو الموزع التلقائي لعناوين IP — نفس قاعدة السؤال السابق بصياغة مباشرة."},
+{n:33,text:"البروتوكول المستخدم في نقل البريد الإلكتروني هو:",opts:[["أ","FTP",0],["ب","POP",0],["ج","IMTP",0],["د","SMTP",1]],panel:"إرسال أم استقبال؟",note:"SMTP لإرسال البريد ونقله بين الخوادم. الفخ الأقرب: POP للاستقبال والسحب فقط — فرّق بين الاتجاهين."},
+{n:34,text:"الإرسال الذي يحدث من جهاز إلى مجموعة محددة من الأجهزة هو:",opts:[["أ","Broadcast",0],["ب","Unicast",0],["ج","allcast",0],["د","Multicast",1]],panel:"أنواع الإرسال الثلاثة",diagrams:[["cast","لمجموعة محددة يكون الإرسال متعدد الوجهات"]],one:true},
+{n:35,text:"الحاسب الذي يقوم بتوصيل البيانات لبقية الأجهزة عبر الإنترنت هو:",opts:[["أ","Clint",0],["ب","Main frame",0],["ج","Server",1],["د","Work group",0]],panel:"من يخدم من؟",diagrams:[["clisrv","من يوصل البيانات ويخدم البقية هو الخادم"]],one:true},
+{n:36,text:"ما نوع الإرسال الذي يتم فيه إرسال البيانات من جهاز إلى جميع الأجهزة؟",opts:[["أ","Broadcast",1],["ب","Unicast",0],["ج","Multicast",0],["د","Anycast",0]],panel:"أنواع الإرسال الثلاثة",diagrams:[["cast","للجميع بلا استثناء يكون الإرسال بثًا عامًا"]],one:true},
+{n:37,text:"البروتوكول الذي يسمح بإجراء محادثات صوتية عبر الإنترنت هو:",opts:[["أ","Internet Protocol",0],["ب","Network Protocol",0],["ج","VOIP",1],["د","Weblog",0]],panel:"القاعدة",note:"المحادثات الصوتية عبر الشبكة تتم ببروتوكول VOIP أي نقل الصوت عبر بروتوكول الإنترنت."},
+{n:38,text:"الجهاز الذي يقوم بتوصيل الأجهزة في شبكة واحدة باستخدام موجات الراديو أو الإشارات اللاسلكية هو:",opts:[["أ","Router",0],["ب","NAP",1],["ج","VOIP",0],["د","HUB",0]],panel:"نقطة الوصول",note:"نقطة الوصول اللاسلكية توصل الأجهزة بموجات الراديو، وهي المقصودة في السؤال. تنبيه علمي: ورد في خيارات السؤال الاختصار NAP، والصحيح قياسيًا AP (Access Point) وهو الاختصار المعتمد لنقطة الوصول اللاسلكية. أما NAP (Network Access Point) فهو نقطة ربط بين الشبكات الكبيرة أو مزودي خدمة الإنترنت لتبادل البيانات، وليس جهاز نقطة وصول لاسلكية."},
+{n:39,text:"التقنية التي تعمل على حماية سرية المعلومات أثناء نقلها هي:",opts:[["أ","الشبكة الخاصة الافتراضية VPN",1],["ب","التروجان Trojans",0],["ج","التجزئة",0],["د","التشفير",0]],panel:"تنبيه على القريب من الصح",note:"الإجابة المرجحة: الشبكة الخاصة الافتراضية — منظومة كاملة للنقل الآمن. تنبيه ذكي: التشفير قريب جدًا من الصح فهو الأسلوب الذي تعمل به هذه المنظومة، والفيصل كلمة «أثناء نقلها» التي تشير للتقنية الشاملة لا للأسلوب."},
+{n:40,text:"الشبكة التي تربط أجهزة الحاسب في منطقة جغرافية صغيرة هي:",opts:[["أ","NIC",0],["ب","WAN",0],["ج","TAN",0],["د","LAN",1]],panel:"سلم أحجام الشبكات",diagrams:[["sizes","منطقة جغرافية صغيرة = شبكة محلية"]],one:true},
+{n:41,text:"البروتوكول المستخدم في معالجة أخطاء الشبكة هو:",opts:[["أ","ICMP",1],["ب","PPTP",0],["ج","SRI",0],["د","VPN",0]],panel:"القاعدة",note:"ICMP بروتوكول رسائل التحكم والأخطاء في الشبكة، ومنه يعمل أمر ping المعروف."},
+{n:42,text:"نوع الإرسال الذي يتم فيه نقل البيانات من جهاز واحد إلى جهاز واحد فقط هو:",opts:[["أ","Broadcast",0],["ب","Unicast",1],["ج","Multicast",0],["د","Anycast",0]],panel:"أنواع الإرسال الثلاثة",diagrams:[["cast","جهاز واحد إلى جهاز واحد يكون إرسالًا أحاديًا"]],one:true},
+{n:43,text:"الشبكة التي تربط أجهزة في نطاق مدينة كاملة باستخدام الألياف الضوئية أو اللاسلكية هي:",opts:[["أ","WAN",0],["ب","MAN",1],["ج","LAN",0],["د","TAN",0]],panel:"سلم أحجام الشبكات",diagrams:[["sizes","نطاق مدينة كاملة = شبكة المدينة"]],one:true},
+{n:44,text:"شبكة خاصة تسمح بدخول مستخدمين خارجيين محددين هي:",opts:[["أ","VBN",0],["ب","WorldNet's",0],["ج","Extranet",1],["د","Intranet",0]],panel:"داخلية أم موسعة؟",note:"القاعدة: Intranet داخلية بحتة لمنسوبي الجهة فقط، وExtranet داخلية تفتح بابًا مضبوطًا بتصريح لخارجيين محددين — كلمة «خارجيين» تحسم السؤال."},
+{n:45,text:"التوصيل الذي يتم فيه ربط الأجهزة بمبدّل أو جهاز مركزي يُسمى:",opts:[["أ","توصيل شجري",0],["ب","توصيل خطي",0],["ج","توصيل هرمي",0],["د","توصيل نجمي",1]],panel:"نقطة مركزية = نجمي",diagrams:[["star","جهاز مركزي في الوسط وكل الأجهزة تتصل به مباشرة"]],one:true},
+{n:46,text:"شبكة يوجد بها مستودع مركزي ونظام حماية مركزي، ويتم الدخول للملفات والكمبيوترات المتصلة بالشبكة من خلال تصريح معين هي:",opts:[["أ","شبكة العميل/الخادم",1],["ب","شبكة الإثرنت",0],["ج","شبكة الند للند",0],["د","الشبكة المحلية الشخصية(PAN)",0]],panel:"الإدارة المركزية",diagrams:[["clisrv","مستودع مركزي وحماية مركزية وتصاريح دخول تعني شبكة العميل والخادم — عكس الند للند التي لا مركز لها"]],one:true},
+{n:47,text:"البروتوكول المستخدم في نقل الملفات عبر الشبكة هو:",opts:[["أ","Tcp",0],["ب","FTP",1],["ج","PPP",0],["د","HTTP",0]],panel:"القاعدة",note:"FTP بروتوكول نقل الملفات — الاسم يفضح الوظيفة. الفخ: HTTP لنقل صفحات الويب لا الملفات عمومًا."},
+{n:48,text:"الشهادات التي تُصدرها شركة سيسكو (Cisco) تتعلق بمجال:",opts:[["أ","الدعم الفني",0],["ب","البرمجة",0],["ج","الشبكات",1],["د","قواعد البيانات",0]],panel:"القاعدة",note:"سيسكو الشركة الأشهر عالميًا في أجهزة الشبكات، وشهاداتها كلها في مجال الشبكات."},
+{n:49,text:"في هذا النوع من الشبكات تنتقل الإشارة في اتجاه واحد فقط ضمن حلقة مغلقة:",opts:[["أ","Bus topology",0],["ب","Ring Topology",1],["ج","Star topology",0],["د","Mesh topology",0]],panel:"حلقة باتجاه واحد",diagrams:[["ring","اتجاه واحد داخل حلقة مغلقة — قارنها بالخطية ذات الاتجاهين في السؤال الأول"]],one:true},
+{n:50,text:"تُعد شبكة WAN شبكة:",opts:[["أ","تتوزع على مباني مجاورة",0],["ب","تربط عدد قليل من أجهزة الحاسب",0],["ج","ممتدة على نطاق واسع",1],["د","تستخدم في الشبكات الشخصية الصغيرة",0]],panel:"سلم أحجام الشبكات",diagrams:[["sizes","الاسم يشرح نفسه: شبكة ممتدة على نطاق واسع"]],one:true},
+{n:51,text:"جهاز الربط الشبكي الذي يُعرف باسم المكرر متعدد المحطات هو:",opts:[["أ","المبدل",0],["ب","الجسر",0],["ج","الموجه",0],["د","Active hub المجمع المركزي الفعال",1]],panel:"القاعدة",note:"المجمع المركزي الفعال يقوي الإشارة ويوزعها على كل المنافذ — فهو عمليًا مكرر بعدة محطات، ومن هنا جاءت تسميته."},
+{n:52,text:"الشبكة التي تربط شركة داخل مدينة واحدة مثل الدمام تُعد:",opts:[["أ","MAN",1],["ب","WAN",0],["ج","LAN",0],["د","TAN",0]],panel:"سلم أحجام الشبكات",diagrams:[["sizes","المعتمد هنا: داخل مدينة = شبكة المدينة. تنبيه: لو كانت الشركة في مبنى واحد لصارت محلية — القاعدة: جارك محلية، مدينتك مدينية، وبين المدن واسعة"]],one:true},
+{n:53,text:"الشبكة التي تربطك بجهاز جارك مباشرة تُعد:",opts:[["أ","WAN",0],["ب","MAN",0],["ج","LAN",1],["د","TAN",0]],panel:"سلم أحجام الشبكات",diagrams:[["sizes","جارك المباشر ضمن النطاق المحلي"]],one:true},
+{n:54,text:"البروتوكول SMTP يستخدم المنفذ رقم:",opts:[["أ","80 منفذ",0],["ب","20 منفذ",0],["ج","68 منفذ",0],["د","25 منفذ",1]],panel:"أرقام المنافذ الشهيرة",diagrams:[["ports","بروتوكول الإرسال يستخدم المنفذ 25 — احفظ الثلاثة معًا"]],one:true},
+{n:55,text:"الطبقة التي تتحكم في استخدام الشبكة وتمنع التصادم هي:",opts:[["أ","Transmission Layer",0],["ب","Data Link",1],["ج","Physical Layer",0],["د","Network Layer",0]],panel:"مكانها في الهرم",osi:{hl:5,lbl:"التحكم في الوصول للوسط ومنع التصادم مسؤولية طبقة ربط البيانات"},one:true},
+{n:56,text:"عمل بروتوكول DNS ضمن الطبقة:",opts:[["أ","Application Layer",1],["ب","Physical Layer",0],["ج","Network Layer",0],["د","Data Link",0]],panel:"أعلى الهرم",osi:{hl:0,lbl:"DNS خدمة يتعامل معها المستخدم مباشرة فتعمل في طبقة التطبيقات"},one:true},
+{n:57,text:"اختصار ISDN يشير إلى:",opts:[["أ","Interactive Standard Dynamic Networks",0],["ب","Internet Services Data Network",0],["ج","Integrated Standard Digital Networks",0],["د","Integrated Services Digital Network",1]],panel:"طابق حرفًا حرفًا",note:"ISDN هي الشبكة الرقمية للخدمات المتكاملة. طابق كل حرف بكلمته: متكاملة ثم خدمات ثم رقمية ثم شبكة — الفخ في كل خيار كلمة واحدة مبدلة فقط."},
+{n:58,text:"تم تطوير تقنية Wi-Fi من معهد IEEE تحت المعيار رقم:",opts:[["أ","802.16",0],["ب","802.11",1],["ج","802.13",0],["د","802.12",0]],panel:"رقم يحفظ",note:"معيار 802.11 هو الواي فاي قصير المدى. أما 802.16 فهو معيار WiMAX الأوسع نطاقًا — احفظهما كثنائية."},
+{n:59,text:"في شبكة ......... تكون كل الأجهزة متصلة بكابلات منفصلة مع نقطة مركزية:",opts:[["أ","Ring topology",0],["ب","Mesh Topology",0],["ج","Star topology",1],["د","Bus Topology",0]],panel:"نقطة مركزية = نجمي",diagrams:[["star","كابل مستقل لكل جهاز نحو نقطة مركزية واحدة"]],one:true},
+{n:60,text:"يعمل بروتوكول PPP (Point to Point Protocol) في أي طبقة؟",opts:[["أ","التطبيقات",0],["ب","الفيزيائية",0],["ج","العرض",0],["د","البيانات",1]],panel:"مكانه في الهرم",osi:{hl:5,lbl:"بروتوكول نقطة إلى نقطة يعمل في طبقة ربط البيانات"},one:true},
+{n:61,text:"يُستخدم ......... للتغلب على ضعف الإشارة المرسلة لضمان وصولها إلى وجهتها.",opts:[["أ","Router",0],["ب","Transceiver",0],["ج","Repeater",1],["د","Gateway",0]],panel:"القاعدة",note:"ضعف الإشارة يعالجه المكرر: يستقبلها ويقويها ويعيد إرسالها لتكمل طريقها. كلمة «ضعف الإشارة» في أي سؤال تنادي المكرر."},
+{n:62,text:"يعمل الـ Hub في أي طبقة من نموذج OSI؟",opts:[["أ","Physical Layer",1],["ب","Application Layer",0],["ج","Network Layer",0],["د","Data Link",0]],panel:"جهاز بسيط في أسفل الهرم",osi:{hl:6,lbl:"الموزع جهاز بسيط لا يفهم العناوين فيعمل في الطبقة الفيزيائية"},one:true},
+{n:63,text:"عنوان أي موقع على الإنترنت يُرمز له بالرمز:",opts:[["أ","HTTP",0],["ب","TCP/IP",0],["ج","FTP",0],["د","URL",1]],panel:"القاعدة",note:"عنوان الموقع هو URL. الفخ: HTTP بروتوكول نقل الصفحات وليس العنوان نفسه."},
+{n:64,text:"بروتوكول يستخدم لإنشاء قناة اتصال بين الشبكات الخاصة:",opts:[["أ","NTP",0],["ب","PPTP",1],["ج","FTP",0],["د","HTTP",0]],panel:"القاعدة",note:"PPTP بروتوكول إنشاء الأنفاق بين الشبكات الخاصة، وهو من أسس تقنية الشبكة الخاصة الافتراضية القديمة."},
+{n:65,text:"الحاسب الذي يتعامل مع شخص واحد لكنه أقوى من الحاسب الشخصي:",opts:[["أ","حاسب التحكم",0],["ب","الحاسب المركزي",0],["ج","الحاسب الخادم",0],["د","حاسب محطة العمل",1]],panel:"شخص واحد بقوة أكبر",note:"أقوى من الشخصي ويخدم شخصًا واحدًا يعني محطة العمل. الفخ: الخادم قوي لكنه يخدم كثيرين لا شخصًا واحدًا — كلمة «شخص واحد» هي الفيصل."},
+{n:66,text:"بروتوكول POP يستخدم المنفذ رقم:",opts:[["أ","20 منفذ",0],["ب","25 منفذ",0],["ج","110 منفذ",1],["د","68 منفذ",0]],panel:"أرقام المنافذ الشهيرة",diagrams:[["ports","بروتوكول الاستقبال يستخدم المنفذ 110 — والفخ منفذ 25 الخاص بالإرسال"]],one:true},
+{n:67,text:"جهاز يعمل كمترجم بين شبكتين مختلفتين في البنية أو البروتوكولات:",opts:[["أ","NIC",0],["ب","REPEATER",0],["ج","GATEWAY",1],["د","PPTP",0]],panel:"المترجم الشامل",note:"مترجم بين بنى وبروتوكولات مختلفة يعني البوابة. قارنها بالسؤال التاسع: الجسر للمتشابه، والبوابة للمختلف — كلمة «مختلفتين» هنا صريحة فحسمت الجواب."},
+{n:68,text:"......... هي خليط من شبكة Star وشبكة Bus.",opts:[["أ","Ring topology",0],["ب","hybrid Topology",1],["ج","Star topology",0],["د","Bus Topology",0]],panel:"خليط تصميمين",diagrams:[["star","نجمية"],["bus","خطية — ودمجهما معًا يسمى التصميم الهجين"]]},
+{n:69,text:"شبكة WiMAX تم تطويرها من معهد IEEE بمواصفات رقم:",opts:[["أ","802.13",0],["ب","802.12",0],["ج","802.11",0],["د","802.16",1]],panel:"رقم يحفظ",note:"معيار 802.16 هو WiMAX واسع النطاق، بينما Wi-Fi معياره 802.11 الأقصر مدى — نفس ثنائية السؤال 58 معكوسة."},
+{n:70,text:"كرت الشبكة اللاسلكي المستخدم في الحواسيب المحمولة هو:",opts:[["أ","WNIC",1],["ب","External Modem",0],["ج","Wrouter",0],["د","PCMCIA",0]],panel:"القاعدة",note:"الكرت اللاسلكي هو WNIC أي كرت شبكة لاسلكي. الفخ: PCMCIA شكل شق توسعة قديم في المحمولات وليس كرت شبكة بذاته."},
+{n:71,text:"جهاز المودم Modem يقوم بـ:",opts:[["أ","تقوية الإشارات بين الأجهزة",0],["ب","تحويل الإشارات الرقمية إلى تماثلية",0],["ج","نقل الملفات من جهاز الى جهاز آخر",0],["د","تحويل الإشارات التماثلية إلى رقمية ومن ثم العكس",1]],panel:"تضمين وفك تضمين",note:"المودم يحول الإشارة في الاتجاهين: رقمية إلى تماثلية عند الإرسال ثم يعكسها عند الاستقبال. الفخ الأقرب: الخيار الذي يذكر اتجاهًا واحدًا فقط ناقص — كلمة «ومن ثم العكس» هي الفيصل."},
+{n:72,text:"أجهزة الحاسب مربوطة بنقطة اتصال مركزية مثل Hub أو Router أو Switch.",opts:[["أ","Star Topology",1],["ب","Mesh topology",0],["ج","Ring topology",0],["د","Bus Topology",0]],panel:"نقطة مركزية = نجمي",diagrams:[["star","أي نقطة اتصال مركزية مهما كان نوع الجهاز تعني التصميم النجمي"]],one:true},
+{n:73,text:"البروتوكول المستخدم في طبقة النقل هو:",opts:[["أ","PPP",0],["ب","NIC",0],["ج","TCP",1],["د","DNS",0]],panel:"مكانه في الهرم",osi:{hl:3,lbl:"طبقة النقل موطن TCP وUDP"},one:true},
+{n:74,text:"يريد مستخدمي الحاسب الوصول إلى تطبيقات تم تخزينها في الشبكة، ما مكون الشبكة الذي يحتوي على التطبيقات؟",opts:[["أ","Client",0],["ب","Server",1],["ج","Switch",0],["د","Gateway",0]],panel:"من يخدم من؟",diagrams:[["clisrv","التطبيقات المخزنة في الشبكة تسكن على الخادم والعملاء يصلون إليها"]],one:true},
+{n:75,text:"في أسماء المواقع، الاختصار الذي يدل على موقع حكومي هو:",opts:[["أ","GOV",1],["ب","ORG",0],["ج","EDU",0],["د","COM",0]],panel:"نطاقات المواقع",note:"الاختصار GOV للمواقع الحكومية، وEDU للتعليمية، وORG للمنظمات، وCOM للمواقع التجارية."}
+];
+
+let cur=0;
+const host=document.getElementById("host");
+
+function render(){
+ host.innerHTML=S.map((s,si)=>`
+ <section class="slide ${si===cur?"on":""}" id="sl${si}">
+  <div class="qbar"><div class="qnum">${s.n}</div><div class="qtext">${s.text}</div></div>
+  <div class="grid" id="g${si}">
+    <div>
+      <div class="opts">
+        ${s.opts.map((o,oi)=>`<button class="opt" id="o${si}_${oi}" onclick="mark(${si},${oi})">
+          <span class="letter">${o[0]}</span><span>${o[1]}</span></button>`).join("")}
+      </div>
+      ${(s.diagrams||s.osi||s.note)?`<button class="showbtn" id="sb${si}" onclick="openPanel(${si})">${(s.diagrams||s.osi)?"اعرض الرسم التوضيحي":"اعرض القاعدة"}</button>`:""}
+    </div>
+    <div class="panel" id="p${si}">
+      <h2>${s.panel||"القاعدة"}</h2>
+      ${(s.note&&!s.diagrams&&!s.osi)?`<div class="notecard">${s.note}</div>`:`<div class="diagrid ${s.one?"one":""}" id="dg${si}">
+        ${s.osi
+          ? `<div class="dcard"><div id="osi${si}">${SVG.osi(s.osi.hl,s.osi.span)}</div>${s.osi.lbl?`<div class="lbl">${s.osi.lbl}</div>`:""}</div>`
+          : s.diagrams.map((d,di)=>`<div class="dcard" id="d${si}_${di}">${SVG[d[0]]}<div class="lbl">${d[1]}</div></div>`).join("")}
+      </div>`}
+    </div>
+  </div>
+ </section>`).join("");
+ document.getElementById("pg").textContent=`سؤال ${cur+1} من ${S.length}`;
+}
+
+function openPanel(si){
+ document.getElementById("p"+si).classList.add("on");
+ document.getElementById("g"+si).classList.add("open");
+ document.getElementById("sb"+si).classList.add("hide");
+}
+
+function mark(si,oi){
+ const s=S[si], el=document.getElementById(`o${si}_${oi}`), ok=s.opts[oi][2]===1;
+ el.classList.remove("x","ok");
+ el.classList.add(ok?"ok":"x");
+ /* ربط الرسم بالخيار في سؤال التصاميم */
+ if(s.map!==undefined && document.getElementById("p"+si).classList.contains("on")){
+   const di=s.map[oi], card=document.getElementById(`d${si}_${di}`);
+   if(card){ if(ok){card.classList.add("hero");card.classList.remove("dim");} else card.classList.add("dim"); }
+ }
+}
+
+function resetSlide(){
+ const si=cur, s=S[si];
+ s.opts.forEach((_,oi)=>document.getElementById(`o${si}_${oi}`).classList.remove("x","ok"));
+ if(s.map!==undefined) Object.values(s.map).forEach(di=>{const c=document.getElementById(`d${si}_${di}`);if(c)c.classList.remove("dim","hero")});
+}
+
+function move(dir){
+ cur=Math.min(S.length-1,Math.max(0,cur+dir));
+ document.querySelectorAll(".slide").forEach((e,i)=>e.classList.toggle("on",i===cur));
+ document.getElementById("pg").textContent=`سؤال ${cur+1} من ${S.length}`;
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+document.addEventListener("keydown",e=>{
+ if(e.key==="ArrowLeft")move(1);
+ if(e.key==="ArrowRight")move(-1);
+ if(e.key===" "){e.preventDefault();openPanel(cur);}
+});
+
+render();
+</script>
+</body>
+</html>
