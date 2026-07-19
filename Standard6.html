@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اختبار المتابعين – المعيار السادس (1-50)</title>
+<style>
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; background: #FFFFFF; color: #16233C; direction: rtl; }
+.header { background: #063A6E; padding: 20px 20px 16px; text-align: center; border-bottom: 4px solid #E8AD28; }
+.header h1 { font-size: 1.3rem; font-weight: 900; color: #FFFFFF; }
+.header p { font-size: 0.82rem; color: #C7D6EC; margin-top: 4px; }
+.badge { display: inline-block; background: #E8AD28; color: #063A6E; font-weight: 700; font-size: 0.72rem; padding: 3px 14px; border-radius: 20px; margin-top: 8px; }
+.wrap { max-width: 680px; margin: 20px auto 60px; padding: 0 14px; }
+.qcard { background: #FFFFFF; border-radius: 14px; border: 1.5px solid #E2E8F2; box-shadow: 0 2px 10px rgba(6,58,110,0.06); margin-bottom: 20px; overflow: hidden; display: flex; flex-direction: column; min-height: 100vh; }
+.qcard-inner { padding: 16px 18px 10px; flex-shrink: 0; }
+.qhead { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; }
+.qnum { background: #063A6E; color: #FFFFFF; font-weight: 900; font-size: 0.9rem; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+.qtext { font-size: 0.97rem; font-weight: 700; line-height: 1.7; color: #16233C; }
+.opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+.opts.col1 { grid-template-columns: 1fr; }
+.opt { display: flex; align-items: center; gap: 9px; background: #F4F7FB; border: 1.5px solid #E2E8F2; border-radius: 10px; padding: 11px 13px; color: #16233C; font-size: 0.93rem; font-weight: 600; cursor: pointer; width: 100%; transition: background 0.15s, border-color 0.15s; user-select: none; }
+.opt:hover { background: #FCF6E6; border-color: #E8AD28; }
+.obadge { background: #063A6E; color: #FFFFFF; font-weight: 900; min-width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.83rem; flex-shrink: 0; }
+.optxt { line-height: 1.55; }
+.opt.correct { background: #E7F5EC!important; border-color:#059548!important; color:#05793A!important; }
+.opt.correct .obadge { background: #059548!important; color:#FFFFFF!important; }
+.exp { display: none; margin-top: 13px; background: #F1F5FB; border-right: 4px solid #E8AD28; border-radius: 9px; padding: 12px 14px; font-size: 0.9rem; line-height: 1.9; color: #16233C; }
+.exp.show { display: block; }
+.etitle { color: #063A6E; font-weight: 700; margin-bottom: 7px; font-size: 0.92rem; }
+.scratch { border-top: 2px dashed rgba(232,173,40,0.45); flex: 1; margin-top: 10px; margin-bottom: 27px; min-height: 120px; background-image: repeating-linear-gradient(to bottom, transparent, transparent 27px, #DDE6F1 27px, #DDE6F1 28px); background-color: #FBFCFE; background-position: 0 28px; }
+.qcard { position: relative; }
+.qlogo { position: absolute; left: 14px; bottom: 60px; width: 28px; height: 40px; background: url(data:image/png;base64,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) no-repeat center; background-size: contain; opacity: 0.9; z-index: 3; pointer-events: none; }
+.qcard-inner { position: relative; }
+.scratch { margin-bottom: 0 !important; }
+.qfooter { position: relative; height: 46px; background: #063A6E; flex-shrink: 0; overflow: hidden; }
+.qfcorner { position: absolute; right: 0; bottom: 0; width: 0; height: 0; border-style: solid; border-width: 0 46px 46px 0; border-color: transparent #E8AD28 transparent transparent; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>🖥️ اختبار المتابعين – حاسب</h1>
+  <p>المعيار السادس كاملاً (قواعد البيانات) | الأسئلة 1-50</p>
+  <div class="badge">الخبير / محمد السواط</div>
+</div>
+<div class="wrap">
+<!-- Q1 -->
+<div class="qcard" data-correct="1">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">1</div><div class="qtext">أي مستوى تطبيع ينطبق على الجدول التالي؟ (السعر/اللون/الرقم — يحوي اللون قيمًا متعددة مثل 'أحمر-أزرق')</div></div>
+    <div class="opts col1">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">غير مطبّع</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">1NF الصيغة المعيارية</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">2NF الصيغة المعيارية الثانية</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">3NF الصيغة المعيارية الثالثة</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>وجود قيم متعددة في خلية واحدة (أحمر-أزرق) يعني أن الجدول غير مطبّع، لأنه يخالف شرط الذرّية في 1NF.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q2 -->
+<div class="qcard" data-correct="4">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">2</div><div class="qtext">أي خيار يصف بيانات لها نفس النوع داخل بنية واحدة؟</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">العلاقة</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">الجدول</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">السجل</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">الحقل</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الحقل (Field) يمثّل بيانات من نفس النوع داخل بنية واحدة (عمود واحد).</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q3 -->
+<div class="qcard" data-correct="1">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">3</div><div class="qtext">أي التصنيفات التالية يندرج تحت معيار تصنيف نموذج البيانات؟</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">شبكي (Network)</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">موزع (Distributed)</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">مركزي (Centralized)</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">متعدد المستخدمين (Multi-users)</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>النموذج الشبكي (Network) من نماذج تصنيف قواعد البيانات؛ الموزّع والمركزي ومتعدد المستخدمين تصنيفات معمارية لا نماذج بيانات.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q4 -->
+<div class="qcard" data-correct="1">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">4</div><div class="qtext">أقل مجموعة من الصفات يمكن أن تميّز الصف في الجدول عن بقية الصفوف الأخرى هي:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt" dir="ltr">Candidate Kay</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt" dir="ltr">Foreign Kay</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt" dir="ltr">Primary Kay</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt" dir="ltr">Super Key</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الـCandidate Key هو أقل مجموعة من السمات (Minimal) التي تميّز كل سجل بشكل فريد، ويختلف عن Super Key الذي قد يحوي سمات زائدة غير لازمة للتمييز. أما Primary Key فهو أحد المفاتيح المرشّحة الذي تم اختياره ليكون المفتاح الأساسي. وأما Foreign Key فلا يميّز الصف، بل يربط الجدول بمفتاح أساسي في جدول آخر لبناء العلاقات.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q5 -->
+<div class="qcard" data-correct="1">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">5</div><div class="qtext">تجميع البيانات وتنظيمها بما يسهّل استخراج معلومات مفيدة منها هو:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">قواعد البيانات</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">البيانات</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">المعلومات</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">الأساسيات</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>قواعد البيانات (Database) تجمّع البيانات وتنظّمها لتسهيل استخراج معلومات مفيدة.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q6 -->
+<div class="qcard" data-correct="1">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">6</div><div class="qtext">العلاقة بين الكيانين: طالب — كتب مستعارة هي:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">واحد/متعدد</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">واحد/واحد</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">متعدد/متعدد</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">متعدد/واحد</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الطالب الواحد يستعير عدة كتب، فالعلاقة واحد/متعدد (One-to-Many).</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q7 -->
+<div class="qcard" data-correct="2">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">7</div><div class="qtext">عبارة SQL التالية: Select * from person تقوم بـ:</div></div>
+    <div class="opts col1">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">أسماء الحقول person</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">السجلات الموجودة بالجدول person</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">أحجام ومواصفات حقول الجدول person</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">الحقول التي تحوي العلامة * من الجدول person</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الرمز * يعني كل الأعمدة، فالعبارة تسترجع جميع السجلات الموجودة في الجدول person.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q8 -->
+<div class="qcard" data-correct="2">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">8</div><div class="qtext">الأشكال المختلفة التي تُمثّل بها الحقائق والمعارف (أرقام/حروف/صور) وتُعالَج يدويًا أو حاسوبيًا للحصول على معنى لها هي:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">قواعد البيانات</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">البيانات</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">المعلومات</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">الأساسيات</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>البيانات (Data) هي الأشكال الخام (أرقام/حروف/صور) قبل معالجتها للحصول على معنى.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q9 -->
+<div class="qcard" data-correct="3">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">9</div><div class="qtext">عند إنشاء قاعدة بيانات للطلاب، أي مما يلي يُعد مفتاحًا أساسيًا مناسبًا لتمييز كل طالب بشكل فريد؟</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">العمر</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">المرحلة الدراسية</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">السجل المدني</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">اسم الطالب</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>السجل المدني قيمة فريدة لكل طالب لا تتكرر، فهو المفتاح الأساسي المناسب؛ بقية الخيارات قد تتكرر. تعريف المفتاح الأساسي (Primary Key): صفة أو مجموعة صفات تميّز كل سجل بشكل فريد، يُختار من المفاتيح المرشّحة، ولا يقبل القيمة الفارغة (NOT NULL)، ويكون واحدًا فقط لكل جدول.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q10 -->
+<div class="qcard" data-correct="3">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">10</div><div class="qtext">أعلى مستوى في الترتيب الهرمي للبيانات هو:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">الحقول</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">الملف</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">قاعدة البيانات</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">السجل</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الترتيب الهرمي: حقل ثم سجل ثم ملف ثم قاعدة البيانات؛ فأعلاها قاعدة البيانات.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q11 -->
+<div class="qcard" data-correct="1">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">11</div><div class="qtext">......... بيانات تمت معالجتها وتحويلها إلى صورة قابلة للفهم؛ حيث تُعالَج بتصنيفها وتنظيمها لاستنباط معلومات مفيدة لأغراض عدة:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">المعلومات</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">البيانات</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">قواعد البيانات</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">الأساسيات</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>المعلومات (Information) هي ناتج معالجة البيانات وتحويلها لصورة مفهومة مفيدة.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q12 -->
+<div class="qcard" data-correct="4">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">12</div><div class="qtext">أي خاصية تستخدم لتعطيل النموذج (منعه من التفاعل) في برامج قواعد البيانات؟</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt" dir="ltr">Enable</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt" dir="ltr">Locked</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt" dir="ltr">Visible</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt" dir="ltr">Disable</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الخاصية Disable تعطّل النموذج وتمنع التفاعل معه.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q13 -->
+<div class="qcard" data-correct="2">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">13</div><div class="qtext">إذا كانت جميع أعمدة الجدول تحتوي على قيم ذرّية (قيمة واحدة فقط دون تجميع)، فهذا يدل على أن الجدول في:</div></div>
+    <div class="opts col1">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">BCNF - صيغة بويس-كود العادية</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">1NF الصيغة المعيارية الأولى</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">2NF الصيغة المعيارية الثانية</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">3NF الصيغة المعيارية الثالثة</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الذرّية (قيمة واحدة في كل خلية) هي شرط الصيغة المعيارية الأولى 1NF.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q14 -->
+<div class="qcard" data-correct="1">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">14</div><div class="qtext">تتألف السجلات في قاعدة البيانات من:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">حقول</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">نماذج</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">جداول</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">أسس</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>السجل (Record) يتألف من مجموعة حقول (Fields).</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q15 -->
+<div class="qcard" data-correct="4">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">15</div><div class="qtext">في أي مستوى من التطبيع يحدث أن تعتمد بعض الصفات (الأعمدة) اعتمادًا وظيفيًا على صفة غير المفتاح الرئيسي؟</div></div>
+    <div class="opts col1">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">BCNF - صيغة بويس-كود العادية</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">1NF الصيغة المعيارية الأولى</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">2NF الصيغة المعيارية الثانية</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">3NF الصيغة المعيارية الثالثة</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>اعتماد صفة على صفة غير مفتاحية (اعتماد متعدٍّ) يُعالَج في الصيغة الثالثة 3NF.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q16 -->
+<div class="qcard" data-correct="3">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">16</div><div class="qtext">مجموعة من الخطوات المكتوبة بشكل منطقي ومتسلسل لحل مشكلة ما تُسمى:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">تنفيذ البرنامج</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">كتابة البرنامج</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">الخوارزمية</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">مخطط الانسياب</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الخوارزمية (Algorithm) خطوات منطقية متسلسلة لحل مشكلة.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q17 -->
+<div class="qcard" data-correct="3">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">17</div><div class="qtext">في أي مستوى من التطبيع تعتمد بعض الصفات اعتمادًا وظيفيًا على جزء فقط من المفتاح الأساسي المركّب؟</div></div>
+    <div class="opts col1">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">BCNF - صيغة بويس-كود العادية (Boyce-Codd Normal Form)</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">1NF الصيغة المعيارية الأولى</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">2NF الصيغة المعيارية الثانية</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">3NF الصيغة المعيارية الثالثة</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الاعتماد الجزئي على جزء من المفتاح المركّب يُعالَج في الصيغة الثانية 2NF.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q18 -->
+<div class="qcard" data-correct="4">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">18</div><div class="qtext">بناء التقارير من مهام:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">مصمم قواعد البيانات</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">مدير قواعد البيانات</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">موجّه قواعد البيانات</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">مبرمج قواعد البيانات</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>إنشاء التقارير والنماذج والاستعلامات من مهام تطوير تطبيق قاعدة البيانات، وهي من مسؤوليات مبرمج/مطوّر قواعد البيانات، لا مدير قاعدة البيانات (DBA) الذي يختصّ بالصيانة والأمن والأداء.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q19 -->
+<div class="qcard" data-correct="2">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">19</div><div class="qtext">اللغة المستخدمة لتعريف المخطط الداخلي (Internal Schema) في قواعد البيانات هي:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt" dir="ltr">DML</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt" dir="ltr">SDL</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt" dir="ltr">VDL</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt" dir="ltr">DMBC</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>لغة تعريف التخزين SDL (Storage Definition Language) تُستخدم لتعريف المخطط الداخلي.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q20 -->
+<div class="qcard" data-correct="1">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">20</div><div class="qtext">العملية التي يقوم بها برنامج قواعد البيانات لإعادة ترتيب البيانات في تسلسل معين تُسمى:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">فرز</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">تقرير</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">تصفية</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">استعلام</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الفرز (Sort) يعيد ترتيب البيانات في تسلسل معيّن (تصاعدي/تنازلي).</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q21 -->
+<div class="qcard" data-correct="4">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">21</div><div class="qtext">العلاقة بين (مؤلفون - كتاب):</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">واحد/متعدد</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">واحد/واحد</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">متعدد/متعدد</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">متعدد/واحد</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>العلاقة بين (مؤلفون - كتاب) = متعدد/واحد. ملاحظة: قد تُعدّ العلاقة متعدد/متعدد بشكل عام (المؤلف يكتب عدة كتب والكتاب قد يشترك فيه عدة مؤلفين)، لكن صيغة السؤال (عدة مؤلفين لكتابٍ واحد) تؤيّد متعدد/واحد.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q22 -->
+<div class="qcard" data-correct="3">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">22</div><div class="qtext">أكثر قواعد البيانات انتشارًا هي:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">الهرمية</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">الشيئية العلائقية</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">العلائقية</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">الشبكية</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>قواعد البيانات العلائقية (Relational) هي الأكثر انتشارًا واستخدامًا.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q23 -->
+<div class="qcard" data-correct="3">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">23</div><div class="qtext">لو أرادت وزارة التعليم معرفة المعلمين الذين يرغبون في الانتقال إلى مدينة الرياض فقط؛ فإنه يمكن استخراج ذلك عبر استخدام الأمر:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">التقارير</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">النماذج</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">الاستعلام</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">الأساس</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الاستعلام (Query) يستخرج بيانات محددة وفق شرط (مدينة الرياض).</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q24 -->
+<div class="qcard" data-correct="4">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">24</div><div class="qtext">الهدف الأساسي من تطبيع الجداول في قواعد البيانات هو:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">سهولة الاستخدام</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">سهولة التخزين</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">أمان عالي</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">التقليل من التكرار</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الهدف الأساسي من التطبيع (Normalization) هو تقليل تكرار البيانات ومنع التعارض.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q25 -->
+<div class="qcard" data-correct="1">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">25</div><div class="qtext">البرنامج الذي يكون الامتداد MDB لملفاته هو:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">أكسس</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">وورد</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">إكسل</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">بوربوينت</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الامتداد MDB خاص ببرنامج قواعد البيانات Microsoft Access.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q26 -->
+<div class="qcard" data-correct="2">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">26</div><div class="qtext">لإنشاء قاعدة بيانات باسم EMP نستخدم الأمر:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt" dir="ltr">CREAT NEW EMP</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt" dir="ltr">CREAT DATABASE EMP</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt" dir="ltr">NEW DATABASE EMP</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt" dir="ltr">CREAT EMP</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الأمر الصحيح لإنشاء قاعدة بيانات هو CREATE DATABASE يليه الاسم (EMP).</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q27 -->
+<div class="qcard" data-correct="4">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">27</div><div class="qtext">اللغة التي تُستخدم لاسترجاع وإدخال وتعديل وحذف البيانات هي:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">لغة وصف البيانات</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">لغة الاستفسار الهيكلية</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">لغة تعريف الأشكال</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">لغة التعامل مع البيانات DML</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>لغة التعامل مع البيانات DML تُستخدم لإدخال وتعديل وحذف واسترجاع البيانات.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q28 -->
+<div class="qcard" data-correct="1">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">28</div><div class="qtext">الأمر المستخدم في SQL لتعديل هيكل الجدول (إضافة/تغيير حقل):</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt" dir="ltr">ALTER TABLE</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt" dir="ltr">UPDATE TABLE</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt" dir="ltr">ALTER DATABASE</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt" dir="ltr">DELETE TABLE</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الأمر ALTER TABLE يعدّل هيكل الجدول (إضافة أو تغيير حقل).</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q29 -->
+<div class="qcard" data-correct="3">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">29</div><div class="qtext">الأمر المستخدم في SQL لتعديل خصائص قاعدة البيانات:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt" dir="ltr">ALTER TABLE</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt" dir="ltr">UPDATE TABLE</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt" dir="ltr">ALTER DATABASE</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt" dir="ltr">DELETE TABLE</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الأمر ALTER DATABASE يعدّل خصائص قاعدة البيانات ككل.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q30 -->
+<div class="qcard" data-correct="4">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">30</div><div class="qtext">في دورة حياة قواعد البيانات، في أي مرحلة يتم تحديد متطلبات قاعدة البيانات؟</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">مرحلة التصميم</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">مرحلة التنفيذ</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">مرحلة التخطيط</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">مرحلة التحليل</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>تحديد المتطلبات يتم في مرحلة التحليل (Analysis).</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q31 -->
+<div class="qcard" data-correct="4">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">31</div><div class="qtext">من مميزات استخدام قواعد البيانات:</div></div>
+    <div class="opts col1">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">توفير واجهات متعددة لتعامل المستخدم مع البيانات</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">فرض القيود على المستخدمين الذين ليس لهم صلاحية معينة</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">أمن وسرية البيانات عالية</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">جميع ما سبق</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>كل ما ذُكر من مميزات قواعد البيانات، فالإجابة جميع ما سبق.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q32 -->
+<div class="qcard" data-correct="4">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">32</div><div class="qtext">من أنواع الاستعلام في قواعد البيانات:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">استعلام تحديث</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">استعلام حذف</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">استعلام إضافة</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">جميع ما سبق</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الاستعلام يشمل التحديث والحذف والإضافة، فالإجابة جميع ما سبق.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q33 -->
+<div class="qcard" data-correct="1">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">33</div><div class="qtext">الفرق الجوهري بين برنامج الإكسل والأكسس:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">تقارير – علاقات</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">معلومات – بيانات</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">بيانات – معلومات</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">علاقات – تقارير</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الأكسس يبني علاقات بين الجداول، والإكسل يعتمد على التقارير والحسابات؛ فالفرق الجوهري تقارير (إكسل) – علاقات (أكسس).</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q34 -->
+<div class="qcard" data-correct="3">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">34</div><div class="qtext">الأمر المستخدم لحذف جدول كامل في SQL:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt" dir="ltr">DELETE TABLE</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt" dir="ltr">ERASE TABLE</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt" dir="ltr">DROP TABLE</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt" dir="ltr">REMOVE TABLE</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الأمر DROP TABLE يحذف الجدول كاملًا (هيكلًا وبيانات)؛ أما DELETE فيحذف الصفوف فقط.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q35 -->
+<div class="qcard" data-correct="4">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">35</div><div class="qtext">اختر الإجابة الصحيحة:</div></div>
+    <div class="opts col1">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">قواعد البيانات تستخدم فقط في البنوك</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">توجد تطبيقات متقدمة لقواعد البيانات مثل: استخدام الذكاء الاصطناعي والتجارة الإلكترونية</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">يتم تصميم قواعد البيانات لغرض تخزين البيانات وتنظيمها واسترجاعها</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">ب و ج</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>العبارتان (ب) و(ج) صحيحتان معًا، فالإجابة 'ب و ج'.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q36 -->
+<div class="qcard" data-correct="2">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">36</div><div class="qtext">مجموعة من الحقول التي تصف حقيقة عن كيان معين تمثّل:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">البيانات</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">السجلات</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">الملفات</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">المعلومات</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>مجموعة الحقول التي تصف كيانًا واحدًا تمثّل السجل (Record).</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q37 -->
+<div class="qcard" data-correct="1">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">37</div><div class="qtext">لترتيب البيانات تصاعديًا في SQL نضيف في نهاية الأمر الكلمة:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt" dir="ltr">ASC</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt" dir="ltr">Upsert</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt" dir="ltr">ORDER</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt" dir="ltr">DESC</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الكلمة ASC (Ascending) تُرتّب البيانات تصاعديًا.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q38 -->
+<div class="qcard" data-correct="3">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">38</div><div class="qtext">لترتيب البيانات تنازليًا في SQL نضيف:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt" dir="ltr">Upsert</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt" dir="ltr">ORDER</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt" dir="ltr">DESC</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt" dir="ltr">ASC</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الكلمة DESC (Descending) تُرتّب البيانات تنازليًا.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q39 -->
+<div class="qcard" data-correct="2">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">39</div><div class="qtext">أسلوب أو منهجية لتنظيم المعلومات بحيث يسهّل إدخالها وتعديلها واسترجاعها بشكل مفهوم للمستخدم، وتكون البيانات مترابطة ومتجانسة منطقيًا، هو:</div></div>
+    <div class="opts col1">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">البيانات</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">قواعد البيانات</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">المعلومات</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">نظم إدارة قواعد البيانات</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>هذا هو تعريف قاعدة البيانات، أما نظام إدارة قواعد البيانات (DBMS) فهو البرنامج الذي يدير قاعدة البيانات.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q40 -->
+<div class="qcard" data-correct="2">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">40</div><div class="qtext">......... عبارة عن خاصية عادية من ضمن خواص الكيان وموجودة كخاصية مفتاح أساسي في كيان آخر:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">المفتاح الداخلي</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">المفتاح الخارجي</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">المفتاح الثانوي</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">المفتاح الأساسي</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>المفتاح الخارجي (Foreign Key) خاصية عادية في كيان، وهي مفتاح أساسي في كيان آخر، وبها تُبنى العلاقات.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q41 -->
+<div class="qcard" data-correct="2">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">41</div><div class="qtext">باستخدام الجدول التالي، نريد عرض جميع بيانات الموظفين ما عدا الموظف الذي راتبه يساوي 10000. ما الاستعلام الصحيح؟</div></div>
+    <div class="opts col1">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt" dir="ltr">SELECT * FROM EMP WHERE ID SALARY = 10000;</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt" dir="ltr">SELECT * FROM EMP WHERE SALARY &lt;&gt; 10000;</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt" dir="ltr">SELECT * FROM EMP WHERE AND SALARY = 10000;</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt" dir="ltr">SELECT * FROM EMP WHERE NOT SALARY = 10000;</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>المعامل &lt;&gt; يعني 'لا يساوي'، فيعرض جميع الموظفين ما عدا صاحب الراتب 10000.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q42 -->
+<div class="qcard" data-correct="1">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">42</div><div class="qtext">أي مخطط UML يشبه مخطط التتابع ولكنه لا يُظهر الزمن؟</div></div>
+    <div class="opts col1">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt" dir="ltr">COLLABORATION DIAGRAM</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt" dir="ltr">USE-CASE DIAGRAM</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt" dir="ltr">CLASS DIAGRAM</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt" dir="ltr">SEQUENCE DIAGRAM</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>مخطط التعاون (Collaboration Diagram) يعرض نفس تفاعلات مخطط التتابع لكن دون إظهار البعد الزمني.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q43 -->
+<div class="qcard" data-correct="4">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">43</div><div class="qtext">مخطط يوصف متطلبات النظام بشكل عام ويوضح المهام التي يجب أن يقوم بها المستخدم هو:</div></div>
+    <div class="opts col1">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt" dir="ltr">CLASS DIAGRAM</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt" dir="ltr">COLLABORATION DIAGRAM</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt" dir="ltr">SEQUENCE DIAGRAM</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt" dir="ltr">USE-CASE DIAGRAM</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>مخطط حالات الاستخدام (Use-Case Diagram) يوضح متطلبات النظام ووظائف المستخدم.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q44 -->
+<div class="qcard" data-correct="2">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">44</div><div class="qtext">شكل المفتاح الرئيسي في قواعد البيانات العلائقية هو:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">معين</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">بيضاوي</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">مستطيل</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">متوازي أضلاع</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>في مخططات ERD يُمثّل المفتاح (والصفة) بشكل بيضاوي.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q45 -->
+<div class="qcard" data-correct="4">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">45</div><div class="qtext">لتصميم قاعدة بيانات للمصطلحات الحاسوبية الإنجليزية الواردة في مقرر مادة الحاسب الآلي مع ترجمة كل مصطلح إلى اللغة العربية نستخدم:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt" dir="ltr">FoxPro</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt" dir="ltr">Oracle</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt" dir="ltr">Access</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">جميع ما سبق</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>لأن Access و Oracle و FoxPro جميعها برامج لإدارة قواعد البيانات، وتدعم إنشاء الجداول وتخزين البيانات النصية بمختلف اللغات (الإنجليزية والعربية)، لذا يمكن استخدام أيٍّ منها لإنشاء قاعدة بيانات مصطلحات مع ترجمتها.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q46 -->
+<div class="qcard" data-correct="2">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">46</div><div class="qtext">في مخططات قواعد البيانات (ERD)، يتم تمثيل الخصائص/الصفات (Attributes) بشكل:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">معين</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">بيضاوي</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">مستطيل</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">متوازي أضلاع</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>تُمثّل الصفات (Attributes) في ERD بالشكل البيضاوي.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q47 -->
+<div class="qcard" data-correct="3">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">47</div><div class="qtext">في مخطط الـERD، الكيان (Entity) يتم تمثيله بشكل:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">معين</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">بيضاوي</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">مستطيل</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">متوازي أضلاع</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>يُمثّل الكيان (Entity) في ERD بالمستطيل.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q48 -->
+<div class="qcard" data-correct="1">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">48</div><div class="qtext">مفتاح يستخدم لتعريف سجل أو أكثر ويُستفاد منه في الوصول إلى مجموعة من السجلات التي تحتوي على قيم مشتركة هو:</div></div>
+    <div class="opts">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">المفتاح الثانوي</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">المفتاح الأساسي</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">المفتاح الخارجي</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">المفتاح الفريد</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>المفتاح الثانوي (Secondary Key) يُستخدم للوصول إلى سجلات تشترك في قيمة معينة، وقد يتكرر.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q49 -->
+<div class="qcard" data-correct="4">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">49</div><div class="qtext">اللغة المستخدمة مع نموذج البيانات العلائقية للوصول إلى البيانات واسترجاعها هي:</div></div>
+    <div class="opts col1">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">لغة وصف البيانات (DDL)</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">لغة تعريف الأشكال</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">لغة التعامل مع البيانات (DML)</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">لغة الاستفسار الهيكلية (SQL)</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>لغة الاستفسار الهيكلية SQL هي لغة التعامل مع نموذج البيانات العلائقية والوصول إليها.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+<!-- Q50 -->
+<div class="qcard" data-correct="4">
+  <div class="qcard-inner">
+    <div class="qhead"><div class="qnum">50</div><div class="qtext">المكونات الأساسية لأي نظام قاعدة بيانات علائقية تشمل:</div></div>
+    <div class="opts col1">
+        <div class="opt"><span class="obadge">أ</span><span class="optxt">الجداول</span></div>
+        <div class="opt"><span class="obadge">ب</span><span class="optxt">الجداول، الاستعلامات</span></div>
+        <div class="opt"><span class="obadge">ج</span><span class="optxt">الجداول، الاستعلامات، التقارير</span></div>
+        <div class="opt"><span class="obadge">د</span><span class="optxt">الجداول، الاستعلامات، التقارير، النماذج</span></div>
+    </div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>نظام قاعدة البيانات العلائقية يشمل الجداول والاستعلامات والتقارير والنماذج معًا.</div>
+  <div class="scratch"></div>
+  <div class="qlogo"></div>
+  <div class="qfooter"><span class="qfcorner"></span></div>
+</div>
+</div>
+<script>
+
+document.querySelectorAll('.qcard').forEach(function (card) {
+  var correct = parseInt(card.getAttribute('data-correct'), 10);
+  var opts = card.querySelectorAll('.opts .opt');
+  var exp = card.querySelector('.exp');
+  opts.forEach(function (opt, i) {
+    opt.addEventListener('click', function () {
+      if (opts[correct - 1]) opts[correct - 1].classList.add('correct');
+      if (exp) {
+        if (i === correct - 1) exp.classList.add('show');
+        else exp.classList.remove('show');
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
