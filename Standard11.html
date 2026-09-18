@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اختبار المعيار الحادي عشر - التقنية الرقمية</title>
+<style>
+  :root{
+    --navy:#084B8C;
+    --navy-deep:#054084;
+    --gold:#E8AD28;
+    --gold-light:#F4B12C;
+    --green:#059548;
+    --red:#D64541;
+    --bg:#FFFFFF;
+    --text:#16233C;
+    --text2:#5B6B85;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:'Tajawal','Segoe UI',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    margin:0;
+    padding:0;
+    direction:rtl;
+  }
+  .topbar{
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-deep) 100%);
+    color:#fff;
+    padding:22px 18px;
+    text-align:center;
+    border-bottom:5px solid var(--gold);
+  }
+  .topbar h1{
+    margin:0 0 6px;
+    font-size:22px;
+    font-family:'Cairo','Tajawal',sans-serif;
+    font-weight:800;
+  }
+  .topbar p{margin:0;color:var(--gold-light);font-size:14px;font-weight:600;}
+  .wrap{max-width:760px;margin:0 auto;padding:18px 14px 60px;}
+  .qcard{
+    background:#fff;
+    border:1px solid #e3e8f0;
+    border-radius:14px;
+    margin-bottom:18px;
+    padding:16px 16px 4px;
+    position:relative;
+    box-shadow:0 2px 10px rgba(8,75,140,0.07);
+    overflow:hidden;
+  }
+  .qcard::before{
+    content:"";
+    position:absolute;
+    top:0;right:0;
+    width:6px;height:100%;
+    background:var(--gold);
+  }
+  .qhead{display:flex;gap:10px;align-items:flex-start;margin-bottom:14px;}
+  .qnum{
+    flex:0 0 auto;
+    background:var(--navy);
+    color:#fff;
+    width:30px;height:30px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:14px;
+  }
+  .qtext{flex:1;font-size:16px;font-weight:700;line-height:1.6;padding-top:3px;}
+  .cls-tag{
+    display:inline-block;
+    font-size:11px;
+    font-weight:700;
+    padding:2px 9px;
+    border-radius:20px;
+    margin-bottom:8px;
+    background:#eef3fb;
+    color:var(--navy);
+  }
+  .opts{display:flex;flex-direction:column;gap:8px;}
+  .opt{
+    display:flex;align-items:center;gap:10px;
+    border:1.5px solid #e3e8f0;
+    border-radius:10px;
+    padding:9px 12px;
+    cursor:pointer;
+    transition:.15s;
+    position:relative;
+  }
+  .opt:hover{border-color:var(--gold);background:#fffaf0;}
+  .obadge{
+    flex:0 0 auto;
+    width:26px;height:26px;
+    border-radius:50%;
+    background:var(--navy);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:800;
+  }
+  .optxt{font-size:14.5px;line-height:1.5;}
+  input.oradio{position:absolute;opacity:0;width:0;height:0;}
+  .qcard input:checked + .opts .opt,
+  .opt.selected{outline:none;}
+  /* reveal logic */
+  .opt input.oradio:checked ~ .opt-body{}
+  .exp{
+    display:none;
+    margin-top:12px;
+    background:#f3f7fc;
+    border-right:4px solid var(--navy);
+    border-radius:8px;
+    padding:12px 14px;
+    font-size:13.5px;
+    line-height:1.85;
+    color:var(--text);
+  }
+  .etitle{font-weight:800;color:var(--navy);margin-bottom:6px;font-size:13.5px;}
+  .note{
+    margin-top:8px;
+    background:#fff6e6;
+    border-right:4px solid var(--gold);
+    border-radius:8px;
+    padding:10px 12px;
+    font-size:13px;
+    color:#7a5a12;
+    font-weight:600;
+  }
+  .qcard.revealed .exp{display:block;}
+  .qcard.revealed .opt.correct{border-color:var(--green);background:#eafaf1;}
+  .qcard.revealed .opt.correct .obadge{background:var(--green);}
+  .qcard.revealed .opt.wrong-picked{border-color:var(--red);background:#fdecea;}
+  .qcard.revealed .opt.wrong-picked .obadge{background:var(--red);}
+  .footer-note{
+    text-align:center;color:var(--text2);font-size:12px;margin-top:30px;
+  }
+  .brand{
+    text-align:center;padding:14px;color:var(--text2);font-size:12px;
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <h1>🖥️ اختبار المتابعين – حاسب</h1>
+  <p>المعيار الحادي عشر كاملاً (التقنية الرقمية وأخلاقيات استخدامها) | الأسئلة 1-25</p>
+</div>
+
+<div class="wrap">
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">1</div><div class="qtext">من أبرز ما يميز الفصول الافتراضية عن غيرها من أدوات التعلم الإلكتروني هو</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">المحادثات المرئية</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">تسجيل الطالب</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">منتديات الحوار</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">متابعة الواجبات</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>المحادثات المرئية هي التفاعل المباشر بالصوت والصورة، وهذا ما يميز الفصل الافتراضي تحديدًا. أما تسجيل الطلاب ومتابعة الواجبات فوظائف إدارية عامة تتوفر في أي نظام تعليمي، ومنتديات الحوار أداة تواصل غير متزامنة أصلًا.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">2</div><div class="qtext">نظام يركز على إنشاء المحتوى فقط ولا يركز على إدارته هو:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">LCMS</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">CAI</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">CMS</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">LMS</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>CMS يركّز على إدارة المحتوى الرقمي نفسه (إنشاءً وتنظيمًا ونشرًا)، وليس على إدارة عملية التعلم والمتعلمين. أما LMS فيدير المتعلمين والتقييم والتقارير لا المحتوى بحد ذاته، وLCMS يجمع الوظيفتين معًا، وCAI مصطلح تدريسي وليس نوع نظام إدارة أصلًا.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">3</div><div class="qtext">تهتم معايير سكورم بـ:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">النشاط الإلكتروني</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">المقرر الإلكتروني</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">الاختبار الإلكتروني</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">جميع ما سبق</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>يبني سكورم محتواه من عناصر (Assets) وكائنات تعليمية قابلة للمشاركة (SCOs) وتجميعات محتوى (Content Aggregations)، وهذه التجميعات يمكن أن تمثّل نشاطًا، أو اختبارًا، أو مقررًا كاملًا. ولذلك يمكن تضمين الأنشطة والاختبارات والمقررات كلها داخل حزم متوافقة مع سكورم، فلا يصح حصر الإجابة في المقرر وحده.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">4</div><div class="qtext">من مميزات التعليم الإلكتروني:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">المعلم هو أساس العملية التعليمية</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">ضرورة تدريب المعلمين</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">قصر وقت المحاضرات المنشورة</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">مرونة التعليم في الزمان والمكان الذي يناسب المتعلم</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>مرونة الزمان والمكان أشهر ميزة للتعليم الإلكتروني. أما ضرورة تدريب المعلمين وقصر وقت المحاضرات فهي تحديات وسلبيات لا مزايا، وكون المعلم أساس العملية التعليمية مبدأ عام للتعليم بشكل مطلق لا خاصية للتعليم الإلكتروني تحديدًا.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">5</div><div class="qtext">من برامج تصميم المقررات الإلكترونية:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Course lab</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Quizlet</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Camtasia</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Sony Vegas</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>Course Lab برنامج مخصص لبناء مقررات إلكترونية تفاعلية كاملة. أما Quizlet فبطاقات مراجعة، وCamtasia لتسجيل الشاشة، وSony Vegas لمونتاج الفيديو العام — ولا واحد منها مصمَّم لبناء مقرر متكامل.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">6</div><div class="qtext">اهم استخدامات للسبورة البيضاء:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">لوحة تفاعلية</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">أداة رسم وكتابة</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">الفصول الافتراضية</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">إدارة المحتوى الرقمي</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>أداة رسم وكتابة هي الاستخدام الفعلي للسبورة أثناء الشرح (تدوين، رسم، تمييز نقاط). أما لوحة تفاعلية فوصفٌ لنوع الأداة لا استخدامها، والفصول الافتراضية وإدارة المحتوى مفاهيم أوسع تحتوي السبورة كأداة فرعية داخلها فقط.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">7</div><div class="qtext">التعلم بمساعدة الكمبيوتر:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">CBL</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">CAI</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">CBI</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">CML</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الملزمة تُعرّف "التعلم بمساعدة الكمبيوتر" بأنه CAI تحديدًا، حيث الكمبيوتر يكمّل دور المعلم لا يستبدله. تصنيفات CBI وCML وCBL الدقيقة قد تختلف قليلًا بين المراجع، لكن مطابقة نص السؤال لعنوان تعريف CAI في الملزمة حرفيًا يجعله الإجابة الأدق هنا.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">8</div><div class="qtext">أحد التطبيقات المستخدمة في التصحيح الآلي المستعمل:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Stage</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Or Code</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Edmodo</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Zip Grade</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>Zip Grade تطبيق مخصص لمسح وتصحيح الاختبارات الورقية آليًا بكاميرا الجوال. أما Edmodo فمنصة تواصل وإدارة فصل لا تصحيح آلي، وStage وOr Code ليسا أدوات تصحيح معروفة.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">9</div><div class="qtext">برنامج يستخدم لعقد المحاضرات واللقاءات الافتراضية هو:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Zoom</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Webex</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">GoToMeeting</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">جميع ما ذكر</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الثلاثة (Zoom، Webex، GoToMeeting) برامج مؤتمرات فيديو فعلية تُستخدم لعقد المحاضرات واللقاءات الافتراضية، ولذلك لا يوجد استبعاد منطقي لأي منها.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">10</div><div class="qtext">أحد أهداف معايير سكورم ويعني إمكانية استخدام المحتوى مع أنواع متعددة من الأجهزة وأنظمة التشغيل وأنظمة إدارة التعلم وبرامج الإبحار ومسيري قواعد البيانات</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">سهولة الوصول</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">التوافق</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">إمكانية إعادة الاستخدام</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">القابلية للتكيف</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>وفق مرجعية سكورم لدى ADL، السمات الأساسية هي: الوصول (Accessibility)، وإعادة الاستخدام (Reusability)، والتشغيل البيني/التوافقية (Interoperability)، والاستمرارية التقنية (Durability). وعبارة السؤال (العمل مع أجهزة وأنظمة تشغيل وأنظمة إدارة تعلم ومتصفحات مختلفة دون إعادة برمجة) تطابق تحديدًا مفهوم التشغيل البيني (Interoperability). أما سهولة الوصول فتخص توفر المحتوى للمتعلم وقت الحاجة، وإعادة الاستخدام تخص الكائنات التعليمية عبر دورات متعددة، والقابلية للتكيف تخص مواءمة المحتوى لاحتياجات المتعلم الفردية لا تعدد الأجهزة والأنظمة.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">11</div><div class="qtext">أداة لعمل دروس تفاعلية:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">MOVIEMAKER</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">SNAGIT</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">STORYLINE</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">CAMTASIA</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>Storyline أداة تأليف احترافية لبناء دروس ومحتوى تفاعلي حقيقي. أما MovieMaker فتحرير فيديو بسيط، وSnagit التقاط شاشة، وCamtasia تسجيل شاشة — ولا واحدة منها أداة تأليف تفاعلي.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">12</div><div class="qtext">من أهم أدوات الفصول الافتراضية:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">الاختبارات الإلكترونية</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">اللوحة البيضاء</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">المنتديات التعليمية</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">البريد الإلكتروني</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>اللوحة البيضاء أداة تفاعل مباشر داخل اللقاء الحي نفسه. أما الاختبارات الإلكترونية والمنتديات والبريد فأدوات مستقلة تُستخدم خارج بيئة الفصل الافتراضي المباشر، وغالبًا غير متزامنة.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">13</div><div class="qtext">نوع من أنواع البرمجيات التعليمية يستخدم لمهارات سبق تعلمها لزيادة فهم الطالب هو:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">برمجيات التعليم الخصوصي (Tutorial programs)</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">برمجيات حل المشكلات (problem solving)</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">برمجيات الألعاب التربوية (Games programs)</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">برمجيات التدريب والممارسة (Drill &amp; Practice)</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>التدريب والممارسة يقدّم تمارين متكررة بتغذية راجعة فورية لتعزيز مهارة سبق تعلّمها. أما التعليم الخصوصي فيقدّم مفاهيم جديدة، وحل المشكلات يركّز على التفكير النقدي، والألعاب التربوية تجمع الترفيه بالتعلم — ولا علاقة لأي منها بتكرار مهارة سابقة تحديدًا.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">14</div><div class="qtext">نظام يركز على الإدارة وليس على المحتوى هو:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">LMS</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">CAI</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">CMS</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">LCMS</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>LMS يدير المتعلمين والمقررات والتقارير دون إنشاء محتوى بذاته. أما CMS فعكسه (محتوى فقط)، وLCMS يجمع الاثنين، وCAI مصطلح تدريسي لا نوع نظام.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">15</div><div class="qtext">من أنظمة إدارة التعلم الإلكتروني مغلقة المصدر:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Atutor</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Blackboard</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Sakai</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Moodle</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>Blackboard نظام تجاري مغلق المصدر بترخيص مدفوع. أما Atutor وSakai وMoodle فالثلاثة أنظمة مفتوحة المصدر مجانية الكود، عكس المطلوب تمامًا.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">16</div><div class="qtext">منصة تتبع لمعهد الإدارة العامة وهي احدى مبادرات برنامج التحول الرقمي لتحقيق رؤية 2030 هي:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">المكتبة السعودية الرقمية</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">دروب</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">رواق</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">إثرائي</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>إثرائي منصة التعلم التابعة تحديدًا لمعهد الإدارة العامة. أما دروب فبرنامج تدريب إلكتروني تابع لصندوق تنمية الموارد البشرية (هدف)، ورواق منصة مقررات عامة، والمكتبة السعودية الرقمية مبادرة بحثية أكاديمية — ولا علاقة مباشرة لأي منها بمعهد الإدارة العامة.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">17</div><div class="qtext">أحد معايير تطوير المحتوى ويمثل واجهه الربط بين نظام إدارة التعلم والمحتوى هو:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">MIS</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">LMS</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">SCORM</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">CMS</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>سكورم معيار تقني يضمن أن المحتوى يتحدث بنفس اللغة مع أي نظام إدارة تعلم. أما LMS وCMS فأنظمة كاملة لا معايير ربط، وMIS نظام معلومات إداري عام لا علاقة له بربط المحتوى التعليمي.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">18</div><div class="qtext">يرمز المصطلح Mooc إلى:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">أداة لعمل دروس تفاعلية</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">المقررات العالمية الضخمة</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">النظم الخبيرة</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">نظم إدارة المحتوى</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>موك اختصار "المقررات الهائلة المفتوحة عبر الإنترنت". أما أداة الدروس التفاعلية فوصف عام لأي أداة تأليف، والنظم الخبيرة ونظم إدارة المحتوى مفاهيم مختلفة تمامًا لا علاقة لها بانفتاح النطاق والمجانية.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">19</div><div class="qtext">نظام إدارة تعلم مفتوح المصدر:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Moodle</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Blackboard</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Ecollege</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">learning space</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>Moodle أشهر نظام مفتوح المصدر عالميًا (ملاحظة: النص الأصلي يكتبها خطأ إملائيًا "Model"). أما Blackboard وEcollege وLearning Space فأنظمة تجارية مغلقة المصدر.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">20</div><div class="qtext">تعتبر منصة مدرستي مثالاً على:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">CAI</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">LMS</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">CMS</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">LCMS</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>منصة مدرستي تدير تسجيل الطلاب والحضور والدرجات والواجبات — وظائف إدارة تعلم رسمية، وهذا جوهر عمل LMS. أما CMS فيركّز على المحتوى فقط، وLCMS يضيف تأليف محتوى، وCAI مصطلح تدريسي لا نوع منصة.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">21</div><div class="qtext">من مزايا التعليم الإلكتروني:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">عدم الاعتماد على الحضور الفعلي</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">تجاوز قيود المكان والزمان في العملية التعليمية</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">سهولة الوصول الى المعلم إلكترونيًا حتى خارج أوقات العمل الرسمية</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">جميع ما سبق</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>عدم الاعتماد على الحضور الفعلي، وتجاوز قيود المكان والزمان، وسهولة الوصول للمعلم إلكترونيًا — الثلاثة مزايا حقيقية وموثّقة للتعليم الإلكتروني، ولذلك لا يوجد استبعاد منطقي لأي منها.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">22</div><div class="qtext">يتيح نظام ................. لأستاذ المقرر الالتقاء مع طلابه بشكل مباشر عبر شبكة الإنترنت</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">نظام Articulate</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">نظام Moodle</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Elluminate Live</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">نظام إدارة التعليم الإلكتروني LMS</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>Elluminate Live أداة لقاءات مباشرة متزامنة عبر الإنترنت، وهذا بالضبط معنى "الالتقاء المباشر" في السؤال. أما Articulate فأداة تأليف غير متزامنة، وMoodle وLMS أنظمة إدارة تعلم شاملة لا أدوات لقاء مباشر بحد ذاتها.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">23</div><div class="qtext">برامج الحاسب التي تجعل المستخدم يشارك بشكل قريب من الحقيقة دون التعرض لخطر المشاركة الفعلية هي برامج:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">النمذجة والمحاكاة</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">ألعاب الحاسب</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">التدريس الخصوصي</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">التدريب والتمرن</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>النمذجة والمحاكاة تقلّد مواقف واقعية يصعب تنفيذها في الصف، وتتيح بيئة آمنة لاتخاذ القرار دون خطر فعلي. أما ألعاب الحاسب فترفيهية أساسًا، والتدريس الخصوصي يقدّم مفاهيم جديدة، والتدريب والتمرن يكرّر مهارة سابقة.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">24</div><div class="qtext">برنامج لتصميم درس تفاعلي:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Nearpod</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Authorware</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Canva</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Word</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>Nearpod منصة مخصصة لتقديم دروس تفاعلية مباشرة أو ذاتية بتفاعل فوري من الطلاب. أما Word فمعالج نصوص، وCanva تصميم جرافيك — فلا علاقة لهما بتصميم درس تفاعلي. أما Authorware فكانت فعلًا أداة تأليف معتمدة لهذا الغرض، لكن أدوبي أوقفت تطويرها رسميًا سنة 2007 واستبدلتها بـAdobe Captivate، فهي اليوم أداة تاريخية متوقفة لا خيار عملي حديث.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">25</div><div class="qtext">كل الآتي من خصائص المكتبة الرقمية ما عدا:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">لا حدود فعلية</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">سهولة الوصول</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">استخراج المعلومات</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">إمكانية التعديل من المستفيدين</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>إمكانية التعديل من المستفيدين ليست خاصية للمكتبة الرقمية أصلًا — فهي مصدر اطلاع وبحث، لا منصة تعديل جماعي. أما لا حدود فعلية وسهولة الوصول واستخراج المعلومات فكلها خصائص حقيقية وموثّقة للمكتبات الرقمية.</div>
+</div>
+</div>
+<div class="brand">مبني وفق منهجية الفلتر الخماسي — محمد السواط | alsuwatedu.com</div>
+<script>
+document.querySelectorAll('.qcard').forEach(function(card){
+  const correct = parseInt(card.getAttribute('data-correct'), 10); // 1-indexed
+  const opts = card.querySelectorAll('.opt');
+  opts.forEach(function(opt, idx){
+    opt.addEventListener('click', function(){
+      if(card.classList.contains('revealed')) return;
+      card.classList.add('revealed');
+      opts.forEach(function(o, i2){
+        if(i2 === correct - 1){ o.classList.add('correct'); }
+        else if(o === opt){ o.classList.add('wrong-picked'); }
+      });
+    });
+  });
+});
+</script>
+
+</body>
+</html>
