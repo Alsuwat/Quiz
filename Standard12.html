@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اختبار المعيار الثاني عشر - استراتيجيات وطرق تدريس الحاسب</title>
+<style>
+  :root{
+    --navy:#084B8C;
+    --navy-deep:#054084;
+    --gold:#E8AD28;
+    --gold-light:#F4B12C;
+    --green:#059548;
+    --red:#D64541;
+    --bg:#FFFFFF;
+    --text:#16233C;
+    --text2:#5B6B85;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:'Tajawal','Segoe UI',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    margin:0;
+    padding:0;
+    direction:rtl;
+  }
+  .topbar{
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-deep) 100%);
+    color:#fff;
+    padding:22px 18px;
+    text-align:center;
+    border-bottom:5px solid var(--gold);
+  }
+  .topbar h1{
+    margin:0 0 6px;
+    font-size:22px;
+    font-family:'Cairo','Tajawal',sans-serif;
+    font-weight:800;
+  }
+  .topbar p{margin:0;color:var(--gold-light);font-size:14px;font-weight:600;}
+  .wrap{max-width:760px;margin:0 auto;padding:18px 14px 60px;}
+  .qcard{
+    background:#fff;
+    border:1px solid #e3e8f0;
+    border-radius:14px;
+    margin-bottom:18px;
+    padding:16px 16px 4px;
+    position:relative;
+    box-shadow:0 2px 10px rgba(8,75,140,0.07);
+    overflow:hidden;
+  }
+  .qcard::before{
+    content:"";
+    position:absolute;
+    top:0;right:0;
+    width:6px;height:100%;
+    background:var(--gold);
+  }
+  .qhead{display:flex;gap:10px;align-items:flex-start;margin-bottom:14px;}
+  .qnum{
+    flex:0 0 auto;
+    background:var(--navy);
+    color:#fff;
+    width:30px;height:30px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:14px;
+  }
+  .qtext{flex:1;font-size:16px;font-weight:700;line-height:1.6;padding-top:3px;}
+  .cls-tag{
+    display:inline-block;
+    font-size:11px;
+    font-weight:700;
+    padding:2px 9px;
+    border-radius:20px;
+    margin-bottom:8px;
+    background:#eef3fb;
+    color:var(--navy);
+  }
+  .opts{display:flex;flex-direction:column;gap:8px;}
+  .opt{
+    display:flex;align-items:center;gap:10px;
+    border:1.5px solid #e3e8f0;
+    border-radius:10px;
+    padding:9px 12px;
+    cursor:pointer;
+    transition:.15s;
+    position:relative;
+  }
+  .opt:hover{border-color:var(--gold);background:#fffaf0;}
+  .obadge{
+    flex:0 0 auto;
+    width:26px;height:26px;
+    border-radius:50%;
+    background:var(--navy);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:800;
+  }
+  .optxt{font-size:14.5px;line-height:1.5;}
+  input.oradio{position:absolute;opacity:0;width:0;height:0;}
+  .qcard input:checked + .opts .opt,
+  .opt.selected{outline:none;}
+  /* reveal logic */
+  .opt input.oradio:checked ~ .opt-body{}
+  .exp{
+    display:none;
+    margin-top:12px;
+    background:#f3f7fc;
+    border-right:4px solid var(--navy);
+    border-radius:8px;
+    padding:12px 14px;
+    font-size:13.5px;
+    line-height:1.85;
+    color:var(--text);
+  }
+  .etitle{font-weight:800;color:var(--navy);margin-bottom:6px;font-size:13.5px;}
+  .note{
+    margin-top:8px;
+    background:#fff6e6;
+    border-right:4px solid var(--gold);
+    border-radius:8px;
+    padding:10px 12px;
+    font-size:13px;
+    color:#7a5a12;
+    font-weight:600;
+  }
+  .qcard.revealed .exp{display:block;}
+  .qcard.revealed .opt.correct{border-color:var(--green);background:#eafaf1;}
+  .qcard.revealed .opt.correct .obadge{background:var(--green);}
+  .qcard.revealed .opt.wrong-picked{border-color:var(--red);background:#fdecea;}
+  .qcard.revealed .opt.wrong-picked .obadge{background:var(--red);}
+  .footer-note{
+    text-align:center;color:var(--text2);font-size:12px;margin-top:30px;
+  }
+  .brand{
+    text-align:center;padding:14px;color:var(--text2);font-size:12px;
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <h1>🖥️ اختبار المتابعين – حاسب</h1>
+  <p>المعيار الثاني عشر كاملاً (استراتيجيات وطرق تدريس الحاسب) | الأسئلة 1-24</p>
+</div>
+
+<div class="wrap">
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">1</div><div class="qtext">أي من الجوانب التالية يُصنَّف ضمنها قيام المعلم مع طلابه بنشاط عمل صيانة أجهزة معمل الحاسب؟</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">المنهجي</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">المهاري</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">الوجداني</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">المعرفي</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: المهاري. صيانة الأجهزة عمل يدوي تطبيقي (فك، تركيب، فحص، إصلاح) — يندرج تحت الجانب المهاري (النفس-حركي) من جوانب التعلم الثلاثة. أما المعرفي فيخص المعلومات والمفاهيم النظرية، والوجداني يخص المشاعر والاتجاهات والقيم، والمنهجي ليس أصلًا من تصنيف جوانب التعلم الثلاثة (معرفي/وجداني/مهاري) بل مصطلح مختلف السياق.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">2</div><div class="qtext">ما المصطلح الذي يُطلق على رسم خطة كاملة وشاملة لعملية التدريس، تتضمن الأهداف والمحتوى والوسائل والأنشطة والتقويم؟</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">استراتيجية التدريس</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">طريقة التدريس</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">هدف التدريس</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">أسلوب التدريس</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: استراتيجية التدريس — الإطار العام الشامل الذي يخطط من خلاله المعلم لتحقيق أهداف تعليمية محددة. أما طريقة التدريس فهي الإجراء العملي المحدد لتنفيذ جزء من الاستراتيجية، وأسلوب التدريس الطابع الشخصي للمعلم في التطبيق، وهدف التدريس مجرد نتيجة مرجوة لا خطة شاملة.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">3</div><div class="qtext">طريقة تدريس تمكن المتعلم من أن يعلم نفسه بنفسه بواسطة برنامج أعد بأسلوب خاص</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">استراتيجية العمل الجماعي</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">استراتيجية المحاكاة</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">استراتيجية التعليم المبرمج</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">استراتيجية خرائط المفاهيم</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: استراتيجية التعليم المبرمج — تقدّم المحتوى بشكل منظم ومتسلسل عبر برنامج مُعدّ خصيصًا، يتيح للمتعلم التعلم الذاتي خطوة بخطوة. أما العمل الجماعي فيعتمد على التعاون بين الطلاب لا التعلم الفردي ببرنامج، والمحاكاة تقليد لموقف واقعي، وخرائط المفاهيم أداة تنظيم بصري للمعرفة — ولا علاقة مباشرة لأي منها بـ'برنامج أُعدّ بأسلوب خاص' يعلّم الطالب نفسه بنفسه.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">4</div><div class="qtext">صالح يدرس طلابه الطباعة باللمس باستخدام لوحة المفاتيح لإتقان الطلاب لهذه المهارة يحتاجون الى:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">مهارات متقدمة في معالج النصوص</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">زيادة في وقت التدريب</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">فهم واستقصاء للعمليات الحسابية</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">تعلم تعاوني بين المجموعات</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: زيادة في وقت التدريب. الطباعة باللمس مهارة حركية آلية (Muscle Memory) تُتقن فقط بالتكرار والممارسة المستمرة، لا بفهم نظري أو تعاون جماعي. أما معالج النصوص فمهارة مختلفة تمامًا، والفهم الحسابي والتعلم التعاوني لا علاقة مباشرة لهما بإتقان حركة الأصابع الآلية.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">5</div><div class="qtext">برنامج يقوم بإدارة الأجهزة ضمن الصف أو الشبكة؛ حيث يمكن المعلم من عرض الشاشة الخاصة به على كل الحواسيب المتصلة بالشبكة هو:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Canva</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Norton Antivirus</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Deep freeze</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">NetSupport School</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: NetSupport School — برنامج إدارة فصول رقمية مخصص، يتيح للمعلم عرض شاشته على أجهزة الطلاب والتحكم بها. أما Canva أداة تصميم جرافيك، وNorton Antivirus برنامج حماية من الفيروسات، وDeep Freeze يحافظ على حالة الجهاز الأصلية بعد إعادة التشغيل — ولا علاقة لأي منها بعرض الشاشة عبر الشبكة.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">6</div><div class="qtext">استراتيجية PBL هي استراتيجية "Project Based Learning"</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">المشاريع</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">حل المشكلات</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">الرحلات المعرفية</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">العرض العملي</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: المشاريع. السؤال نفسه يحدد المصطلح الإنجليزي صراحة (Project Based Learning)، والترجمة المباشرة له هي التعلم بالمشروع/المشاريع. أما حل المشكلات فهو Problem-Based Learning (اختصار مشابه PBL لكن مصطلح مختلف تمامًا)، والرحلات المعرفية هي WebQuests، والعرض العملي هو Demonstration — لا علاقة لأي منها بـ'Project'.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">7</div><div class="qtext">استراتيجية تعليمية تعتمد على تزويد المتعلمين بمادة تعليمية حول الدرس كمقاطع فيديو أو ملفات صوتية أو غيرها للاطلاع عليها في منازلهم وقبل حضور الدرس في حين يخصص وقت الدرس للمناقشة والأنشطة هي:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">العصف الذهني</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">البيان العملي</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">المحطات العلمية</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">الصف المقلوب</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: الصف المقلوب — يدرس الطالب المحتوى خارج الفصل (فيديو، مواد رقمية) ويُطبّق داخل الفصل، وهذا مطابق حرفيًا لنص السؤال. أما العصف الذهني فأسلوب توليد أفكار جماعي، والبيان العملي عرض مهارة أمام الطلاب مباشرة في الحصة، والمحطات العلمية تقسيم الصف لمجموعات متنقلة — ولا علاقة لأي منها بمشاهدة المحتوى خارج الفصل قبل الحصة.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">8</div><div class="qtext">...................... هي قائمة بالمهارات أو السلوكيات الذي نريد التحقق من وجودها لدى الطالب، ويقوم الملاحظ بالتأشير أمام كل منها وذلك بوضع إشارة (✓) عندما تظهر المهارة ووضع إشارة (×) عندما لا تظهر.</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">المشاريع</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">قوائم الشطب</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">الملاحظة</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">سلالم التقدير</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: قوائم الشطب (Checklist) — أداة ثنائية القيمة (موجود/غير موجود) بالضبط كما يصفها السؤال (✓ أو ×). أما سلالم التقدير فتقيس درجة الجودة بمستويات متدرجة لا بوجود/عدم وجود فقط، والملاحظة أسلوب تقويم عام غير محدد الشكل، والمشاريع نوع مهمة تعليمية لا أداة تقويم.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">9</div><div class="qtext">يواجه المعلم مشكلة في تفاوت مستويات الطلاب في احدى وحدات المقرر؛ ولذا فهو بحاجة للتخطيط الجيد المعتمد على بعض الأدوات ومن أهمها:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">تحليل المستوى الدراسي السابق للطالب</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">الاختبار الجدي للوحدة التدريسية</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">تقويم الطالب قبل تدريس الوحدة</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">الاختبار الشامل لجميع وحدات المقرر</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: تقويم الطالب قبل تدريس الوحدة — تحديدًا هذا هو التقويم القبلي الذي يكشف تفاوت مستويات الطلاب قبل بدء الوحدة، فيمكّن المعلم من التخطيط الجيد بناءً على نتائجه. أما تحليل المستوى الدراسي السابق فمعلومة تاريخية عامة لا أداة تخطيط مباشرة للوحدة الحالية، والاختبار الجدي والشامل يأتيان بعد التدريس لا قبله، فلا يخدمان هدف التخطيط المسبق.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">10</div><div class="qtext">إعلام الطالب نتيجة تعلمه من خلال تزويده بمعلومات عن سير أدائه بشكل مستمر، لمساعدته في تثبيت ذلك الأداء إذا كان يسير في الاتجاه الصحيح، أو تعديله إذا كان بحاجة إلى تعديل هو:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">التغذية الراجعة</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">الاختبارات</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">التقويم التشخيصي</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">التقويم النهائي</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: التغذية الراجعة (Feedback) — إعلام مستمر بسير الأداء لتثبيته أو تعديله، وهذا هو تعريفها بالضبط. أما الاختبارات فأداة قياس لا إعلام مستمر بالأداء، والتقويم التشخيصي يكشف صعوبات التعلم وأسبابها لا يتابع سير الأداء يومًا بيوم، والتقويم النهائي يأتي بعد انتهاء التعلم لا أثناءه.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">11</div><div class="qtext">..............هي تصور عقلي لموضوع أو فكرة تكون متمركزة في الوسط يتم فيه ربط الموضوعات أو الأفكار الفرعية باستخدام الخطوط والرموز والأشكال والصور لإعادة تنظيم المعرفة بطريقة إبداعية</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">الخرائط المعرفية COGNITIVE MAPS</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">الخرائط التفصيلية CADASTRAL MAPS</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">الخرائط الذهنية MENTAL MAP</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">الخرائط المفاهيمية CONCEPT MAPS</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: الخرائط الذهنية (Mind Map) — تبدأ من فكرة رئيسية في المنتصف (متمركزة في الوسط كما يقول السؤال حرفيًا)، وتتفرع منها أفكار فرعية بخطوط وألوان وصور. أما الخرائط المفاهيمية فتبدأ من مفهوم عام في الأعلى بترتيب هرمي لا من مركز، والخرائط المعرفية والتفصيلية مصطلحات من سياقات مختلفة (جغرافية/مساحية) لا علاقة مباشرة لها بهذا التعريف.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">12</div><div class="qtext">نشاط قائم على الاستقصاء، يتيح للطالب استخدام المصادر والأدوات القائمة على شبكة الإنترنت، لجعل التعلم حقيقي وذا معنى هو:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">الرحلات المعرفية</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">الصف المقلوب</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">العصف الذهني</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">حل المشكلات</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: الرحلات المعرفية (WebQuest) — نشاط استقصاء موجّه يعتمد على مصادر وأدوات الإنترنت تحديدًا، وهذا تعريفها الدقيق. أما الصف المقلوب فيخص توقيت مشاهدة المحتوى (قبل/بعد الحصة) لا الاستقصاء عبر الإنترنت، والعصف الذهني توليد أفكار جماعي، وحل المشكلات أعم من الاعتماد الحصري على مصادر الإنترنت.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">13</div><div class="qtext">استراتيجية ................... لا تقدم معلومات جديدة</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">التعليم المبرمج</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">التدريب والممارسة "Drill &amp; Practice"</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">التعلم الخصوصي</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">الألعاب التعليمية</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: التدريب والممارسة — تعتمد على تكرار مهارة أو معلومة سبق تعلمها لترسيخها، ولا تقدّم أي محتوى جديد أصلًا، بعكس التعليم المبرمج والتعلم الخصوصي اللذين يقدّمان مفاهيم جديدة خطوة بخطوة، والألعاب التعليمية التي غالبًا تعرض مفاهيم جديدة بقالب ترفيهي.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">14</div><div class="qtext">ويمكن الاستعانة بهذا التقويم لتحديد ما إذا كان الطالب مستعدًا لدراسة مادة ما مثل "الأمن السيبراني"</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">التقويم البنائي</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">التقويم الختامي</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">التقويم التشخيصي</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">التقويم القبلي</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: التقويم القبلي — يُستخدم قبل بدء موضوع جديد لتحديد مدى جاهزية الطالب واستعداده له، وهذا مطابق تمامًا لسياق السؤال (هل الطالب مستعد لدراسة مادة جديدة). أما التقويم البنائي فيُستخدم أثناء التدريس لقياس التقدم المستمر، والختامي بعد انتهاء الوحدة، والتشخيصي لتحديد أسباب صعوبات تعلم قائمة فعلًا — لا لتحديد الاستعداد المسبق لموضوع لم يُدرَّس بعد.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">15</div><div class="qtext">من خطوات استراتيجية حل المشكلات في التدريس طرح الفرضيات والمقصود بها:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">فهم السياق والأبعاد المختلفة للمشكلة</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">تنفيذ الحل ومراقبة النتائج</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">تطوير استنتاجات منطقية</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">جمع كافة المعلومات المتعلقة بالمشكلة</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: تطوير استنتاجات منطقية. تنبيه دقيق: الفرضية بمعناها الدقيق تفسير أو حل محتمل قابل للفحص والاختبار، لا 'استنتاج' نهائي بالضرورة — لكن من بين الخيارات الأربعة المتاحة هنا، هذا الخيار هو الأقرب لمعنى طرح الفرضيات. أما فهم السياق وجمع المعلومات فخطوتان سابقتان تمهّدان لطرح الفرضيات لا هي نفسها، وتنفيذ الحل ومراقبة النتائج خطوة لاحقة تأتي بعد تقييم الفرضيات واختيار الأنسب منها.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">16</div><div class="qtext">أفضل طريقة لتدريس مكونات الحاسب:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">خرائط المفاهيم</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">حل المشكلات</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">الإلقاء</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">تدريب الأقران</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: خرائط المفاهيم — مكونات الحاسب (المعالج، الذاكرة، التخزين، وحدات الإدخال والإخراج) علاقات هرمية وتصنيفية بطبيعتها (كل مكون له فئة وفئات فرعية)، وهذا بالضبط ما تنظّمه خرائط المفاهيم بمفهوم عام في الأعلى يتفرع لمفاهيم فرعية. أما الإلقاء فأسلوب تلقيني أحادي الاتجاه لا يبرز العلاقات بين المكونات بصريًا، وحل المشكلات وتدريب الأقران أنسب لمهارات تطبيقية لا لتنظيم معرفة تصنيفية.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">17</div><div class="qtext">معلم طلب من الطلاب إنشاء برنامج يحسب المتوسط الحسابي لدرجات الطلاب، استخدم المعلم استراتيجية:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">حل المشكلات</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">خرائط المفاهيم</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">العصف الذهني</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">استقصاء رياضي</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: حل المشكلات — كتابة برنامج يحسب مسألة محددة (المتوسط الحسابي) عملية تصميم حل خطوة بخطوة لمشكلة محددة، وهذا جوهر استراتيجية حل المشكلات في سياق البرمجة تحديدًا. أما خرائط المفاهيم أداة تنظيم معرفة لا بناء حل برمجي، والعصف الذهني توليد أفكار أولي لا تنفيذ فعلي، و'استقصاء رياضي' ليس مصطلحًا معتمدًا لهذا النوع من المهام البرمجية.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">18</div><div class="qtext">طريقة تدريس تخرج عن المألوف التي يكون فيها الطالب متلقي ويتعامل مع الأمور الحقيقية هي:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">الاستكشاف</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">المناقشة</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">التعلم التعاوني</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">التدريب العملي</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: التدريب العملي — يتعامل الطالب فيه مع أجهزة ومهام حقيقية ملموسة بدل المحتوى النظري المجرد، وهذا مطابق لعبارة 'يتعامل مع الأمور الحقيقية'. أما الاستكشاف فيعتمد على البحث الذاتي عن المعرفة لا التلقي، والمناقشة والتعلم التعاوني يعتمدان على التفاعل اللفظي بين الطلاب لا التعامل المباشر مع أدوات حقيقية.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">19</div><div class="qtext">طريقة يطبق فيها شيء على الحياة اليومية وتدعوا الى البحث والاستقصاء والتفكير الناقد:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">المحاكاة</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">الإلقاء</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">حل المشكلات</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">التطبيق العملي</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: حل المشكلات — من أبرز مزاياها (كما توثّقها الملزمة) أنها تدرّب المتعلم على التعامل مع مواقف الحياة الواقعية، وتشجع البحث والاستقصاء والتفكير المنطقي والتحليلي. أما المحاكاة فتقليد لموقف لا تطبيق مباشر على الحياة اليومية الفعلية، والإلقاء أسلوب تلقيني أحادي الاتجاه لا يدعو للبحث، والتطبيق العملي أعم وأقل تحديدًا من ربط الأمر تحديدًا بالبحث والتفكير الناقد.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">20</div><div class="qtext">اقترح المعلم على الطالب تقديم عرض باستخدام البوربوينت خلال الحفل، لكن الطالب رفض لأنه يعتقد أنه قادر على الشرح بدون وسائل مساعدة. ما الأسلوب الأفضل الذي ينبغي أن يتبعه المعلم في هذه الحالة؟</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">يقنعه بأن العرض يساعد في ترتيب أفكاره وتوضيحها</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">يجبره على استخدام البوربوينت دون مناقشة</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">يسمح له بالشرح دون أي تحضير أو تنظيم</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">ينتقد رأيه أمام زملائه ليُشعره بالخطأ</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: يقنعه بأن العرض يساعد في ترتيب أفكاره وتوضيحها — الأسلوب التربوي السليم هو الإقناع بالحجة وتوضيح الفائدة، لا الإجبار أو الانتقاد العلني اللذان يضران بثقة الطالب بنفسه، ولا السماح بلا توجيه الذي يهمل دور المعلم الإرشادي تمامًا.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">21</div><div class="qtext">من مهارات التفكير العليا في البرمجة التي يستطيع المعلم تعليمها للطلاب:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">تحديد المدخلات</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">تحليل عناصر المسألة</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">تحديد المخرجات</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">عمليات المعالجة</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: تحليل عناصر المسألة — التحليل مهارة تفكير عليا فعلية (من مستويات بلوم العليا)، وهي الخيار الأكثر وضوحًا هنا. أما تحديد المدخلات والمخرجات وعمليات المعالجة فخطوات إجرائية أساسية في نموذج الإدخال-المعالجة-الإخراج (IPO)؛ وهذا لا يعني أنها 'دنيا' دائمًا بشكل مطلق (فهي قد تدخل ضمن عملية التحليل نفسها)، لكنها من بين الخيارات الأربعة أقل ارتباطًا المباشر بمهارات التفكير العليا تحديدًا مقارنة بالتحليل.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">22</div><div class="qtext">عند تطبيق استراتيجية حل المشكلات في درس عن طريقة توصيل الطابعة بالحاسب، أيّ العبارات التالية لا تُعد هدفًا مناسبًا لهذه الاستراتيجية؟</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">قدرة الطالب على إيجاد الوسيلة الصحيحة لتوصيل الطابعة</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">اكتساب الطالب مهارة توصيل الطابعة</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">أن يجعل المعلم جميع الصف قادرًا على رؤية كيفية توصيل الطابعة</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">أن الطالب يكتسبون التفكير الناقد</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: أن يجعل المعلم جميع الصف قادرًا على رؤية كيفية توصيل الطابعة — هذا هدف يخص عرض/تجهيز الحصة (رؤية بصرية جماعية)، لا هدف تعلّمي فردي ناتج عن ممارسة الطالب نفسه لحل المشكلة. أما باقي الخيارات (إيجاد الحل، اكتساب المهارة، التفكير الناقد) فكلها نواتج تعلّم حقيقية متوقعة من استراتيجية حل المشكلات تحديدًا.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">23</div><div class="qtext">استراتيجية تعليمية تستخدم في تفريد التعلم وتتضمن قدرًا من المنافسة بين الطلاب:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">المحطات العلمية</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">الصف المقلوب</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">عناصر اللعبة التعليمية</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">التعليم التعاوني</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: عناصر اللعبة التعليمية (التلعيب/Gamification) — تجمع بين التقدم الفردي لكل طالب (تفريد التعلم) وعنصر المنافسة (نقاط، مستويات، ترتيب) في آن واحد، وهذا مطابق تمامًا لوصف السؤال. أما التعليم التعاوني فيقوم على العمل الجماعي لا المنافسة الفردية، والمحطات العلمية والصف المقلوب يخصان تنظيم الوقت والمكان لا المنافسة بحد ذاتها.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">24</div><div class="qtext">يقصد بالفجوة الرقمية:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">عدم حصول جميع الطلاب على فرص متساوية للوصول للتقنية</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">عدم دمج التقنية في المناهج الدراسية</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">عدم تغطية الدراسات والأبحاث لمواضيع التقنية</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">عدم فهم معلمي التقنية لمصطلحات التقنية</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: عدم حصول جميع الطلاب على فرص متساوية للوصول للتقنية — هذا هو التعريف المعتمد عالميًا لمصطلح 'الفجوة الرقمية' (Digital Divide): التفاوت في إمكانية الوصول للتقنية بين الأفراد أو الفئات. أما باقي الخيارات فتصف قصورًا مختلفًا تمامًا (دمج المنهج، تغطية الأبحاث، فهم المصطلحات) لا علاقة له بمفهوم 'الفجوة' من حيث الوصول والتوفر.</div>
+</div>
+</div>
+<div class="brand">مبني وفق منهجية الفلتر الخماسي — محمد السواط | alsuwatedu.com</div>
+<script>
+document.querySelectorAll('.qcard').forEach(function(card){
+  const correct = parseInt(card.getAttribute('data-correct'), 10); // 1-indexed
+  const opts = card.querySelectorAll('.opt');
+  opts.forEach(function(opt, idx){
+    opt.addEventListener('click', function(){
+      if(card.classList.contains('revealed')) return;
+      card.classList.add('revealed');
+      opts.forEach(function(o, i2){
+        if(i2 === correct - 1){ o.classList.add('correct'); }
+        else if(o === opt){ o.classList.add('wrong-picked'); }
+      });
+    });
+  });
+});
+</script>
+
+</body>
+</html>
