@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اختبار المعيار الخامس - أساسيات البرمجة وهياكل البيانات</title>
+<style>
+  :root{
+    --navy:#084B8C;
+    --navy-deep:#054084;
+    --gold:#E8AD28;
+    --gold-light:#F4B12C;
+    --green:#059548;
+    --red:#D64541;
+    --bg:#FFFFFF;
+    --text:#16233C;
+    --text2:#5B6B85;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:'Tajawal','Segoe UI',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    margin:0;
+    padding:0;
+    direction:rtl;
+  }
+  .topbar{
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-deep) 100%);
+    color:#fff;
+    padding:22px 18px;
+    text-align:center;
+    border-bottom:5px solid var(--gold);
+  }
+  .topbar h1{
+    margin:0 0 6px;
+    font-size:22px;
+    font-family:'Cairo','Tajawal',sans-serif;
+    font-weight:800;
+  }
+  .topbar p{margin:0;color:var(--gold-light);font-size:14px;font-weight:600;}
+  .wrap{max-width:760px;margin:0 auto;padding:18px 14px 60px;}
+  .qcard{
+    background:#fff;
+    border:1px solid #e3e8f0;
+    border-radius:14px;
+    margin-bottom:18px;
+    padding:16px 16px 4px;
+    position:relative;
+    box-shadow:0 2px 10px rgba(8,75,140,0.07);
+    overflow:hidden;
+  }
+  .qcard::before{
+    content:"";
+    position:absolute;
+    top:0;right:0;
+    width:6px;height:100%;
+    background:var(--gold);
+  }
+  .qhead{display:flex;gap:10px;align-items:flex-start;margin-bottom:14px;}
+  .qnum{
+    flex:0 0 auto;
+    background:var(--navy);
+    color:#fff;
+    width:30px;height:30px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:14px;
+  }
+  .qtext{flex:1;font-size:16px;font-weight:700;line-height:1.6;padding-top:3px;}
+  .cls-tag{
+    display:inline-block;
+    font-size:11px;
+    font-weight:700;
+    padding:2px 9px;
+    border-radius:20px;
+    margin-bottom:8px;
+    background:#eef3fb;
+    color:var(--navy);
+  }
+  .opts{display:flex;flex-direction:column;gap:8px;}
+  .opt{
+    display:flex;align-items:center;gap:10px;
+    border:1.5px solid #e3e8f0;
+    border-radius:10px;
+    padding:9px 12px;
+    cursor:pointer;
+    transition:.15s;
+    position:relative;
+  }
+  .opt:hover{border-color:var(--gold);background:#fffaf0;}
+  .obadge{
+    flex:0 0 auto;
+    width:26px;height:26px;
+    border-radius:50%;
+    background:var(--navy);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:800;
+  }
+  .optxt{font-size:14.5px;line-height:1.5;}
+  input.oradio{position:absolute;opacity:0;width:0;height:0;}
+  .qcard input:checked + .opts .opt,
+  .opt.selected{outline:none;}
+  /* reveal logic */
+  .opt input.oradio:checked ~ .opt-body{}
+  .exp{
+    display:none;
+    margin-top:12px;
+    background:#f3f7fc;
+    border-right:4px solid var(--navy);
+    border-radius:8px;
+    padding:12px 14px;
+    font-size:13.5px;
+    line-height:1.85;
+    color:var(--text);
+  }
+  .etitle{font-weight:800;color:var(--navy);margin-bottom:6px;font-size:13.5px;}
+  .note{
+    margin-top:8px;
+    background:#fff6e6;
+    border-right:4px solid var(--gold);
+    border-radius:8px;
+    padding:10px 12px;
+    font-size:13px;
+    color:#7a5a12;
+    font-weight:600;
+  }
+  .qcard.revealed .exp{display:block;}
+  .qcard.revealed .opt.correct{border-color:var(--green);background:#eafaf1;}
+  .qcard.revealed .opt.correct .obadge{background:var(--green);}
+  .qcard.revealed .opt.wrong-picked{border-color:var(--red);background:#fdecea;}
+  .qcard.revealed .opt.wrong-picked .obadge{background:var(--red);}
+  .footer-note{
+    text-align:center;color:var(--text2);font-size:12px;margin-top:30px;
+  }
+  .brand{
+    text-align:center;padding:14px;color:var(--text2);font-size:12px;
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <h1>🖥️ اختبار المتابعين – حاسب</h1>
+  <p>المعيار الخامس كاملاً (لغات البرمجة وهياكل البيانات) | الأسئلة 1-75</p>
+</div>
+
+<div class="wrap">
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">1</div><div class="qtext">من لغات البرمجة الإجرائية:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">C</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">JAVA</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">C++</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Scratch</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: C — لغة إجرائية كلاسيكية (البرنامج سلسلة أوامر متتابعة). أما JAVA وC++ فلغات شيئية (كائنية التوجه) بالأساس، وScratch لغة مرئية قائمة على الأحداث والكتل لا الأوامر الإجرائية المتتابعة.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">2</div><div class="qtext">إحدى هذه اللغات ليست إجرائية:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Go</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">C</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Scratch</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Basic</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Scratch — لغة برمجة مرئية (Block-based) قائمة على السحب والإفلات والأحداث، لا على أوامر إجرائية متتابعة نصية. أما Go وC وBasic فكلها لغات نصية إجرائية.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">3</div><div class="qtext">لكتابة برنامج حاسوبي لتحويل الاتصالات الواردة إلى مأمور الاتصال للرد عليهم حسب ترتيب اتصالهم؛ فإن هيكل البيانات (Data Structure) المناسب هو:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Stack مكدس</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">الطابور Queue</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">شجرة Tree</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">جدول التجزئة Hash Table</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: الطابور (Queue) — يعمل وفق مبدأ FIFO (أول داخل، أول خارج)، وهذا يطابق تمامًا فكرة الرد على المتصلين حسب ترتيب اتصالهم (أول متصل يُرد عليه أولاً). أما المكدس (Stack) فيعمل بمبدأ معاكس (LIFO)، والشجرة وجدول التجزئة لا علاقة لهما بترتيب زمني تسلسلي كهذا.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">4</div><div class="qtext">يمكن استخدامها لبرمجة تطبيقات الويب:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">PHP</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">JAVA</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">C</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">VISUAL BASIC</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: PHP — لغة برمجة من جانب الخادم مصممة أساسًا لتطوير الويب. أما C فلغة نظم منخفضة المستوى غير مخصصة للويب، وVisual Basic تطبيقات سطح مكتب تقليديًا.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">5</div><div class="qtext">أمر في لينكس لنقل أو إعادة تسمية الملفات:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">cat</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Rm</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Mkdir</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">mv</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: mv (move) — الأمر المخصص لنقل أو إعادة تسمية الملفات في لينكس. أما cat لعرض محتوى ملف، وrm للحذف، وmkdir لإنشاء مجلد جديد.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">6</div><div class="qtext">لتعريف متغير له قيمتان فقط نستخدم:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Boolean</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Character</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">integer</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Data</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Boolean — نوع بيانات يحمل قيمتين فقط (صح/خطأ). أما integer وCharacter فمدى قيمهما أوسع بكثير، وData ليس نوع بيانات محددًا.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">7</div><div class="qtext">هيكل بيانات يعمل وفق مبدأ (Last In, First Out) LIFO أو الأخير يدخل أولاً يخرج أولاً؟</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">الطابور Queue</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Stack مكدس</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">شجرة Tree</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">جدول التجزئة Hash Table</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Stack (المكدس) — تعريف LIFO هو بالضبط طريقة عمل المكدس (آخر عنصر يُضاف هو أول عنصر يُزال)، كطبق أطباق فوق بعض. أما الطابور فيعمل بمبدأ معاكس تمامًا (FIFO).</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">8</div><div class="qtext">من اللغات التي لا تحتاج إلى مترجم:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">الفيجول بيسك</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">الجافا</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">الآلة</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">C++</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: لغة الآلة — أوامر ثنائية (0/1) ينفذها المعالج مباشرة دون أي ترجمة، لأنها أصلاً اللغة التي يفهمها الحاسب مباشرة. أما باقي اللغات (Visual Basic، Java، C++) فكلها عالية المستوى تحتاج مترجم أو مفسر لتحويلها للغة الآلة أولاً.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">9</div><div class="qtext">أمر في لينكس لحذف المجلدات الفارغة فقط:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">cat</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Mv</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Mkdir</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">rmdir</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: rmdir — مخصص تحديدًا لحذف المجلدات الفارغة فقط (يفشل لو المجلد فيه محتوى). أما mkdir لإنشاء مجلد، وmv للنقل، وcat لعرض محتوى ملف.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">10</div><div class="qtext">ما هيكل البيانات الذي يعمل وفق مبدأ (First In, First Out) FIFO أو الأول يدخل أولاً يخرج أولاً؟</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">شجرة Tree</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Stack مكدس</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">الطابور Queue</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">جدول التجزئة Hash Table</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: الطابور (Queue) — تعريف FIFO هو بالضبط طريقة عمل الطابور (أول عنصر يدخل هو أول عنصر يخرج)، كطابور الانتظار الحقيقي. أما المكدس فيعمل بمبدأ معاكس (LIFO).</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">11</div><div class="qtext">من لغات البرمجة الشيئية:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">COBOL</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">C++</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">BASIC</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">C</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: C++ — لغة تدعم البرمجة كائنية التوجه (Classes, Objects, Inheritance) بشكل أصيل. أما COBOL وC وBASIC (بصيغتها الأساسية) لغات إجرائية بالدرجة الأولى.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">12</div><div class="qtext">الطوابير تعمل وفق مبدأ:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">FILO</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">FIFO</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">FOFI</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">LIFO</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: FIFO (أول داخل، أول خارج) — هذا هو مبدأ عمل الطابور بالتعريف. أما LIFO/FILO فمبدأ المكدس المعاكس، وFOFI ليس مصطلحًا حقيقيًا.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">13</div><div class="qtext">ما سبب استخدام لغات البرمجة الشيئية Object Oriented؟</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">أوامر البرنامج قليلة وسهلة القراءة والفهم</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">أنها صعبة ومعقدة</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">التحكم في تنفيذ البرنامج أمر بعد أمر</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">أن يكون البرنامج قابلاً لإعادة الاستخدام</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: أن يكون البرنامج قابلاً لإعادة الاستخدام — من أهم مزايا البرمجة الشيئية إعادة استخدام الكود عبر الكائنات والوراثة (Inheritance) والتغليف (Encapsulation). أما 'الصعوبة والتعقيد' فهي عيب لا سبب استخدام، و'التحكم أمر بعد أمر' يصف البرمجة الإجرائية لا الشيئية.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">14</div><div class="qtext">تتميز لغة جافا بـ:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">نستطيع تحويلها في جميع أنظمة التشغيل</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">سهولة برمجتها</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">تناسب جميع مستويات المبرمجين</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">صعوبتها</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: نستطيع تحويلها في جميع أنظمة التشغيل — هذه هي الميزة التعريفية لجافا (Write Once, Run Anywhere) عبر آلة جافا الافتراضية (JVM)، والسبب الأساسي لانتشارها العالمي.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">15</div><div class="qtext">البرمجة تعتمد على:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">حفظ القوانين</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">إتقان اللغة الإنجليزية</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">فهم الخوارزميات</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">إتقان برامج معالجة النصوص</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: فهم الخوارزميات — جوهر البرمجة هو القدرة على بناء خطوات منطقية لحل مشكلة (خوارزمية)، لا حفظ قواعد لغة أو إتقان الإنجليزية أو برامج معالجة النصوص.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">16</div><div class="qtext">الأمر import يُستخدم في لغة:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">PHP</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">VISUAL BASIC</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">C</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">JAVA</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: JAVA — الأمر import جزء أساسي من بنية اللغة، يُستخدم لاستيراد الحزم (Packages) والفئات (Classes). أما PHP فتستخدم include/require، وC وVisual Basic ليس لديهما هذا الأمر بنفس الصيغة.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">17</div><div class="qtext">لعمل اختبار لبرنامج حاسوبي يلزم مراعاة شرط رئيسي وهو أن يُسمح بـ:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">طباعة جميع قيم المتغيرات</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">استخدام الدوال</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">تنفيذ كل سطر من البرنامج</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">حذف كل شيء</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: تنفيذ كل سطر من البرنامج — مبدأ أساسي في اختبار البرمجيات (Code Coverage) هو التأكد من أن كل سطر/مسار في الكود قد تم تنفيذه واختباره فعليًا، لضمان عدم وجود أخطاء مخفية في أجزاء لم تُختبر.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">18</div><div class="qtext">يسمى العنصر الأساسي في البيانات الشجرية</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Leaves</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Node</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">shapes</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Root</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Root — العنصر الأساسي/الجذري الذي تبدأ منه الشجرة بالكامل وتتفرع منه بقية العقد. أما Node مصطلح عام لأي عنصر في الشجرة (جذر أو فرعي أو ورقة)، وLeaves العقد الطرفية بلا أبناء.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">19</div><div class="qtext">نوع هيكل البيانات الذي يستخدم الاستدعاء الذاتي:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">الطوابير</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">الأشجار</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">المكدسات</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">المصفوفة</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: المكدسات — الاستدعاء الذاتي (Recursion) يُنفَّذ فعليًا عبر مكدس الاستدعاءات (Call Stack)، حيث تُحفظ كل استدعاء دالة كطبقة فوق سابقتها وتُزال بترتيب عكسي عند العودة. ملاحظة: الأشجار أيضًا هيكل مرتبط بمفهوم العودية من ناحية تعريفها الرياضي، لكن السؤال يقصد الآلية التنفيذية للاستدعاء الذاتي أثناء التشغيل، وهذه وظيفة المكدس تحديدًا.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">20</div><div class="qtext">في نظام يونكس عند إنشاء Create Process نستخدم الأمر:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Bat</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Wit</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">creat</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Fork</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Fork — استدعاء النظام (System Call) القياسي في يونكس/لينكس لإنشاء عملية (Process) جديدة عبر تكرار العملية الحالية. أما Bat وWit وcreat ليست أوامر حقيقية لهذا الغرض.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">21</div><div class="qtext">أي من اللغات التالية تستخدم في الذكاء الاصطناعي؟</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Cobol</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Fortran</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Prolog</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">X</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Prolog — لغة برمجة منطقية صُممت أساسًا لتطبيقات الذكاء الاصطناعي والاستدلال المنطقي. أما COBOL لغة أعمال تجارية، وFortran لحوسبة علمية عددية، وX ليست لغة حقيقية.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">22</div><div class="qtext">أي من الخيارات التالية يُستخدم لاختيار وتنفيذ عملية مثل الجمع (+) أو الطرح (-) بناءً على اختيارٍ المستخدم؟</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Switch</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Stack</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Cipher</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Linked list</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Switch — عبارة تحكم برمجية مصممة تحديدًا للاختيار بين عدة مسارات تنفيذ بناءً على قيمة إدخال (مثل اختيار عملية حسابية من قائمة). أما Stack وLinked list هياكل بيانات لا عبارات تحكم، وCipher مصطلح تشفير لا علاقة له.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">23</div><div class="qtext">يكتب مبرمج خوارزمية تعمل على ربط العناصر بسلسلة معينة؛ ما تركيب البيانات (Data Structure) المناسب لتخزين هذه المجموعة؟</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Linked list</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Stack</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Heap</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Array</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Linked list — تعريفها الحرفي هو ربط العناصر ببعضها عبر سلسلة من المؤشرات (كل عنصر يشير للتالي)، وهذا مطابق تمامًا لنص السؤال. أما Stack وHeap وArray هياكل بيانات مختلفة الطبيعة والاستخدام.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">24</div><div class="qtext">من الشروط اللازمة لاستخدام إجراء التكرار (Looping) في لغات البرمجة:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">تكرار بغير شروط</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">تكرار لا نهائي</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">تكرار بعدد محدد مسبقًا</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">جميع ما سبق</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: تكرار بعدد محدد مسبقًا — التكرار السليم يحتاج آلية واضحة تُنهيه (شرط منطقي أو عدد تكرارات معروف). أما 'تكرار بغير شروط' فلا يمثل شرطًا عامًا صحيحًا لاستخدام التكرار، و'تكرار لا نهائي' لا يُعد كذلك شرطًا عامًا (وقد يكون غير مرغوب فيه إن لم يكن مقصودًا، مع أنه في حالات معينة كخوادم تنتظر أحداثًا باستمرار يكون لا نهائيًا بشكل مقصود ومطلوب).</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">25</div><div class="qtext">واحدة من هذه اللغات لا تُستخدم في برمجة التطبيقات، وهي:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">JAVA</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Objective-C</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Kotlin</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">C++</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>⚠️ ملاحظة: صياغة هذا السؤال كما وردت في ملف الأسئلة غير دقيقة علميًا بإطلاقها (Java وC++ وKotlin وObjective-C كلها تُستخدم فعليًا في أنواع من التطبيقات)، وقد يكون فيها خطأ نقل عن المصدر الأصلي أو نقص كلمة تحدد السياق (مثل 'تطبيقات الجوال' تحديدًا). بافتراض أن السياق المقصود هو تطبيقات الجوال: Java وKotlin ارتبطتا بتطوير Android، وObjective-C بتطوير تطبيقات Apple، بينما C++ أقل ارتباطًا بالتطوير التقليدي المباشر لتطبيقات الجوال. الإجابة المتوقعة حسب هذا الافتراض: C++.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">26</div><div class="qtext">من نقاط ضعف صفحات HTML:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">صعوبة كتاباتها</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">غير تفاعلية</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">سهلة الاختراق</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">سهولة التعامل معها</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: غير تفاعلية — HTML لغة ترميز ثابتة (Static) بطبيعتها، لا تحتوي منطق برمجي أو تفاعل حقيقي بذاتها (يحتاج ذلك JavaScript). أما 'سهولة التعامل معها' وصف صحيح لكنه ميزة لا عيب، و'صعوبة الكتابة' غير دقيقة (HTML من أبسط لغات الترميز).</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">27</div><div class="qtext">ما نوع البحث الخوارزمي المناسب لإيجاد موضع الرقم 8 في قائمة أعداد صحيحة مرتبة تنازليًا من 10 إلى 3؟</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">الخطي</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">الثنائي</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">العشوائي</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">العكسي</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: البحث الثنائي (Binary Search). القائمة مرتبة (تنازليًا من 10 إلى 3)، وهذا الشرط الوحيد اللازم لاستخدام البحث الثنائي — يعمل بنفس الكفاءة سواء كان الترتيب تصاعديًا أو تنازليًا. يقسّم القائمة للنصف في كل خطوة، وهذا أسرع بكثير من فحص كل عنصر واحدًا تلو الآخر (البحث الخطي)، الذي يصلح فقط لو كانت القائمة غير مرتبة أصلًا.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">28</div><div class="qtext">الإدخال في لغة (C):</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Set</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Cin</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">scanner</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Scanf</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Scanf — دالة الإدخال القياسية في لغة C. أما Cin فخاصة بـC++، وScanner خاصة بـJava، وSet ليست دالة إدخال حقيقية.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">29</div><div class="qtext">تُخلَف البيانات مع العمليات الخاصة بها داخل كائن يدل عليها؛ فما نوع لغة البرمجة التي تحقق ذلك؟</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">لغة التجميع</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">لغات البرمجة بالكائنات</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">لغة الآلة</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">لغات البرمجة الإجرائية</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: لغات البرمجة بالكائنات (OOP) — هذا تعريف 'التغليف' (Encapsulation) بالضبط، وهو مبدأ أساسي في البرمجة كائنية التوجه: تجميع البيانات مع الدوال التي تعمل عليها داخل كائن واحد. أما لغة التجميع ولغة الآلة والإجرائية فلا تتضمن هذا المفهوم أصلًا.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">30</div><div class="qtext">الإدخال في لغة (++C) يتم باستخدام:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Set</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Cin</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">scanner</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Scanf</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Cin — دالة/كائن الإدخال القياسي في C++. أما Scanf خاصة بـC، وScanner خاصة بـJava.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">31</div><div class="qtext">لغة Prolog من الجيل:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">الخامس</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">الرابع</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">الثالث</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">الثاني</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: الخامس — Prolog من أبرز أمثلة لغات الجيل الخامس (لغات منطقية موجهة للذكاء الاصطناعي والاستدلال).</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">32</div><div class="qtext">لتنفيذ انتقال غير مشروط في البرنامج:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">For</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Goto</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Do while</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">If</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Goto — عبارة التحكم الوحيدة المصممة للقفز غير المشروط لنقطة أخرى في البرنامج مباشرة. أما For وDo while فعبارات تكرار، وIf عبارة انتقال مشروط بطبيعتها.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">33</div><div class="qtext">يكتب مبرمج خوارزمية تعمل على تحديد ومسح أكبر رقم من مجموعة أرقام بشكل متكرر؛ ما تركيب البيانات المناسب لتخزين هذه المجموعة؟</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Heap</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Stack</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Array</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Queue</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Heap. هيكل الكومة (تحديدًا Max-Heap) مصمم خصيصًا لعملية 'إيجاد وحذف أكبر قيمة بشكل متكرر' بكفاءة عالية — وهذا الاستخدام الكلاسيكي الأشهر للـHeap (طابور الأولوية). أما المكدس (Stack) فمبدأ عمله متعلق بترتيب الإدخال/الإخراج فقط، ولا علاقة له بـ'قيمة' العنصر الأكبر أو الأصغر.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">34</div><div class="qtext">اللغة غير الهيكلية:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Delphi</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Visual Basic</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Fortran</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Pascal</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Fortran — من أقدم اللغات (خصوصًا نسخها المبكرة) وتُصنَّف تقليديًا كلغة غير هيكلية (تعتمد على GOTO بكثرة قبل ظهور مبادئ البرمجة الهيكلية). أما Pascal فصُممت خصيصًا لتكون لغة هيكلية نموذجية، وDelphi وVisual Basic لغات حديثة نسبيًا مبنية على مبادئ هيكلية.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">35</div><div class="qtext">نوع الحقل الذي يستقبل أعلى قيمة عدد حقيقي:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">single</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Integer</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">long</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">double</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: double — نوع بيانات الفاصلة العائمة مزدوجة الدقة، يحمل مدى وقيمًا أكبر وأدق من single (أحادية الدقة). أما Integer وlong فأنواع أعداد صحيحة لا تحمل كسورًا (أعدادًا حقيقية) أصلًا.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">36</div><div class="qtext">الأعداد الحقيقية في لغة بايثون يرمز لها بالرمز:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Double</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Int</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Float</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Char</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Float — بايثون لا تملك نوعًا منفصلًا باسم Double كما في لغات أخرى (C/Java)؛ فهي تستخدم float لكل الأعداد الحقيقية ذات الفاصلة العائمة. أما Int للأعداد الصحيحة، وChar لا وجود له كنوع منفصل في بايثون أصلًا.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">37</div><div class="qtext">لغة Oracle من لغات الجيل:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">الرابع</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">الثالث</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">الخامس</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">الثاني</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: الرابع — لغات الجيل الرابع (4GL) تشمل لغات الاستعلام وقواعد البيانات عالية المستوى مثل SQL/PL-SQL المرتبطة بـOracle، حيث يحدد المبرمج 'ماذا يريد' دون تفاصيل 'كيف' التنفيذ.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">38</div><div class="qtext">اللغة التي تتعامل مع الصفر والواحد فقط:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">لغة التجميع</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">لغة بايثون</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">لغة الآلة</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">لغة جافا</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: لغة الآلة — التمثيل الثنائي الخام (0 و1) الذي ينفذه المعالج مباشرة دون أي وسيط. أما لغة التجميع فتستخدم رموزًا نصية مختصرة (Mnemonics) لا أرقامًا ثنائية خالصة، وبايثون وجافا لغات عالية المستوى بعيدة كليًا عن التمثيل الثنائي المباشر.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">39</div><div class="qtext">................ يقوم بتحويل البرنامج إلى لغة الآلة سطرًا سطرًا أثناء التنفيذ</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">المنفذ</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">(خيار آخر)</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">المترجم</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">المفسر</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: المفسر (Interpreter) — يترجم وينفذ الكود سطرًا بسطر أثناء التشغيل مباشرة، بعكس المترجم (Compiler) الذي يترجم البرنامج بالكامل دفعة واحدة قبل التنفيذ. هذا هو الفرق الجوهري بين الاثنين.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">40</div><div class="qtext">ما هي لغة البرمجة التي لها علاقة بقواعد البيانات؟</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">PHP</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">SQL</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Java</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Basic</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: SQL (Structured Query Language) — لغة مصممة حصريًا للتعامل مع قواعد البيانات (استعلام، إدراج، تحديث، حذف). أما باقي اللغات لغات برمجة عامة، قد تتصل بقواعد بيانات لكنها ليست مخصصة لها.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">41</div><div class="qtext">ما الخوارزمية الأنسب لجمع قائمتين مرتبتين أبجديًا أو أكثر مرتبة أبجديًا لأسماء الطلاب في قائمة واحدة مرتبة؟</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">الترتيب العشوائي</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">الترتيب الفقاعي (Bubble Sort)</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">ترتيب الدمج (Merge Sort)</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">ترتيب الاختيار (Selection Sort)</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: ترتيب الدمج (Merge Sort) — خطوة 'الدمج' (Merge) هي جوهر هذه الخوارزمية بالتحديد: دمج قوائم فرعية مرتبة سلفًا في قائمة واحدة مرتبة بكفاءة، وهذا مطابق تمامًا لنص السؤال. أما الفقاعي والاختيار فيرتبان قائمة واحدة غير مرتبة من الصفر، لا يدمجان قوائم مرتبة سلفًا.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">42</div><div class="qtext">أسهل اللغات من حيث التعليم والاستخدام:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">C</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">C++</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Java</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Basic</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Basic — الاسم نفسه اختصار لـ'تعليمات رمزية للأغراض العامة للمبتدئين' (Beginner's All-purpose Symbolic Instruction Code)، صُممت خصيصًا لتكون أسهل لغة للمبتدئين. أما C وC++ وJava أكثر تعقيدًا نحويًا بكثير.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">43</div><div class="qtext">لغة Assembly من لغات البرمجة في الجيل:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">الرابع</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">الثالث</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">الخامس</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">الثاني</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: الثاني — الجيل الأول هو لغة الآلة الخام، والجيل الثاني هو لغة التجميع (Assembly) التي أضافت رموزًا نصية مختصرة (Mnemonics) بدل الأرقام الثنائية الخالصة.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">44</div><div class="qtext">أي من لغات البرمجة التالية يستخدم التعبير (:=) في جمل الإسناد؟</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Fortran</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Pascal</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Visual Basic</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">لا شيء مما ذكر</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Pascal — من أبرز خصائصها النحوية المميزة استخدام := للإسناد تحديدًا (تمييزًا عن = المستخدم للمقارنة)، وهذه سمة تُعرَّف بها Pascal في أغلب المراجع.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">45</div><div class="qtext">الإدخال في لغة (Java):</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Set</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Cin</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Scanner</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Scanf</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Scanner — الفئة (Class) القياسية المستخدمة لقراءة الإدخال في جافا. أما Cin خاصة بـC++، وScanf خاصة بـC.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">46</div><div class="qtext">"GoTo" لا توجد في لغة:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">C++</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Java</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Fortran</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">C</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Java — من الحقائق المعروفة أن جافا لا تدعم عبارة goto إطلاقًا (رغم أن الكلمة محجوزة نظريًا في اللغة، لا تُستخدم عمليًا)، بعكس C وC++ وFortran التي تدعمها جميعًا.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">47</div><div class="qtext">من أمثلة هياكل البيانات الخطية:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">BINARY TREE</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">LINKED LIST</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">الرسومات البيانية</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Hash Table</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: LINKED LIST — القائمة المترابطة هيكل بيانات خطي كلاسيكي (عناصر متسلسلة واحد تلو الآخر). أما الشجرة الثنائية والرسومات البيانية هياكل غير خطية (فروع/عقد متعددة الاتجاهات)، وجدول التجزئة لا يُصنَّف ضمن الهياكل الخطية التقليدية.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">48</div><div class="qtext">الإخراج في لغة (C):</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Printf</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">On</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">System.out.println</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Cout</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Printf — دالة الإخراج/الطباعة القياسية في لغة C. أما System.out.println خاصة بجافا، وCout خاصة بـC++.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">49</div><div class="qtext">يتم تعريف المتغيرات في لغة الفجول بيسك (Visual Basic) بإستخدام أمر:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Var</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Type</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Dim</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Const</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Dim — الكلمة المفتاحية القياسية لتعريف المتغيرات في Visual Basic (اختصار Dimension). أما Const لتعريف الثوابت لا المتغيرات، وVar وType ليسا أوامر تعريف قياسية في هذه اللغة.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">50</div><div class="qtext">البرنامج الذي يقوم بالتحويل من لغة Assembly إلى لغة الآلة هو:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Comparator</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Assembler</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Compiler</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Interpreter</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Assembler (المُجمِّع) — اسمه نفسه يدل على وظيفته: برنامج مخصص لتحويل لغة التجميع (Assembly) تحديدًا إلى لغة الآلة. أما Compiler فيترجم لغات عالية المستوى (لا Assembly تحديدًا)، وInterpreter يفسر سطرًا بسطر أثناء التنفيذ.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">51</div><div class="qtext">في هذا النوع نجتاز الشجرة الفرعية اليسرى ثم الشجرة الفرعية اليمنى وأخيرًا العقدة الجذرية</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">In-order-Traversal</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Sub-order-Traversal</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Pre-order-Traversal</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Post-order-Traversal</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Post-order Traversal — ترتيب الزيارة فيه: يسار ← يمين ← جذر (Left, Right, Root)، وهذا مطابق تمامًا لنص السؤال (الفرعية اليسرى، ثم اليمنى، وأخيرًا الجذر). أما In-order فترتيبه يسار-جذر-يمين، وPre-order جذر-يسار-يمين.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">52</div><div class="qtext">الإخراج في لغة (C++):</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Printf</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">On</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">System.out.println</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Cout</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Cout — كائن الإخراج القياسي في C++. أما Printf خاصة بـC، وSystem.out.println خاصة بجافا.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">53</div><div class="qtext">LISP لغة برمجة من الجيل:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">الخامس</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">الرابع</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">الثالث</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">الثاني</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: الخامس — تُصنَّف LISP (مع Prolog) ضمن لغات الجيل الخامس المرتبطة بالذكاء الاصطناعي والمعالجة الرمزية في أغلب مصادر هذا التصنيف التعليمي (رغم وجود خلاف بسيط بين مصادر أخرى حول تاريخها المبكر نسبيًا).</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">54</div><div class="qtext">الإخراج في لغة (Java):</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Printf</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">On</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">System.out.println</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Cout</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: System.out.println — طريقة الإخراج القياسية في جافا. أما Printf خاصة بـC، وCout خاصة بـC++.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">55</div><div class="qtext">لإدخال وحساب المتوسط الحسابي لدرجات الطالب نستخدم:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">البادئة</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">حلقة التكرار</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">العبارة الشرطية</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">المصفوفة</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: حلقة التكرار — لحساب متوسط عدة درجات، يحتاج البرنامج تكرار عملية الإدخال والجمع لكل درجة قبل القسمة على عددها، وهذا هو دور حلقة التكرار تحديدًا. أما العبارة الشرطية فتخص اتخاذ قرار لا تكرار عملية.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">56</div><div class="qtext">المصطلح (++C) يعني:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">برمجة عليا</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">آلة</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">برمجة دنيا</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">برمجة لا تحتاج إلى مترجم</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: برمجة عليا — C++ تُصنَّف كلغة برمجة عالية المستوى (High-level)، أقرب لفهم الإنسان مقارنة بلغة التجميع أو لغة الآلة (البرمجة الدنيا)، رغم قربها النسبي من مستوى النظام مقارنة بلغات عالية أخرى.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">57</div><div class="qtext">ما الكلمة المحجوزة (المحمية) من بين الخيارات التالية في لغة (Java)؟</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Steatment</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Switch</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">PackageName</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">FIFO</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Switch — كلمة مفتاحية محجوزة فعليًا في نحو لغة جافا (لعبارة التحكم switch-case). أما باقي الخيارات ليست كلمات محجوزة حقيقية في جافا.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">58</div><div class="qtext">مكتبة (++C):</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Fortran</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Pda</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">iostream</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">JVM</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: iostream — مكتبة قياسية في C++ للتعامل مع الإدخال والإخراج (تحتوي cin وcout). أما Fortran لغة منفصلة، وJVM آلة جافا الافتراضية لا مكتبة C++.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">59</div><div class="qtext">في هذا النوع.................. نجتاز الشجرة الفرعية اليسرى ثم العقدة الجذرية ثم الشجرة الفرعية اليمنى</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Pre-order-Traversal</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Sub-order-Traversal</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Post-order-Traversal</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">In-order-Traversal</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: In-order Traversal — ترتيب الزيارة فيه: يسار ← جذر ← يمين (Left, Root, Right)، مطابق تمامًا لنص السؤال. أما Pre-order فجذر-يسار-يمين، وPost-order يسار-يمين-جذر.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">60</div><div class="qtext">الصيغة الصحيحة للطباعة في (++C):</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">cout&gt;&gt;a&gt;&gt;b;</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">couter&lt;&lt;a,b;</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">cout&lt;&lt;a&lt;&lt;b;</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">cout&lt;&lt;a,b;</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: cout&lt;&lt;a&lt;&lt;b; — الصيغة النحوية الصحيحة تستخدم عامل الإدراج &lt;&lt; مكررًا لكل قيمة. أما الخيار الأول يستخدم عامل الاستخراج &gt;&gt; (خاص بالإدخال cin لا الإخراج)، والثاني فيه خطأ إملائي (couter بدل cout)، والرابع يستخدم فاصلة غير صحيحة نحويًا.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">61</div><div class="qtext">أنواع هياكل البيانات:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">خطية وشبكية وقوائم</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">خطية وشجرية وشبكية</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">شبكية وشجرية ومصفوفات</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">خطية ومصفوفات وقوائم</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: خطية وشجرية وشبكية — هذا التصنيف الثلاثي (Linear / Tree / Graph) هو التصنيف المعياري الأشمل لأنواع هياكل البيانات في علم الحاسب. أما باقي الخيارات فتخلط بين هذا التصنيف العام وأمثلة فرعية محددة (كالقوائم والمصفوفات التي هي أمثلة على الهياكل الخطية لا أنواع مستقلة بذاتها).</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">62</div><div class="qtext">ما نوع الحلقة (Loop) التي تُستخدم لتكرار عدد محدد من المرات؟</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">For......Loop</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">While......Loop</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Do While......Loop</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Infinite Loop</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: For Loop — الحلقة المصممة خصيصًا لعدد تكرارات معروف ومحدد مسبقًا (لها عداد بداية ونهاية وخطوة واضحة). أما While وDo While فتُستخدمان غالبًا لشرط غير محدد العدد مسبقًا، وInfinite Loop خطأ برمجي لا نوع تكرار مقصود.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">63</div><div class="qtext">في هذا النوع.................. تتم زيارة العقدة الجذرية أولاً ثم الشجرة الفرعية اليسرى ثم اليمنى</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Pre-order-Traversal</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">In-order-Traversal</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Post-order-Traversal</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Sub-order-Traversal</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Pre-order Traversal — ترتيب الزيارة فيه: جذر ← يسار ← يمين (Root, Left, Right)، مطابق تمامًا لنص السؤال (الجذر أولاً). أما In-order فيسار-جذر-يمين، وPost-order يسار-يمين-جذر.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">64</div><div class="qtext">أمر صوت الجرس في لغة (++C):</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">/f</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">/u</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">/a</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">/b</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: \a — رمز الهروب (Escape Sequence) الخاص بإصدار صوت التنبيه/الجرس (Alert/Bell) في لغة C/C++. أما \f لتغذية الصفحة، \b للمسافة الخلفية، ولا وجود لـ\u بهذا المعنى في C++ القياسية.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">65</div><div class="qtext">الدالة التي يتم استخدامها لعرض النص على الشاشة في بايثون هي:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">printf()</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">print()</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">System.out.</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Println</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: print() — دالة الإخراج القياسية والوحيدة تقريبًا في بايثون. أما printf() خاصة بـC، وSystem.out./Println خاصة بجافا.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">66</div><div class="qtext">يقصد بالرمز (!=) في لغة (++C):</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">المساواة</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">أصغر من</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">أكبر من</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">لا يساوي</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: لا يساوي — عامل المقارنة != في C++ يعني 'لا يساوي' (Not Equal)، بعكس == التي تعني المساواة.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">67</div><div class="qtext">ما يميز الجيل الخامس:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">ظهور لغة باسكال</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">ظهور لغة الجافا</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">ظهور الذكاء الاصطناعي</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">ظهور لغة C++</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: ظهور الذكاء الاصطناعي — لغات الجيل الخامس (كـProlog وLISP) ارتبطت أساسًا بتطبيقات الذكاء الاصطناعي والمعالجة المنطقية/الرمزية. أما باسكال وC++ وجافا لغات من أجيال وسياقات مختلفة تمامًا.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">68</div><div class="qtext">ما هو الأمر المستخدم لتعديل صلاحيات الملفات في نظام التشغيل Unix؟</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Fork</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Chmod</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Pulse</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Kill</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Chmod (Change Mode) — الأمر القياسي في يونكس/لينكس لتعديل صلاحيات الملفات (قراءة/كتابة/تنفيذ). أما Fork لإنشاء عملية جديدة، وKill لإنهاء عملية، وPulse ليس أمرًا حقيقيًا.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">69</div><div class="qtext">أمر نموذج أو صفحة جديدة في لغة (++C) هو:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">/f</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">/u</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">/a</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">/b</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: \f — رمز الهروب الخاص بتغذية الصفحة/الانتقال لصفحة جديدة (Form Feed) في C/C++. أما \a لصوت التنبيه، و\b للمسافة الخلفية.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">70</div><div class="qtext">إعطاء الأوامر والتعليمات للحاسب بلغة يفهمها وذلك لأداء مهمة معينة هو تعريف:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">البرمجة</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">البرنامج</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">المبرمج</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">المقطع البرمجي</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: البرمجة — هذا تعريفها الدقيق (فعل إعطاء الأوامر). أما البرنامج فهو الناتج/المخرج النهائي لعملية البرمجة، والمبرمج هو الشخص الذي يقوم بها، والمقطع البرمجي جزء صغير من برنامج أكبر.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">71</div><div class="qtext">من لغات البرمجة التالية ليست من لغات البرمجة بالكائنات:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">C</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Python</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Java</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">C++</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: C — لغة إجرائية بحتة لا تدعم البرمجة كائنية التوجه إطلاقًا (لا كلاسات، لا كائنات، لا وراثة). أما Python وJava وC++ فالثلاثة لغات كائنية التوجه (OOP) فعليًا وبدرجة معتبرة، فتُستبعد جميعًا ويبقى C هو الاستثناء الواضح والوحيد بلا جدل.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">72</div><div class="qtext">ما نوع المتغير الذي يمكنه الاحتفاظ بقيمتين فقط (مثل: صح أو خطأ، 1 أو 0)؟</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Boolean</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Double</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">String</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Integer</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Boolean — نوع بيانات مصمم خصيصًا لحمل قيمتين فقط (صح/خطأ أو 1/0). أما باقي الأنواع فمداها الممكن أوسع بكثير من قيمتين فقط.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">73</div><div class="qtext">...................... يعد متغيرًا صحيحًا في لغة (++C)</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Tea_cher</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Tea+cher</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Tea cher</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">2tea_cher</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Tea_cher — يتبع قواعد تسمية المتغيرات الصحيحة في C++ (يبدأ بحرف، ويستخدم الشرطة السفلية المسموحة، بلا مسافات أو رموز خاصة). أما Tea+cher ففيه رمز عملية حسابية غير مسموح، وTea cher فيه مسافة غير مسموحة، وTea_cher2ea_cher يبدأ برقم وهذا ممنوع تمامًا في قواعد التسمية.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">74</div><div class="qtext">الفرق بين IF و Switch:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Switch تتعامل مع عدة متغيرات</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">IF تتعامل مع عدة متغيرات</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">IF تتعامل مع متغير واحد</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Switch تتعامل مع متغير واحد</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>عبارة IF تقدر تُقيّم شروطًا منطقية مركبة ومتنوعة، وقد تشمل أكثر من متغير في الشرط الواحد. أما Switch فتختار عادةً بين حالات متعددة (Cases) بناءً على قيمة تعبير واحد فقط. الإجابة من بين الخيارات: IF تتعامل مع عدة متغيرات.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">75</div><div class="qtext">ما هي مخرجات البرنامج التالي:<br>M = 1<br>Do While M &lt;= 4<br>Print "Hello"<br>M = M + 1<br>Loop</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">طباعة (Hello) ثلاث مرات</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">طباعة (Hello) خمس مرات</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">لا يطبع أي شيء</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">طباعة (Hello) أربع مرات</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: طباعة Hello أربع مرات — بتتبع التنفيذ: M=1 (يطبع، يصير M=2) → M=2 (يطبع، يصير M=3) → M=3 (يطبع، يصير M=4) → M=4 (يطبع، يصير M=5) → M=5 لا يحقق الشرط M&lt;=4 فيتوقف. إجمالي 4 مرات طباعة بالضبط.</div>
+</div>
+</div>
+<div class="brand">مبني وفق منهجية الفلتر الخماسي — محمد السواط | alsuwatedu.com</div>
+<script>
+document.querySelectorAll('.qcard').forEach(function(card){
+  const correct = parseInt(card.getAttribute('data-correct'), 10); // 1-indexed
+  const opts = card.querySelectorAll('.opt');
+  opts.forEach(function(opt, idx){
+    opt.addEventListener('click', function(){
+      if(card.classList.contains('revealed')) return;
+      card.classList.add('revealed');
+      opts.forEach(function(o, i2){
+        if(i2 === correct - 1){ o.classList.add('correct'); }
+        else if(o === opt){ o.classList.add('wrong-picked'); }
+      });
+    });
+  });
+});
+</script>
+
+</body>
+</html>
