@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اختبار المعيار السابع - أمن المعلومات والشبكات</title>
+<style>
+  :root{
+    --navy:#084B8C;
+    --navy-deep:#054084;
+    --gold:#E8AD28;
+    --gold-light:#F4B12C;
+    --green:#059548;
+    --red:#D64541;
+    --bg:#FFFFFF;
+    --text:#16233C;
+    --text2:#5B6B85;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:'Tajawal','Segoe UI',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    margin:0;
+    padding:0;
+    direction:rtl;
+  }
+  .topbar{
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-deep) 100%);
+    color:#fff;
+    padding:22px 18px;
+    text-align:center;
+    border-bottom:5px solid var(--gold);
+  }
+  .topbar h1{
+    margin:0 0 6px;
+    font-size:22px;
+    font-family:'Cairo','Tajawal',sans-serif;
+    font-weight:800;
+  }
+  .topbar p{margin:0;color:var(--gold-light);font-size:14px;font-weight:600;}
+  .wrap{max-width:760px;margin:0 auto;padding:18px 14px 60px;}
+  .qcard{
+    background:#fff;
+    border:1px solid #e3e8f0;
+    border-radius:14px;
+    margin-bottom:18px;
+    padding:16px 16px 4px;
+    position:relative;
+    box-shadow:0 2px 10px rgba(8,75,140,0.07);
+    overflow:hidden;
+  }
+  .qcard::before{
+    content:"";
+    position:absolute;
+    top:0;right:0;
+    width:6px;height:100%;
+    background:var(--gold);
+  }
+  .qhead{display:flex;gap:10px;align-items:flex-start;margin-bottom:14px;}
+  .qnum{
+    flex:0 0 auto;
+    background:var(--navy);
+    color:#fff;
+    width:30px;height:30px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:14px;
+  }
+  .qtext{flex:1;font-size:16px;font-weight:700;line-height:1.6;padding-top:3px;}
+  .opts{display:flex;flex-direction:column;gap:8px;}
+  .opt{
+    display:flex;align-items:center;gap:10px;
+    border:1.5px solid #e3e8f0;
+    border-radius:10px;
+    padding:9px 12px;
+    cursor:pointer;
+    transition:.15s;
+    position:relative;
+  }
+  .opt:hover{border-color:var(--gold);background:#fffaf0;}
+  .obadge{
+    flex:0 0 auto;
+    width:26px;height:26px;
+    border-radius:50%;
+    background:var(--navy);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:800;
+  }
+  .optxt{font-size:14.5px;line-height:1.5;}
+  .exp{
+    display:none;
+    margin-top:12px;
+    background:#f3f7fc;
+    border-right:4px solid var(--navy);
+    border-radius:8px;
+    padding:12px 14px;
+    font-size:13.5px;
+    line-height:1.85;
+    color:var(--text);
+  }
+  .etitle{font-weight:800;color:var(--navy);margin-bottom:6px;font-size:13.5px;}
+  .qcard.revealed .exp{display:block;}
+  .qcard.revealed .opt.correct{border-color:var(--green);background:#eafaf1;}
+  .qcard.revealed .opt.correct .obadge{background:var(--green);}
+  .qcard.revealed .opt.wrong-picked{border-color:var(--red);background:#fdecea;}
+  .qcard.revealed .opt.wrong-picked .obadge{background:var(--red);}
+  .brand{
+    text-align:center;padding:14px;color:var(--text2);font-size:12px;
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <h1>🖥️ اختبار المتابعين – حاسب</h1>
+  <p>المعيار السابع - أمن المعلومات والشبكات</p>
+</div>
+<div class="wrap">
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">1</div><div class="qtext">تسمى فيروسات الحاسب التي تقوم بنسخ نفسها والانتشار سريعًا عبر وسائل الاتصال كالبريد الإلكتروني بـ:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">الثعلب</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">فيروس مدمر</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">حصان طروادة</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">الدودة</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: الدودة (Worm). الدودة برمجية خبيثة تملك خاصية ذاتية فريدة: تنسخ نفسها وتنتشر تلقائيًا عبر الشبكات ووسائل الاتصال كالبريد الإلكتروني دون الحاجة لبرنامج مضيف أو تدخل من المستخدم. أما فيروس مدمر فيحتاج ملفًا مضيفًا لينتشر، وحصان طروادة يعتمد على التخفي داخل برنامج شرعي لا على النسخ الذاتي، و"الثعلب" ليس نوع برمجية خبيثة معروفًا.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">2</div><div class="qtext">يسمى المفتاح المستخدم لفك التشفير في نظام التشفير غير المتماثل:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">المفتاح المتماثل</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">المفتاح الخاص</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">المفتاح السري</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">المفتاح العام يستخدم للتشفير</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: المفتاح الخاص. في التشفير غير المتماثل (Asymmetric) يُستخدم زوج مفاتيح مختلفين: المفتاح العام لتشفير الرسالة (ويمكن نشره للجميع)، والمفتاح الخاص — الذي يحتفظ به المستلم سرًا — لفك التشفير. أما "المفتاح المتماثل" فمصطلح من نظام مختلف كليًا، والمفتاح السري مصطلح عام غير دقيق في هذا السياق.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">3</div><div class="qtext">يطلق على الوثيقة الإلكترونية التي تمنح من قبل هيئات عالمية بـ:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">جدار الحماية</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">نظام التشفير</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">الشهادة الرقمية SSL</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">التوقيع الرقمي</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: الشهادة الرقمية SSL. وثيقة إلكترونية تصدرها جهات إصدار شهادات عالمية معتمدة (CA) لتوثيق هوية موقع أو جهة إلكترونية. أما جدار الحماية ونظام التشفير فأدوات/أنظمة وليسا "وثيقة"، والتوقيع الرقمي آلية تحقق من سلامة البيانات لا وثيقة تمنحها هيئات عالمية.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">4</div><div class="qtext">أي من الآتي له ضرر أكبر على المعلومات؟</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">التشفير</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">التجزئة</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">الشبكة الخاصة الافتراضية VPN</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">التروجان</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: التروجان (حصان طروادة). برمجية خبيثة مصممة لإلحاق الضرر بالمعلومات (سرقة، تخريب، تجسس). أما التشفير والتجزئة وVPN فكلها أدوات حماية تصون المعلومات لا تضرّ بها.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">5</div><div class="qtext">أقوى أنظمة تشفير الشبكات اللاسلكية هو:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">WPA2</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">WEP</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">WPE</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">WPA</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: WPA2. من بين البروتوكولات المذكورة فإن WPA2 هو الأحدث والأقوى؛ يعتمد تشفير AES القوي، بينما WEP أضعفها تاريخيًا (مكسور أمنيًا) وWPA تحسين وسيط عليه، أما WPE فليس بروتوكولًا حقيقيًا.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">6</div><div class="qtext">تسمى الطريقة التي يتم بها استخدام هوية مستخدم للحصول على معلومات سرية أو أمنية أو مبالغ نقدية بـ:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">انتحال شخصية</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">الاختراق</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">التجسس</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">التنصت</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: انتحال شخصية. انتحال هوية مستخدم حقيقي أو جهة موثوقة للحصول على معلومات سرية أو أموال. أما الاختراق فتجاوز أنظمة الحماية عمومًا، والتجسس مراقبة مستمرة، والتنصت اعتراض بيانات أثناء نقلها — وكلها لا تتطلب بالضرورة "انتحال هوية مستخدم" تحديدًا.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">7</div><div class="qtext">علم إخفاء الرسائل (البيانات) وتعتيمها أثناء نقلها أو تبادلها على الشبكة يسمى:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Decryption</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Steganography</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Authentication</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Encryption</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Steganography (إخفاء المعلومات). يركّز على إخفاء وجود الرسالة نفسها عن أي طرف خارجي، لا مجرد تشفير محتواها. أما Encryption فتحويل النص لصيغة غير مقروءة مع بقاء وجود الرسالة ظاهرًا، وDecryption عكس التشفير، وAuthentication يخص التحقق من الهوية لا إخفاء الرسائل.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">8</div><div class="qtext">عدد الخانات التي يستخدمها نظام تشفير الشبكات اللاسلكية هو 128 bit web:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">26 خانة</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">10 خانة</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">20 خانة</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">16 خانة</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: 26 خانة. مفتاح WEP بطول 128-bit يتكوّن من جزء سري مقداره 104-bit إضافة لمتجه تهيئة IV مقداره 24-bit؛ والجزء السري (104-bit) يُكتب بصيغة Hexadecimal في 104÷4 = 26 خانة (10 خانات تخص نظام WEP64 لا 128).</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">9</div><div class="qtext">البرمجيات التالية خاصة بمكافحة الفيروسات ما عدا:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">مكافئ</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">كاسبر</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">ببلشر</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">نورتن</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: ببلشر (Publisher). برنامج من حزمة Microsoft Office لتصميم المنشورات، ولا علاقة له بمكافحة الفيروسات. أما مكافي وكاسبرسكي ونورتن فجميعها برامج مكافحة فيروسات فعلية ومعروفة.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">10</div><div class="qtext">نوع من البرامج الأمنة يسمح بالنقل الآمن لبيانات الطالب من شبكة مدرسية إلى إدارة التعليم:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">مكافحة التجسس</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">التشفير</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">منع الاختراق</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">جدار الحماية</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: التشفير. المطلوب هنا تأمين البيانات أثناء النقل بين شبكتين، وهذا بالتحديد ما يوفره التشفير: تحويل البيانات لصيغة غير مفهومة لأي طرف يعترضها أثناء الانتقال. أما مكافحة التجسس ومنع الاختراق وجدار الحماية فتتعامل مع تهديدات الوصول غير المصرح به للنظام، لا مع تأمين محتوى البيانات أثناء انتقالها تحديدًا.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">11</div><div class="qtext">فيروس يقوم بسرقة الحسابات البنكية ويكشف كلمات المرور ويكون مرفقًا مع البرنامج:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">الثعلب</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">الدودة</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">فيروس مدمر</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">حصان طروادة</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: حصان طروادة (Trojan). يختبئ داخل برنامج شرعي ("مرفقًا مع البرنامج" كما يصف السؤال)، وينشط بعد تثبيت المستخدم للبرنامج المصاب، ليقوم بمهام خبيثة كسرقة بيانات الحسابات البنكية وكلمات المرور دون أن يُظهر نفسه. أما الدودة فتنتشر ذاتيًا دون الحاجة للاختباء داخل برنامج، وفيروس مدمر يركز على إتلاف الملفات لا سرقة البيانات تحديدًا.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">12</div><div class="qtext">استخدام نفس المفتاح في التشفير وفك التشفير:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">التشفير العام</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">التشفير المتماثل Symmetric</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">التشفير الخاص</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">التشفير غير المتماثل Asymmetric</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: التشفير المتماثل (Symmetric). التعريف الحرفي لهذا النوع هو استخدام نفس المفتاح الواحد لعمليتي التشفير وفك التشفير معًا. أما التشفير غير المتماثل فيستخدم مفتاحين مختلفين (عام وخاص)، و"التشفير العام/الخاص" ليسا تسميتين لأنظمة قائمة بذاتها بل صفتين لمفتاحين ضمن النظام غير المتماثل.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">13</div><div class="qtext">الفرق بين "التنصت" و"التجسس" هو:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">التنصت على حزم البيانات والتجسس معرفة محتويات النظام</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">التنصت معرفة محتويات النظام والتجسس على حزم البيانات</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">التنصت والتجسس كلاهما على حزم البيانات</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">التنصت والتجسس كلاهما لمعرفة محتويات النظام</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: التنصت اعتراض على حزم البيانات أثناء انتقالها عبر الشبكة (استراق سمع تقني للاتصال نفسه)، بينما التجسس أوسع: مراقبة وجمع معلومات عن محتويات النظام ونشاط المستخدم بمرور الوقت (كسجل التصفح وضغطات المفاتيح والبيانات الشخصية). الخيارات الأخرى إما تعكس التعريفين أو تساويهما، وهو ما يخالف الفرق الجوهري بينهما.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">14</div><div class="qtext">يساعد على حماية المعلومات من الوصول إليها وقراءتها:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">الشبكة الخاصة الافتراضية VPN</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">التجزئة</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">التشفير</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">التروجان</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: التشفير. يحوّل المعلومات إلى صيغة غير قابلة للقراءة دون امتلاك مفتاح فك التشفير، وهذا بالضبط ما يمنع "الوصول والقراءة" غير المصرح بهما. أما التجزئة (Hash) فتستخدم للتحقق من سلامة البيانات لا لإخفاء محتواها، وVPN يؤمّن قناة الاتصال لا محتوى الملف ذاته، والتروجان برمجية ضارة لا أداة حماية.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">15</div><div class="qtext">يمكن أن ينتقل الفيروس عبر الأنظمة التالية:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">شبكات الحاسب</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">وسائط التخزين المختلفة</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">البريد الإلكتروني</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">جميع ما سبق</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: جميع ما سبق. الفيروسات لا تقتصر على قناة انتقال واحدة؛ فهي تنتقل عبر شبكات الحاسب، ووسائط التخزين (كالفلاشات)، والبريد الإلكتروني على حد سواء — وجميعها قنوات إصابة فعلية وموثقة.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">16</div><div class="qtext">هو آلية تشفير تستخدم للتحقق من صحة وسلامة البيانات الرقمية</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">التوقيع الرقمي البيومتري</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">التوقيع الرقمي</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">الشهادة الرقمية</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">التوقيع الرقمي المحمي</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: التوقيع الرقمي. آلية تشفيرية تثبت أن البيانات لم تُعدَّل (السلامة) وأنها صادرة فعلًا عن الجهة المُوقِّعة (التحقق من الصحة). أما "التوقيع الرقمي البيومتري" و"التوقيع الرقمي المحمي" فمصطلحان غير معياريين، والشهادة الرقمية وثيقة توثيق هوية لا آلية تحقق سلامة بيانات بذاتها.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">17</div><div class="qtext">هي حماية المعلومات والبيانات المتداولة عبر الإنترنت من العبث والتخريب والتبديل أو من أي خطر يهددها</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">أمن المعلومات</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">التشفير</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">نظم المعلومات</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">تقنية المعلومات</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: أمن المعلومات. هذا هو التعريف المعياري لمصطلح "أمن المعلومات" (Information Security) — حماية شاملة للمعلومات والبيانات من أي تهديد. أما التشفير فأداة واحدة من أدوات تحقيق هذه الحماية لا الحماية الشاملة نفسها، ونظم المعلومات وتقنية المعلومات مصطلحان يخصان البنية والأدوات لا مفهوم "الحماية" تحديدًا.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">18</div><div class="qtext">من أسباب الإصابة بالفيروسات:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">النسخ الاحتياطية (backup)</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">إرسال بريد إلكتروني</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">فتح الرسائل البريدية مجهولة المصدر</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">لا شيء مما سبق</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: فتح الرسائل البريدية مجهولة المصدر. من أشهر قنوات الإصابة بالفيروسات فتح مرفقات أو روابط من رسائل مجهولة المصدر. أما النسخ الاحتياطية فإجراء وقائي لا سبب إصابة، ومجرد "إرسال" بريد إلكتروني (لا فتح رسالة مشبوهة) ليس سببًا مباشرًا للإصابة.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">19</div><div class="qtext">هي برمجيات هدفها التسويق التجاري بطريقة إجبارية غير مرغوبة</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">حصان طروادة TROJANS</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">الصفحات المنبثقة POPUP</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">الفيروسات Viruses</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">الإعلانات ADWARE</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: الإعلانات ADWARE. هي تحديدًا فئة البرمجيات المصممة لعرض إعلانات تجارية بشكل إجباري غير مرغوب فيه. أما النوافذ المنبثقة POPUP فوسيلة عرض وليست تصنيف برمجية بذاتها، والتروجان والفيروسات فئتا تهديد مختلفتان لا علاقة أساسية لهما بالتسويق التجاري.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">20</div><div class="qtext">لحماية البيانات من الاختراق والسرقة نستخدم:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">نسخ احتياطي</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">الجدار الناري</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">برنامج حماية</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">نظام التشفير قوي</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: نظام تشفير قوي. التشفير يحمي قيمة البيانات نفسها بحيث تبقى غير قابلة للقراءة حتى لو نجح أحدهم في اختراقها أو سرقتها — وهذا أعمق مستويات الحماية المطلوبة هنا. أما النسخ الاحتياطي فيحمي من فقدان البيانات لا من سرقتها، والجدار الناري وبرنامج الحماية يمنعان الوصول غير المصرح به للنظام لكنهما لا يحميان محتوى البيانات نفسه إن تم تجاوزهما.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">21</div><div class="qtext">من عناصر أمن المعلومات:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">الحماية</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">البرامج</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">التشفير</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">السرية</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: السرية. العناصر الثلاثة الأساسية لأمن المعلومات (CIA Triad) هي: السرية (Confidentiality)، والسلامة (Integrity)، والتوافر (Availability). أما "الحماية" و"البرامج" فمصطلحان عامان غير معياريين كعنصر، والتشفير أداة/آلية تحقق السرية لا عنصرًا من العناصر الثلاثة نفسها.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">22</div><div class="qtext">الذي يتحكم في عملية الاتصال بين الحاسب والشبكة ويمنع البرامج الضارة:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">جدار الحماية</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">الشهادة الرقمية</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">التحديث التلقائي</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">التوقيع الرقمي</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: جدار الحماية (Firewall). وظيفته الأساسية التحكم بحركة الاتصال الداخلة والخارجة بين الجهاز والشبكة، ومنع مرور البرامج والاتصالات الضارة وفق قواعد محددة. أما الشهادة الرقمية والتوقيع الرقمي فيخصان التوثيق لا التحكم بالاتصال، والتحديث التلقائي يسد الثغرات لكنه لا "يتحكم" في عملية الاتصال نفسها.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">23</div><div class="qtext">رسائل دعائية يتم إرسالها بكميات كبيرة أو إلى عدد كبير من الـEmails بغرض دعائي تسمى:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Spandom</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Prom</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Spam</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Spoalt</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Spam. المصطلح المعياري العالمي للرسائل الدعائية أو غير المرغوبة التي تُرسل بكميات ضخمة. أما الخيارات الأخرى (Spandom، Prom، Spoalt) فليست مصطلحات تقنية معروفة في هذا المجال.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">24</div><div class="qtext">أي مما يلي يعتبر من برامج الحماية من الفيروسات؟</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Nero</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">McAfee</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Media Player</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">SQL server</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: McAfee. شركة وبرنامج معروف عالميًا في مكافحة الفيروسات والحماية. أما Nero فبرنامج نسخ ومعالجة أقراص، وMedia Player مشغل وسائط، وSQL Server نظام إدارة قواعد بيانات — ولا علاقة لأي منها بالحماية من الفيروسات.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">25</div><div class="qtext">يتم إرسال الرسالة فقط دون مفتاحها من خلال:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">المفتاح الأجنبي</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">المفتاح الخاص</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">المفتاح العام</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">المفتاح الثانوي</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: المفتاح العام. في التشفير غير المتماثل يُشفَّر المحتوى بالمفتاح العام للمستقبِل — وهو مفتاح معلن أصلًا ولا حاجة لإرساله مع الرسالة؛ بينما مفتاح فك التشفير (الخاص) يبقى محفوظًا لدى المستقبِل ولا يُرسل أبدًا. أما "المفتاح الأجنبي" و"المفتاح الثانوي" فمصطلحان غير معياريين في هذا السياق.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">26</div><div class="qtext">من أنواع الحماية التي تحافظ على المعلومات من التغيير، وتكون أحادية الاتجاه:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">التروجان TROJANS</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">الشبكة الخاصة الافتراضية VPN</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">التشفير</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Hash function التجزئة</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: دالة التجزئة (Hash function). خاصيتها الجوهرية أنها أحادية الاتجاه (لا يمكن عكسها لاستخراج البيانات الأصلية)، وتُستخدم تحديدًا للتحقق من عدم تغيّر البيانات (السلامة) عبر مقارنة بصمة التجزئة. أما التشفير فعملية ثنائية الاتجاه (قابلة للعكس بالمفتاح الصحيح)، والتروجان برمجية ضارة لا آلية حماية، وVPN يؤمّن قناة الاتصال لا يتحقق من تغيّر المحتوى بخاصية أحادية الاتجاه.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">27</div><div class="qtext">محاولة الوصول إلى أجهزة وأنظمة الأفراد أو المنظمات والشركات باستخدام برامج خاصة عن طريق ثغرات في نظام الحماية بهدف الحصول على معلومات على الأنظمة، أو تخريب تلك الأنظمة، وإلحاق الضرر به:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Adware</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Penetration الاختراق</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Spyware التجسس</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Hoax</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Penetration (الاختراق). التعريف الدقيق للاختراق: استغلال ثغرات في نظام الحماية للوصول غير المصرح به بهدف الحصول على معلومات أو إلحاق ضرر. أما Spyware فيركّز على المراقبة والتجسس المستمر لا محاولة "الوصول" عبر ثغرة تحديدًا، وAdware برمجية إعلانات، وHoax خدعة/إشاعة إلكترونية لا محاولة اختراق تقنية.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">28</div><div class="qtext">تراقب وتجمع معلومات حول نشاط المستخدم عبر الإنترنت أو سجل التصفح، أو ضغطات لوحة المفاتيح، أو البيانات الشخصية:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Adware</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Hoax</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Spyware التجسس</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Penetration الاختراق</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Spyware (التجسس). تعريفه الدقيق: المراقبة المستمرة وجمع المعلومات عن نشاط المستخدم (سجل التصفح، ضغطات المفاتيح، البيانات الشخصية) خفية عنه. أما Penetration فمحاولة وصول/اختراق لحظية عبر ثغرة لا مراقبة مستمرة، وAdware يركّز على عرض الإعلانات لا جمع المعلومات، وHoax مجرد خدعة أو إشاعة.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">29</div><div class="qtext">عنصر أمن المعلومات المسؤول عن كون المعلومة صحيحة عند إدخالها، وكذلك أثناء نقلها بين الأجهزة في الشبكة هو:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">السلامة</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">التشفير</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">التوفر والإتاحة</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">السرية</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: السلامة (Integrity). عنصر أمن المعلومات المسؤول عن دقة البيانات وصحتها وعدم تعرضها لتعديل أو تلاعب غير مصرح به، سواء عند الإدخال أو أثناء النقل. أما السرية فتخص منع الاطلاع غير المصرح به (لا صحة المحتوى)، والتوفر يخص إتاحة الوصول وقت الحاجة، والتشفير أداة وليس عنصرًا من عناصر أمن المعلومات الثلاثة نفسها.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">30</div><div class="qtext">في النوع ... يقوم جدار الحماية بالسماح بمرور البيانات وفق قواعد معينة Rules؛ مثل عناوين IP المسموح لها:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Packet-Filters Router</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Application-Level Gateway</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Circuit-Level Gateway</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">لا شيء مما سبق</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Packet-Filters Router. يعمل بفحص كل حزمة بيانات وفق قواعد (Rules) ثابتة بسيطة كعناوين IP والمنافذ المسموح بها. أما Application-Level Gateway فيفحص حركة المرور على مستوى الخدمة/التطبيق نفسه، وCircuit-Level Gateway يراقب حالة الجلسة/الاتصال لا قواعد عناوين IP البسيطة.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">31</div><div class="qtext">المصادقة أو الاستيقان أو الاستيثاق أو التثبت أو التحقق أو التوثيق:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Malware</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Authentication</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Authorization</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Accounting</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Authentication. جميع المرادفات العربية المذكورة (المصادقة، الاستيقان، الاستيثاق، التثبت، التحقق، التوثيق) تشير لمفهوم واحد: التحقق من هوية المستخدم، وهو ما يقابله بالإنجليزية Authentication تحديدًا. أما Authorization فيخص تحديد الصلاحيات بعد التحقق من الهوية، وAccounting تسجيل نشاط المستخدم، وMalware برمجية ضارة لا علاقة له بالموضوع.</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">32</div><div class="qtext">تحويل النص العادي إلى نص مشفر هو:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Cipher text</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Decryption</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Plain text</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Encryption</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Encryption. اسم العملية/الفعل الذي يحوّل النص العادي (Plain text) إلى نص مشفر (Cipher text). أما "Cipher text" فهو الناتج النهائي لهذه العملية لا اسم العملية نفسها، وDecryption عكس التشفير تمامًا، وPlain text هو النص الأصلي قبل التحويل.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">33</div><div class="qtext">لدينا كلمة Root ونريد تشفيرها باستخدام خوارزمية تشفير قيصر، فإذا كان مقدار الإزاحة = 4؛ تكون الكلمة بعد التشفير هي:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Uyyz</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Vyyz</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Vssx</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Ussx</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Vssx. بتطبيق إزاحة قيصر بمقدار 4 خانات على كل حرف من كلمة Root: R←(+4)→V، o←(+4)→s، o←(+4)→s، t←(+4)→x. فتكون الكلمة المشفرة: Vssx — نتيجة حسابية مباشرة يمكن التحقق منها بتطبيق القاعدة حرفًا حرفًا.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">34</div><div class="qtext">شبكة النقل الخلوي تتكون من عدة قطاعات مكانية يطلق على كل منها مسمى "خلية"، والتي قد تمتد لمسافة تقارب:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">20 كيلو مترًا</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">15 كيلو مترًا</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">30 كيلو مترًا</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">7.5 كيلو مترًا</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: 20 كيلومترًا وفق القيمة المعتمدة في المرجع. ⚠️ هذا رقم إحصائي محدد (نصف قطر الخلية الواحدة يتفاوت فعليًا في الواقع حسب الكثافة السكانية والتضاريس، من أقل من كيلومتر في المدن إلى عشرات الكيلومترات في المناطق الريفية)، فالقيمة الدقيقة هنا مرتبطة بالمرجع المعتمد تحديدًا أكثر من كونها حقيقة هندسية ثابتة عالميًا.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">35</div><div class="qtext">هي منظمة وطنية تحت مظلة اللجنة الأولمبية السعودية تسعى لبناء قدرات محلية واحترافية في مجال الأمن السيبراني</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">الاتحاد السعودي للأمن السيبراني والبرمجة والدرونز</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">الهيئة الوطن للأمن السيبراني</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">هيئة الاتصالات وتقنية المعلومات</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">أمن المعلومات الوطني</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: الاتحاد السعودي للأمن السيبراني والبرمجة والدرونز (SAFCSP). يعمل فعليًا تحت مظلة اللجنة الأولمبية والبارالمبية السعودية، ويستهدف بناء قدرات وطنية احترافية في الأمن السيبراني والبرمجة والدرونز عبر برامج ومعسكرات تدريبية (كمعسكر طويق السيبراني). أما الهيئة الوطنية للأمن السيبراني وهيئة الاتصالات وتقنية المعلومات فجهتان حكوميتان رسميتان، وليستا تحت مظلة اللجنة الأولمبية.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">36</div><div class="qtext">مفتاح التشفير في نظام WEP64 يُكتب بصيغة Hexadecimal. كم عدد الخانات التي يتكوّن منها هذا المفتاح؟</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">26 خانة</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">8 خانات</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">10 خانات</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">16 خانة</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: 10 خانات. مفتاح WEP64 يتكوّن من جزء سري مقداره 40-bit (إضافة لمتجه تهيئة IV منفصل مقداره 24-bit لا يُكتب ضمن المفتاح المُدخل). والجزء السري (40-bit) بصيغة Hexadecimal = 40÷4 = 10 خانات (26 خانة تخص WEP128 لا WEP64).</div>
+</div>
+<div class="qcard" data-correct="4">
+  <div class="qhead"><div class="qnum">37</div><div class="qtext">لتعتيم ملف بحيث لا يمكن رؤيته نستخدم:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Printcopy</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Hash</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">privacy</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">Cryptography</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Cryptography، باعتباره العلم الأعم من بين الخيارات المرتبط بإخفاء وحماية محتوى الملفات والمعلومات. ⚠️ ملاحظة: المصطلح الأدق لوصف "إخفاء وجود ملف عن الرؤية" هو تحديدًا Steganography، وهو غير مطروح ضمن الخيارات الأربعة هنا؛ لذلك فإن Cryptography هو "الأقرب" لا التطابق المثالي. أما Hash فدالة تجزئة للتحقق من السلامة لا للإخفاء، وprivacy مفهوم عام وليس أداة تقنية، وPrintcopy ليس مصطلحًا تقنيًا معروفًا.</div>
+</div>
+<div class="qcard" data-correct="2">
+  <div class="qhead"><div class="qnum">38</div><div class="qtext">في النوع ... يقوم جدار الحماية بتصفية الحزمة وفقًا للخدمة المطلوبة</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">Circuit-Level Gateway</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">Application-Level Gateway</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">Packet-Filters Router</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">لا شيء مما ذكر</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Application-Level Gateway. يعمل على مستوى طبقة التطبيق، ويصفّي حركة المرور بناءً على نوع الخدمة أو التطبيق المطلوب تحديدًا (كـ HTTP أو FTP)، بخلاف Packet-Filters Router الذي يعتمد على قواعد عامة كعناوين IP، وCircuit-Level Gateway الذي يراقب حالة الجلسة لا نوع الخدمة بحد ذاته.</div>
+</div>
+<div class="qcard" data-correct="3">
+  <div class="qhead"><div class="qnum">39</div><div class="qtext">أمن المعلومات يتكون من:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">الانغلاق - التوافر – التكرارية</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">السرية - التبادل – السلامة</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">السرية – السلامة - التوافر</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">التوافر - التكرارية – الانغلاق</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: السرية – السلامة – التوافر. هذا هو المثلث المعياري العالمي لعناصر أمن المعلومات (CIA Triad: Confidentiality – Integrity – Availability). أما بقية الخيارات فتضم مصطلحات (الانغلاق، التكرارية، التبادل) ليست من العناصر الثلاثة المعيارية لأمن المعلومات.</div>
+</div>
+<div class="qcard" data-correct="1">
+  <div class="qhead"><div class="qnum">40</div><div class="qtext">يسمى التشفير الذي يستخدم مفتاحين؛ واحدًا للتشفير، والآخر لفك التشفير:</div></div>
+  <div class="opts">
+    <div class="opt"><span class="obadge">أ</span><span class="optxt">غير متماثل</span></div>
+    <div class="opt"><span class="obadge">ب</span><span class="optxt">متماثل</span></div>
+    <div class="opt"><span class="obadge">ج</span><span class="optxt">متزامن</span></div>
+    <div class="opt"><span class="obadge">د</span><span class="optxt">غير متزامن</span></div>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: غير متماثل (Asymmetric). التعريف الدقيق لنظام التشفير غير المتماثل: استخدام مفتاحين مختلفين — واحد للتشفير وآخر لفك التشفير — بعكس التشفير المتماثل الذي يستخدم مفتاحًا واحدًا للعمليتين معًا. أما "متزامن/غير متزامن" فمصطلحان يخصان توقيت الاتصال لا عدد المفاتيح المستخدمة.</div>
+</div>
+</div>
+<div class="brand">مبني وفق منهجية الفلتر الخماسي — محمد السواط | alsuwatedu.com</div>
+<script>
+document.querySelectorAll('.qcard').forEach(function(card){
+  const correct = parseInt(card.getAttribute('data-correct'), 10); // 1-indexed
+  const opts = card.querySelectorAll('.opt');
+  opts.forEach(function(opt, idx){
+    opt.addEventListener('click', function(){
+      if(card.classList.contains('revealed')) return;
+      card.classList.add('revealed');
+      opts.forEach(function(o, i2){
+        if(i2 === correct - 1){ o.classList.add('correct'); }
+        else if(o === opt){ o.classList.add('wrong-picked'); }
+      });
+    });
+  });
+});
+</script>
+
+</body>
+</html>
