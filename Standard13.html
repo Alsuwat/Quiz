@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اختبار المعيار الثالث عشر - مناهج الحاسب الآلي في التعليم العام</title>
+<style>
+  :root{
+    --navy:#084B8C;
+    --navy-deep:#054084;
+    --gold:#E8AD28;
+    --gold-light:#F4B12C;
+    --green:#059548;
+    --red:#D64541;
+    --bg:#FFFFFF;
+    --text:#16233C;
+    --text2:#5B6B85;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:'Tajawal','Segoe UI',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    margin:0;
+    padding:0;
+    direction:rtl;
+  }
+  .topbar{
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-deep) 100%);
+    color:#fff;
+    padding:22px 18px;
+    text-align:center;
+    border-bottom:5px solid var(--gold);
+  }
+  .topbar h1{
+    margin:0 0 6px;
+    font-size:22px;
+    font-family:'Cairo','Tajawal',sans-serif;
+    font-weight:800;
+  }
+  .topbar p{margin:0;color:var(--gold-light);font-size:14px;font-weight:600;}
+  .wrap{max-width:760px;margin:0 auto;padding:18px 14px 60px;}
+  .qcard{
+    background:#fff;
+    border:1px solid #e3e8f0;
+    border-radius:14px;
+    margin-bottom:18px;
+    padding:16px 16px 4px;
+    position:relative;
+    box-shadow:0 2px 10px rgba(8,75,140,0.07);
+    overflow:hidden;
+  }
+  .qcard::before{
+    content:"";
+    position:absolute;
+    top:0;right:0;
+    width:6px;height:100%;
+    background:var(--gold);
+  }
+  .qhead{display:flex;gap:10px;align-items:flex-start;margin-bottom:14px;}
+  .qnum{
+    flex:0 0 auto;
+    background:var(--navy);
+    color:#fff;
+    width:30px;height:30px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:14px;
+  }
+  .qtext{flex:1;font-size:16px;font-weight:700;line-height:1.6;padding-top:3px;}
+  .opts{display:flex;flex-direction:column;gap:8px;}
+  .opt{
+    display:flex;align-items:center;gap:10px;
+    border:1.5px solid #e3e8f0;
+    border-radius:10px;
+    padding:9px 12px;
+    cursor:pointer;
+    transition:.15s;
+    position:relative;
+  }
+  .opt:hover{border-color:var(--gold);background:#fffaf0;}
+  .obadge{
+    flex:0 0 auto;
+    width:26px;height:26px;
+    border-radius:50%;
+    background:var(--navy);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:800;
+  }
+  .optxt{font-size:14.5px;line-height:1.5;}
+  .exp{
+    display:none;
+    margin-top:12px;
+    background:#f3f7fc;
+    border-right:4px solid var(--navy);
+    border-radius:8px;
+    padding:12px 14px;
+    font-size:13.5px;
+    line-height:1.85;
+    color:var(--text);
+  }
+  .etitle{font-weight:800;color:var(--navy);margin-bottom:6px;font-size:13.5px;}
+  .qcard.revealed .exp{display:block;}
+  .qcard.revealed .opt.correct{border-color:var(--green);background:#eafaf1;}
+  .qcard.revealed .opt.correct .obadge{background:var(--green);}
+  .qcard.revealed .opt.wrong-picked{border-color:var(--red);background:#fdecea;}
+  .qcard.revealed .opt.wrong-picked .obadge{background:var(--red);}
+  .fig{text-align:center;margin:0 0 14px;}
+  .fig svg{max-width:100%;height:auto;}
+  .brand{
+    text-align:center;padding:14px;color:var(--text2);font-size:12px;
+  }
+
+  .q input{position:absolute;opacity:0;pointer-events:none;width:0;height:0}
+  .q .opt{cursor:pointer;margin:0}
+  .q input:checked ~ .opts{pointer-events:none}
+  .q input:checked ~ .exp{display:block}
+  .q input:checked ~ .opts .opt.correct{border-color:var(--green);background:#eafaf1}
+  .q input:checked ~ .opts .opt.correct .obadge{background:var(--green)}
+  .q input.i1:checked ~ .opts .opt.o1:not(.correct){border-color:var(--red);background:#fdecea}
+  .q input.i1:checked ~ .opts .opt.o1:not(.correct) .obadge{background:var(--red)}
+  .q input.i2:checked ~ .opts .opt.o2:not(.correct){border-color:var(--red);background:#fdecea}
+  .q input.i2:checked ~ .opts .opt.o2:not(.correct) .obadge{background:var(--red)}
+  .q input.i3:checked ~ .opts .opt.o3:not(.correct){border-color:var(--red);background:#fdecea}
+  .q input.i3:checked ~ .opts .opt.o3:not(.correct) .obadge{background:var(--red)}
+  .q input.i4:checked ~ .opts .opt.o4:not(.correct){border-color:var(--red);background:#fdecea}
+  .q input.i4:checked ~ .opts .opt.o4:not(.correct) .obadge{background:var(--red)}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <h1>🖥️ اختبار المتابعين – حاسب</h1>
+  <p>المعيار الثالث عشر - مناهج الحاسب الآلي في التعليم العام</p>
+</div>
+<div class="wrap">
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">1</div><div class="qtext">بعد تعلم الطالب لدرس مخططات الانسياب وإتقان الدرس يستطيع تعلم :</div></div>
+  <input type="radio" name="q1" id="q1o1" class="i1">
+  <input type="radio" name="q1" id="q1o2" class="i2">
+  <input type="radio" name="q1" id="q1o3" class="i3">
+  <input type="radio" name="q1" id="q1o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q1o1"><span class="obadge">أ</span><span class="optxt">اللعب بالحاسب</span></label>
+    <label class="opt o2 correct" for="q1o2"><span class="obadge">ب</span><span class="optxt">برمجة الحاسب</span></label>
+    <label class="opt o3" for="q1o3"><span class="obadge">ج</span><span class="optxt">الرسم بالحاسب</span></label>
+    <label class="opt o4" for="q1o4"><span class="obadge">د</span><span class="optxt">يمهد للجداول والوورد</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: برمجة الحاسب. مخططات الانسياب (Flowcharts) تمثّل خطوات حل المشكلة بصريًا قبل كتابتها بلغة برمجة، فإتقانها يمهّد مباشرة لتعلّم البرمجة. أما اللعب والرسم بالحاسب فلا يعتمدان على تسلسل الخطوات المنطقية، والجداول والوورد تطبيقات مكتبية لا تعتمد على المخططات الانسيابية.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">2</div><div class="qtext">دراسة وحدة المعالجة المركزية في مناهج المرحلة الثانوية تكون في وحدة:</div></div>
+  <input type="radio" name="q2" id="q2o1" class="i1">
+  <input type="radio" name="q2" id="q2o2" class="i2">
+  <input type="radio" name="q2" id="q2o3" class="i3">
+  <input type="radio" name="q2" id="q2o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q2o1"><span class="obadge">أ</span><span class="optxt">البرمجة</span></label>
+    <label class="opt o2" for="q2o2"><span class="obadge">ب</span><span class="optxt">الوسائط المتعددة</span></label>
+    <label class="opt o3 correct" for="q2o3"><span class="obadge">ج</span><span class="optxt">عمارة الحاسب</span></label>
+    <label class="opt o4" for="q2o4"><span class="obadge">د</span><span class="optxt">معالجة الصور</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: عمارة الحاسب. وحدة المعالجة المركزية (CPU) من مكونات بنية الحاسب، وتُدرس ضمن محتوى عمارة/بنية جهاز الحاسب (في المنهج الحالي ضمن وحدة أساسيات علم الحاسب في أول ثانوي). أما البرمجة والوسائط المتعددة ومعالجة الصور فتتناول الإنتاج والاستخدام لا المكونات الداخلية للجهاز.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">3</div><div class="qtext">أحد أهداف معايير مناهج التعليم العام:</div></div>
+  <input type="radio" name="q3" id="q3o1" class="i1">
+  <input type="radio" name="q3" id="q3o2" class="i2">
+  <input type="radio" name="q3" id="q3o3" class="i3">
+  <input type="radio" name="q3" id="q3o4" class="i4">
+  <div class="opts">
+    <label class="opt o1 correct" for="q3o1"><span class="obadge">أ</span><span class="optxt">الإسهام في تنمية الوطن</span></label>
+    <label class="opt o2" for="q3o2"><span class="obadge">ب</span><span class="optxt">ضمان الاتساق بين مكونات الأطر التخصصية</span></label>
+    <label class="opt o3" for="q3o3"><span class="obadge">ج</span><span class="optxt">تحديد الأدوار والمهام للجهات ذات العلاقة المباشرة</span></label>
+    <label class="opt o4" for="q3o4"><span class="obadge">د</span><span class="optxt">تقديم منظور فكري لبناء معايير مناهج التعليم يلبي حاجات المجتمع</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: الإسهام في تنمية الوطن. تهدف معايير مناهج التعليم العام إلى تمكين المتعلم من اكتساب المعارف والمهارات والقيم اللازمة للحياة؛ ليكون «متعلمًا معتزًّا بهويته، مسهمًا في تنمية وطنه، مبدعًا علميًّا ومهاريًّا، ومنافسًا عالميًّا»، فالإسهام في تنمية الوطن هدف منصوص عليه في الإطار الوطني. أما ضمان الاتساق بين عناصر العملية التعليمية فيأتي في بيان أهمية المعايير لا في أهدافها، وتحديد الأدوار والمهام للجهات ذات العلاقة فصل مستقل عن الأدوار والمسؤوليات، وتقديم منظور فكري لبناء المعايير لا يرد في الإطار.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">4</div><div class="qtext">من أهداف تدريس لغات البرمجة في المرحلة الثانوية تعلم لغة:</div></div>
+  <input type="radio" name="q4" id="q4o1" class="i1">
+  <input type="radio" name="q4" id="q4o2" class="i2">
+  <input type="radio" name="q4" id="q4o3" class="i3">
+  <input type="radio" name="q4" id="q4o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q4o1"><span class="obadge">أ</span><span class="optxt">JAVA</span></label>
+    <label class="opt o2 correct" for="q4o2"><span class="obadge">ب</span><span class="optxt">HTML</span></label>
+    <label class="opt o3" for="q4o3"><span class="obadge">ج</span><span class="optxt">GO</span></label>
+    <label class="opt o4" for="q4o4"><span class="obadge">د</span><span class="optxt">PASCAL</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: HTML. هي اللغة الوحيدة بين الخيارات المقررة في المرحلة الثانوية، إذ يحوي المنهج وحدة «البرمجة باستخدام HTML» في أول ثانوي و«البرمجة المتقدمة باستخدام HTML» في ثاني ثانوي. أما Java وGO وPascal فليست ضمن لغات المقرر. (تنبيه علمي: HTML لغة ترميز لا لغة برمجة بالمعنى الدقيق، لكن المنهج يسميها برمجة.)</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">5</div><div class="qtext">بعد الانتهاء من دراسة وحدة مقدمة في البرمجة يكون الطالب ملما بـ :</div></div>
+  <input type="radio" name="q5" id="q5o1" class="i1">
+  <input type="radio" name="q5" id="q5o2" class="i2">
+  <input type="radio" name="q5" id="q5o3" class="i3">
+  <input type="radio" name="q5" id="q5o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q5o1"><span class="obadge">أ</span><span class="optxt">إدخال البيانات وتنظيمها وتنسيقها</span></label>
+    <label class="opt o2" for="q5o2"><span class="obadge">ب</span><span class="optxt">استخدام العوامل الحسابية لإجراء العمليات الحسابية عن طريق الأرقام والمتغيرات</span></label>
+    <label class="opt o3" for="q5o3"><span class="obadge">ج</span><span class="optxt">تعيين قيم للمتغيرات بطرق مختلفة</span></label>
+    <label class="opt o4 correct" for="q5o4"><span class="obadge">د</span><span class="optxt">ب و ج معًا</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: ب و ج معًا. وحدة مقدمة في البرمجة (بايثون في أول متوسط) تتناول المتغيرات والثوابت والمعاملات الحسابية وإدخال البيانات، فيستخدم الطالب العوامل الحسابية مع الأرقام والمتغيرات (ب) ويعيّن قيمًا للمتغيرات بطرق مختلفة (ج). أما إدخال البيانات وتنظيمها وتنسيقها (أ) فمهارة تتعلق بالجداول والمستندات لا بالبرمجة.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">6</div><div class="qtext">بعد دراسة وحدة إنتاج مقاطع الفيديو يتوقع من المتعلم إتقان برنامج:</div></div>
+  <input type="radio" name="q6" id="q6o1" class="i1">
+  <input type="radio" name="q6" id="q6o2" class="i2">
+  <input type="radio" name="q6" id="q6o3" class="i3">
+  <input type="radio" name="q6" id="q6o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q6o1"><span class="obadge">أ</span><span class="optxt">Moviemaker</span></label>
+    <label class="opt o2" for="q6o2"><span class="obadge">ب</span><span class="optxt">Camtasia</span></label>
+    <label class="opt o3 correct" for="q6o3"><span class="obadge">ج</span><span class="optxt">ShortCut</span></label>
+    <label class="opt o4" for="q6o4"><span class="obadge">د</span><span class="optxt">Pencil</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Shotcut (ويكتب في السؤال ShortCut). برنامج مفتوح المصدر لمونتاج الفيديو، وهو المقرر في وحدة «إنتاج مقطع فيديو» في ثاني متوسط. أما Moviemaker فبرنامج قديم متوقف، وCamtasia برنامج تجاري غير مقرر، وPencil أداة رسوم متحركة لا مونتاج فيديو.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">7</div><div class="qtext">من أهداف وحدة مقدمة في علم البيانات:</div></div>
+  <input type="radio" name="q7" id="q7o1" class="i1">
+  <input type="radio" name="q7" id="q7o2" class="i2">
+  <input type="radio" name="q7" id="q7o3" class="i3">
+  <input type="radio" name="q7" id="q7o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q7o1"><span class="obadge">أ</span><span class="optxt">يفرق بين علم البيانات وذكاء الأعمال</span></label>
+    <label class="opt o2" for="q7o2"><span class="obadge">ب</span><span class="optxt">يحدد مبادئ حوكمة البيانات</span></label>
+    <label class="opt o3" for="q7o3"><span class="obadge">ج</span><span class="optxt">تعريف مصطلح البيانات الضخمة</span></label>
+    <label class="opt o4 correct" for="q7o4"><span class="obadge">د</span><span class="optxt">جميع ما سبق</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: جميع ما سبق. مقدمة علم البيانات تشمل التمييز بين علم البيانات وذكاء الأعمال، وتحديد مبادئ حوكمة البيانات، وتعريف مصطلح البيانات الضخمة؛ وكلها أهداف مقبولة لوحدة تمهيدية في هذا المجال، فلا يصح اختيار واحد منها فقط.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">8</div><div class="qtext">ما وسم HTML المُستخدم لإنشاء قائمة مرتب؟</div></div>
+  <input type="radio" name="q8" id="q8o1" class="i1">
+  <input type="radio" name="q8" id="q8o2" class="i2">
+  <input type="radio" name="q8" id="q8o3" class="i3">
+  <input type="radio" name="q8" id="q8o4" class="i4">
+  <div class="opts">
+    <label class="opt o1 correct" for="q8o1"><span class="obadge">أ</span><span class="optxt">ol</span></label>
+    <label class="opt o2" for="q8o2"><span class="obadge">ب</span><span class="optxt">UL</span></label>
+    <label class="opt o3" for="q8o3"><span class="obadge">ج</span><span class="optxt">Br</span></label>
+    <label class="opt o4" for="q8o4"><span class="obadge">د</span><span class="optxt">Li</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: ol (اختصار Ordered List). تُنشئ قائمة مرقّمة بترتيب. أما ul فللقائمة غير المرتبة، وli لعنصر داخل القائمة وليس القائمة نفسها، وbr للانتقال إلى سطر جديد.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">9</div><div class="qtext">يُستخدم هذا الوسم في html (Img) لإدراج:</div></div>
+  <input type="radio" name="q9" id="q9o1" class="i1">
+  <input type="radio" name="q9" id="q9o2" class="i2">
+  <input type="radio" name="q9" id="q9o3" class="i3">
+  <input type="radio" name="q9" id="q9o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q9o1"><span class="obadge">أ</span><span class="optxt">ارتباط تشعبي</span></label>
+    <label class="opt o2 correct" for="q9o2"><span class="obadge">ب</span><span class="optxt">صورة</span></label>
+    <label class="opt o3" for="q9o3"><span class="obadge">ج</span><span class="optxt">فيديو</span></label>
+    <label class="opt o4" for="q9o4"><span class="obadge">د</span><span class="optxt">قائمة غير مرتبة</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: صورة. الوسم img (اختصار Image) يُدرج صورة في الصفحة. أما الارتباط التشعبي فيستخدم له الوسم a، والفيديو الوسم video، والقائمة غير المرتبة الوسم ul.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">10</div><div class="qtext">سيتم فتح الصفحة في علامة تبويب جديدة باستخدام:</div></div>
+  <input type="radio" name="q10" id="q10o1" class="i1">
+  <input type="radio" name="q10" id="q10o2" class="i2">
+  <input type="radio" name="q10" id="q10o3" class="i3">
+  <input type="radio" name="q10" id="q10o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q10o1"><span class="obadge">أ</span><span class="optxt">_parent</span></label>
+    <label class="opt o2" for="q10o2"><span class="obadge">ب</span><span class="optxt">_top</span></label>
+    <label class="opt o3 correct" for="q10o3"><span class="obadge">ج</span><span class="optxt">_blank</span></label>
+    <label class="opt o4" for="q10o4"><span class="obadge">د</span><span class="optxt">_self</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: _blank. قيمة الخاصية target التي تفتح الرابط في علامة تبويب (أو نافذة) جديدة. أما _self فتفتحه في النافذة نفسها (الافتراضي)، و_parent و_top تخصان الإطارات (frames) وتفتحان في الإطار الأب أو النافذة العليا.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">11</div><div class="qtext">بعد الانتهاء من دراسة وحدة صياغة حل المسائل يكون الطالب ملمًا بـ :</div></div>
+  <input type="radio" name="q11" id="q11o1" class="i1">
+  <input type="radio" name="q11" id="q11o2" class="i2">
+  <input type="radio" name="q11" id="q11o3" class="i3">
+  <input type="radio" name="q11" id="q11o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q11o1"><span class="obadge">أ</span><span class="optxt">العصف الذهني</span></label>
+    <label class="opt o2" for="q11o2"><span class="obadge">ب</span><span class="optxt">تدريبات المعمل</span></label>
+    <label class="opt o3 correct" for="q11o3"><span class="obadge">ج</span><span class="optxt">حل المشكلات</span></label>
+    <label class="opt o4" for="q11o4"><span class="obadge">د</span><span class="optxt">الاكتشاف</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: حل المشكلات. «صياغة حل المسائل» هي بالمعنى نفسه مهارة حل المشكلات (Problem Solving) وخطواتها. أما العصف الذهني فأسلوب لتوليد الأفكار، وتدريبات المعمل أنشطة تطبيقية عامة، والاكتشاف استراتيجية تعلم لا اسم الوحدة.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">12</div><div class="qtext">ما وسم HTML المستخدم لإنشاء قائمة غير مرتبة؟</div></div>
+  <input type="radio" name="q12" id="q12o1" class="i1">
+  <input type="radio" name="q12" id="q12o2" class="i2">
+  <input type="radio" name="q12" id="q12o3" class="i3">
+  <input type="radio" name="q12" id="q12o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q12o1"><span class="obadge">أ</span><span class="optxt">ol</span></label>
+    <label class="opt o2" for="q12o2"><span class="obadge">ب</span><span class="optxt">li</span></label>
+    <label class="opt o3 correct" for="q12o3"><span class="obadge">ج</span><span class="optxt">ul</span></label>
+    <label class="opt o4" for="q12o4"><span class="obadge">د</span><span class="optxt">br</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: ul (اختصار Unordered List). تُنشئ قائمة نقطية غير مرقّمة. أما ol فللقائمة المرتبة، وli لعنصر داخل القائمة، وbr لسطر جديد.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">13</div><div class="qtext">بعد دراسة وحدة مخطط المعلومات البياني في المرحلة المتوسطة يتوقع من المتعلم القيام بـ :</div></div>
+  <input type="radio" name="q13" id="q13o1" class="i1">
+  <input type="radio" name="q13" id="q13o2" class="i2">
+  <input type="radio" name="q13" id="q13o3" class="i3">
+  <input type="radio" name="q13" id="q13o4" class="i4">
+  <div class="opts">
+    <label class="opt o1 correct" for="q13o1"><span class="obadge">أ</span><span class="optxt">استخدام برنامج Canva</span></label>
+    <label class="opt o2" for="q13o2"><span class="obadge">ب</span><span class="optxt">استخدام برنامج Word</span></label>
+    <label class="opt o3" for="q13o3"><span class="obadge">ج</span><span class="optxt">استخدام برنامج INKSCAPE</span></label>
+    <label class="opt o4" for="q13o4"><span class="obadge">د</span><span class="optxt">استخدام برنامج Excel</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: استخدام برنامج Canva. هو البرنامج المقرر لتصميم مخطط المعلومات البياني (الإنفوجرافيك) في ثاني متوسط. أما Word وExcel فللمستندات والجداول، وInkscape للرسم المتجه ولا يدرّس في هذه الوحدة.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">14</div><div class="qtext">أي من الخصائص التالية يتولى إخبار المتصفح بما سيتم فتحه عند الضغط على رابط تشعبي؟</div></div>
+  <input type="radio" name="q14" id="q14o1" class="i1">
+  <input type="radio" name="q14" id="q14o2" class="i2">
+  <input type="radio" name="q14" id="q14o3" class="i3">
+  <input type="radio" name="q14" id="q14o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q14o1"><span class="obadge">أ</span><span class="optxt">Link</span></label>
+    <label class="opt o2 correct" for="q14o2"><span class="obadge">ب</span><span class="optxt">Href</span></label>
+    <label class="opt o3" for="q14o3"><span class="obadge">ج</span><span class="optxt">url</span></label>
+    <label class="opt o4" for="q14o4"><span class="obadge">د</span><span class="optxt">src</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: href. خاصية الوسم a التي تحدد عنوان الوجهة المراد الانتقال إليها عند الضغط على الرابط. أما src فتحدد مصدر ملف (كصورة أو فيديو) لا وجهة رابط، وLink وurl ليستا خاصيتين لتحديد وجهة الرابط التشعبي.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">15</div><div class="qtext">يتم تدريس "نظام التشغيل" للصف:</div></div>
+  <input type="radio" name="q15" id="q15o1" class="i1">
+  <input type="radio" name="q15" id="q15o2" class="i2">
+  <input type="radio" name="q15" id="q15o3" class="i3">
+  <input type="radio" name="q15" id="q15o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q15o1"><span class="obadge">أ</span><span class="optxt">الأول الثانوي</span></label>
+    <label class="opt o2" for="q15o2"><span class="obadge">ب</span><span class="optxt">الثاني الثانوي</span></label>
+    <label class="opt o3" for="q15o3"><span class="obadge">ج</span><span class="optxt">الثاني متوسط</span></label>
+    <label class="opt o4 correct" for="q15o4"><span class="obadge">د</span><span class="optxt">الأول متوسط</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: الأول متوسط. درس «نظام التشغيل» (ضمن وحدة تعلم الأساسيات: أجهزة الحاسب - نظام التشغيل - إعدادات نظام التشغيل الأساسية) مقرر في الصف الأول المتوسط. أما الثاني متوسط فمحوره الفيديو والمخططات والبايثون، والثاني الثانوي محوره علم البيانات والذكاء الاصطناعي.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">16</div><div class="qtext">تستخدم أداة FREE PLAN في:</div></div>
+  <input type="radio" name="q16" id="q16o1" class="i1">
+  <input type="radio" name="q16" id="q16o2" class="i2">
+  <input type="radio" name="q16" id="q16o3" class="i3">
+  <input type="radio" name="q16" id="q16o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q16o1"><span class="obadge">أ</span><span class="optxt">إنشاء مستندات متابعة الأعمال</span></label>
+    <label class="opt o2 correct" for="q16o2"><span class="obadge">ب</span><span class="optxt">إنشاء الخرائط الذهنية</span></label>
+    <label class="opt o3" for="q16o3"><span class="obadge">ج</span><span class="optxt">إنشاء العروض على شبكة الإنترنت</span></label>
+    <label class="opt o4" for="q16o4"><span class="obadge">د</span><span class="optxt">مساحة تخزينية مجانية</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: إنشاء الخرائط الذهنية. المقصود برنامج Freeplane المقرر في أول ثانوي، وهو أداة مفتوحة المصدر لرسم الخرائط الذهنية. أما مستندات متابعة الأعمال فلا يخصصه لها، وعروض الإنترنت أدوات أخرى، والمساحات التخزينية المجانية خدمات مثل OneDrive وGoogle Drive.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">17</div><div class="qtext">في النموذج التالي حدد رابطة العلاقة:</div></div>
+  <div class="fig"><svg viewBox="0 0 420 110" width="420" height="110" xmlns="http://www.w3.org/2000/svg" font-family="Tajawal,sans-serif" font-size="16">
+<rect x="20" y="30" width="110" height="50" fill="#fff" stroke="#084B8C" stroke-width="2"/><text x="75" y="61" text-anchor="middle" fill="#16233C">تلميذ</text>
+<polygon points="165,55 187,30 233,30 255,55 233,80 187,80" fill="#fff8e6" stroke="#E8AD28" stroke-width="2"/><text x="210" y="61" text-anchor="middle" fill="#16233C">يدرس</text>
+<rect x="290" y="30" width="110" height="50" fill="#fff" stroke="#084B8C" stroke-width="2"/><text x="345" y="61" text-anchor="middle" fill="#16233C">مدرسة</text>
+<line x1="130" y1="55" x2="165" y2="55" stroke="#084B8C" stroke-width="2"/><line x1="255" y1="55" x2="290" y2="55" stroke="#084B8C" stroke-width="2"/></svg></div>
+  <input type="radio" name="q17" id="q17o1" class="i1">
+  <input type="radio" name="q17" id="q17o2" class="i2">
+  <input type="radio" name="q17" id="q17o3" class="i3">
+  <input type="radio" name="q17" id="q17o4" class="i4">
+  <div class="opts">
+    <label class="opt o1 correct" for="q17o1"><span class="obadge">أ</span><span class="optxt">يدرس</span></label>
+    <label class="opt o2" for="q17o2"><span class="obadge">ب</span><span class="optxt">مدرسة</span></label>
+    <label class="opt o3" for="q17o3"><span class="obadge">ج</span><span class="optxt">تلميذ</span></label>
+    <label class="opt o4" for="q17o4"><span class="obadge">د</span><span class="optxt">دراسة</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: يدرس. في نموذج الكيانات والعلاقات (ER Diagram) تُرسم الكيانات داخل مستطيلات (تلميذ، مدرسة) وتُرسم العلاقة التي تربط بينها داخل معيّن، وهنا هي «يدرس». أما «تلميذ» و«مدرسة» فكيانان لا علاقة، و«دراسة» ليست مكتوبة في النموذج.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">18</div><div class="qtext">من البرامج التي يدرسها الطلاب بمنهج ثالث متوسط:</div></div>
+  <input type="radio" name="q18" id="q18o1" class="i1">
+  <input type="radio" name="q18" id="q18o2" class="i2">
+  <input type="radio" name="q18" id="q18o3" class="i3">
+  <input type="radio" name="q18" id="q18o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q18o1"><span class="obadge">أ</span><span class="optxt">لغة برمجه java</span></label>
+    <label class="opt o2" for="q18o2"><span class="obadge">ب</span><span class="optxt">لغة البرمجة c</span></label>
+    <label class="opt o3 correct" for="q18o3"><span class="obadge">ج</span><span class="optxt">برنامج (سكراتش)</span></label>
+    <label class="opt o4" for="q18o4"><span class="obadge">د</span><span class="optxt">لغة الفيجوال بيسيك</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: برنامج سكراتش — حسب المناهج القديمة. ⚠️ تنبيه: هذا السؤال مبني على مناهج قديمة؛ المنهج الحالي لثالث متوسط يدرّس لغة بايثون (وحدة «البرمجة مع بايثون») ولم تعد سكراتش ضمنه، إذ تُدرَّس في الصفوف الابتدائية العليا. أما Java ولغة C فلغتان نصيتان متقدمتان لا تُدرَّسان في المتوسط، وفيجوال بيسك من مقررات المناهج القديمة للمرحلة الثانوية.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">19</div><div class="qtext">يقصد بها قيام المعلم بتطبيق عملي مباشر لخبرة أو مهارة معينة مقدمًا إياها في خطوات محددة ومسلسلة وواضحة للعيان بقصد توضيحها وإكسابها للمتعلمين ومن ثم يطلب من المتعلم تطبيقها:</div></div>
+  <input type="radio" name="q19" id="q19o1" class="i1">
+  <input type="radio" name="q19" id="q19o2" class="i2">
+  <input type="radio" name="q19" id="q19o3" class="i3">
+  <input type="radio" name="q19" id="q19o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q19o1"><span class="obadge">أ</span><span class="optxt">الاكتشاف الموجه</span></label>
+    <label class="opt o2" for="q19o2"><span class="obadge">ب</span><span class="optxt">الصف المعكوس</span></label>
+    <label class="opt o3" for="q19o3"><span class="obadge">ج</span><span class="optxt">الاكتشاف غير الموجه</span></label>
+    <label class="opt o4 correct" for="q19o4"><span class="obadge">د</span><span class="optxt">التطبيق العملي</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: التطبيق العملي (ويسمى في بعض المراجع «البيان العملي» أو «العرض العملي»). يؤدي المعلم المهارة أمام الطلاب بخطوات محددة ومتسلسلة ثم يطلب منهم تطبيقها. أما الاكتشاف الموجه فيصل فيه الطالب للمعرفة بتوجيه المعلم دون عرض الخطوات جاهزة، والاكتشاف غير الموجه يتم دون توجيه، والصف المعكوس يقلب ترتيب الدرس (المحتوى في البيت والتطبيق في الصف).</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">20</div><div class="qtext">يتم تدريس visual basic في:</div></div>
+  <input type="radio" name="q20" id="q20o1" class="i1">
+  <input type="radio" name="q20" id="q20o2" class="i2">
+  <input type="radio" name="q20" id="q20o3" class="i3">
+  <input type="radio" name="q20" id="q20o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q20o1"><span class="obadge">أ</span><span class="optxt">متوسط</span></label>
+    <label class="opt o2 correct" for="q20o2"><span class="obadge">ب</span><span class="optxt">ثانوي</span></label>
+    <label class="opt o3" for="q20o3"><span class="obadge">ج</span><span class="optxt">ابتدائي</span></label>
+    <label class="opt o4" for="q20o4"><span class="obadge">د</span><span class="optxt">جميع ما سبق</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: ثانوي — حسب المناهج القديمة. ⚠️ تنبيه: هذا السؤال مبني على مناهج قديمة؛ المنهج الحالي لا يدرّس Visual Basic في أي مرحلة، والمعتمد الآن لغة بايثون. أما المتوسط والابتدائي فلم يُدرَّس فيهما، فلا يصح «جميع ما سبق».</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">21</div><div class="qtext">(يعزز المعلم للطالب بعد الإجابة الصحيحة) ما هو نوع التعزيز الذي لا يجدي نفعًا من التالي:</div></div>
+  <input type="radio" name="q21" id="q21o1" class="i1">
+  <input type="radio" name="q21" id="q21o2" class="i2">
+  <input type="radio" name="q21" id="q21o3" class="i3">
+  <input type="radio" name="q21" id="q21o4" class="i4">
+  <div class="opts">
+    <label class="opt o1 correct" for="q21o1"><span class="obadge">أ</span><span class="optxt">تعزيز الإجابات جميعها</span></label>
+    <label class="opt o2" for="q21o2"><span class="obadge">ب</span><span class="optxt">التعزيز للطالب الأقل أداء</span></label>
+    <label class="opt o3" for="q21o3"><span class="obadge">ج</span><span class="optxt">التعزيز بعد إنهاء الاستجابة بفواصل زمني</span></label>
+    <label class="opt o4" for="q21o4"><span class="obadge">د</span><span class="optxt">تعزيز الإجابات مباشر</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: تعزيز الإجابات جميعها. التعزيز الفعّال يرتبط بالاستجابة الصحيحة؛ أما تعزيز كل الإجابات ومنها الخاطئة فيُفقد التعزيز قيمته ويثبّت الأخطاء. التعزيز للطالب الأقل أداءً مفيد لأنه يحفّزه، وتعزيز الإجابة مباشرة (الفوري) هو الأنسب، والتعزيز بفواصل زمنية أحد جداول التعزيز المعروفة.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">22</div><div class="qtext">استخدام الحاسب للبحث العلمي والاستقصاء يعتبر من:</div></div>
+  <input type="radio" name="q22" id="q22o1" class="i1">
+  <input type="radio" name="q22" id="q22o2" class="i2">
+  <input type="radio" name="q22" id="q22o3" class="i3">
+  <input type="radio" name="q22" id="q22o4" class="i4">
+  <div class="opts">
+    <label class="opt o1 correct" for="q22o1"><span class="obadge">أ</span><span class="optxt">أهداف تدريس الحاسب في المملكة</span></label>
+    <label class="opt o2" for="q22o2"><span class="obadge">ب</span><span class="optxt">أهداف التعليم في المملكة</span></label>
+    <label class="opt o3" for="q22o3"><span class="obadge">ج</span><span class="optxt">استراتيجيات تدريس الحاسب</span></label>
+    <label class="opt o4" for="q22o4"><span class="obadge">د</span><span class="optxt">أساليب تدريس الحاسب</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: أهداف تدريس الحاسب في المملكة. تتضمن الأهداف العامة لمناهج الحاسب تشجيع الطالب على البحث والتجريب والاستكشاف والتعلم الذاتي، فاستخدام الحاسب للبحث العلمي والاستقصاء هدف من أهداف تدريس المادة. أما أهداف التعليم في المملكة فأعم، والاستراتيجيات والأساليب تتعلق بكيفية التدريس لا بما نريد تحقيقه.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">23</div><div class="qtext">إذا أردت استطلاع رأي أولياء أمور الطلاب فالموقع الأنسب للقيام بالمهمة هو:</div></div>
+  <input type="radio" name="q23" id="q23o1" class="i1">
+  <input type="radio" name="q23" id="q23o2" class="i2">
+  <input type="radio" name="q23" id="q23o3" class="i3">
+  <input type="radio" name="q23" id="q23o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q23o1"><span class="obadge">أ</span><span class="optxt">ZOOM</span></label>
+    <label class="opt o2 correct" for="q23o2"><span class="obadge">ب</span><span class="optxt">GOOGLE FORMS</span></label>
+    <label class="opt o3" for="q23o3"><span class="obadge">ج</span><span class="optxt">Webex</span></label>
+    <label class="opt o4" for="q23o4"><span class="obadge">د</span><span class="optxt">TEAMS</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Google Forms. أداة إنشاء نماذج واستبيانات إلكترونية وجمع الإجابات وتحليلها تلقائيًا، وهي الأنسب لاستطلاع رأي أولياء الأمور. أما Zoom وWebex وTeams فمنصات اجتماعات واتصال مرئي لا لجمع الاستبيانات.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">24</div><div class="qtext">تدرس وحدة الوسائط المتعددة في المرحلة:</div></div>
+  <input type="radio" name="q24" id="q24o1" class="i1">
+  <input type="radio" name="q24" id="q24o2" class="i2">
+  <input type="radio" name="q24" id="q24o3" class="i3">
+  <input type="radio" name="q24" id="q24o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q24o1"><span class="obadge">أ</span><span class="optxt">الجامعية</span></label>
+    <label class="opt o2" for="q24o2"><span class="obadge">ب</span><span class="optxt">المتوسطة</span></label>
+    <label class="opt o3" for="q24o3"><span class="obadge">ج</span><span class="optxt">الثانوية</span></label>
+    <label class="opt o4 correct" for="q24o4"><span class="obadge">د</span><span class="optxt">الابتدائية</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: الابتدائية. وحدة «الوسائط المتعددة» وحدة مستقلة في الصف الخامس الابتدائي (الفصل الأول)، وتسبقها وحدة «استخدام الوسائط المتعددة» في الرابع الابتدائي. أما المتوسطة فتظهر الوسائط فيها كدرس داخل وحدة إنتاج مقطع فيديو لا كوحدة مستقلة بهذا الاسم، والثانوية والجامعية لا تحوي وحدة بهذا العنوان.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">25</div><div class="qtext">أحد الوحدات التي تدرس في المرحلة الثانوية:</div></div>
+  <input type="radio" name="q25" id="q25o1" class="i1">
+  <input type="radio" name="q25" id="q25o2" class="i2">
+  <input type="radio" name="q25" id="q25o3" class="i3">
+  <input type="radio" name="q25" id="q25o4" class="i4">
+  <div class="opts">
+    <label class="opt o1 correct" for="q25o1"><span class="obadge">أ</span><span class="optxt">تحليل البيانات</span></label>
+    <label class="opt o2" for="q25o2"><span class="obadge">ب</span><span class="optxt">برنامج كانفا</span></label>
+    <label class="opt o3" for="q25o3"><span class="obadge">ج</span><span class="optxt">برنامج سكراتش</span></label>
+    <label class="opt o4" for="q25o4"><span class="obadge">د</span><span class="optxt">أمن المعلومات</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: تحليل البيانات. يُدرَّس في المرحلة الثانوية ضمن مسار علوم الحاسب والهندسة (علم البيانات): وحدة التحليل الاستكشافي للبيانات وفيها درس «تحليل البيانات» ومكتبة بايثون لتحليل البيانات. أما كانفا فبرنامج يُدرَّس في المتوسط، وسكراتش برنامج يُدرَّس في الابتدائي، وكلاهما برنامج لا وحدة.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">26</div><div class="qtext">فلسفة جون ديوي تعتمد على الجانب:</div></div>
+  <input type="radio" name="q26" id="q26o1" class="i1">
+  <input type="radio" name="q26" id="q26o2" class="i2">
+  <input type="radio" name="q26" id="q26o3" class="i3">
+  <input type="radio" name="q26" id="q26o4" class="i4">
+  <div class="opts">
+    <label class="opt o1 correct" for="q26o1"><span class="obadge">أ</span><span class="optxt">النشاط</span></label>
+    <label class="opt o2" for="q26o2"><span class="obadge">ب</span><span class="optxt">الاتجاهات والميول</span></label>
+    <label class="opt o3" for="q26o3"><span class="obadge">ج</span><span class="optxt">العلمي</span></label>
+    <label class="opt o4" for="q26o4"><span class="obadge">د</span><span class="optxt">المعرفي</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: النشاط. فلسفة جون ديوي (البراجماتية) قائمة على «التعلم بالعمل» والخبرة، فمحورها نشاط المتعلم؛ إذ يرى أن الطفل كائن نشط وإيجابي، وأن التعلم لا يحدث بالتلقين السلبي بل بالمرور بالخبرات والمشاركة في الأنشطة العملية والتفاعل مع البيئة لحل ما يواجهه من مشكلات. الاتجاهات والميول عنصر مهم لكنه يأتي تابعًا للنشاط، أما الجانبان العلمي والمعرفي فيمثلان مدارس تركّز على المحتوى الأكاديمي.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">27</div><div class="qtext">درجة الاختبارات العملية النهائية لمواد التقنية الرقمية للمرحلة الثانوية:</div></div>
+  <input type="radio" name="q27" id="q27o1" class="i1">
+  <input type="radio" name="q27" id="q27o2" class="i2">
+  <input type="radio" name="q27" id="q27o3" class="i3">
+  <input type="radio" name="q27" id="q27o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q27o1"><span class="obadge">أ</span><span class="optxt">15 درجة</span></label>
+    <label class="opt o2 correct" for="q27o2"><span class="obadge">ب</span><span class="optxt">25 درجة</span></label>
+    <label class="opt o3" for="q27o3"><span class="obadge">ج</span><span class="optxt">20 درجة</span></label>
+    <label class="opt o4" for="q27o4"><span class="obadge">د</span><span class="optxt">30 درجة</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: 25 درجة — حسب نظام التقويم القديم. ⚠️ تنبيه: هذا السؤال مبني على لائحة تقويم قديمة لم يعد العمل بها؛ فمناهج الحاسب الآن تعتمد التقويم المستمر ولا يوجد اختبار عملي نهائي بهذه الدرجة.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">28</div><div class="qtext">معلم يريد أن يشرح للطلاب واجهة برنامج قد يتسبب التعامل الخاطئ معه في ضرر للجهاز؛ ما هي الاستراتيجية المناسبة لتوضيح ذلك؟</div></div>
+  <input type="radio" name="q28" id="q28o1" class="i1">
+  <input type="radio" name="q28" id="q28o2" class="i2">
+  <input type="radio" name="q28" id="q28o3" class="i3">
+  <input type="radio" name="q28" id="q28o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q28o1"><span class="obadge">أ</span><span class="optxt">الاستكشاف</span></label>
+    <label class="opt o2" for="q28o2"><span class="obadge">ب</span><span class="optxt">التعليم التعاوني</span></label>
+    <label class="opt o3 correct" for="q28o3"><span class="obadge">ج</span><span class="optxt">البيان العملي</span></label>
+    <label class="opt o4" for="q28o4"><span class="obadge">د</span><span class="optxt">التعليم بالمشروع</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: البيان العملي. يؤدي المعلم الخطوات أمام الطلاب بنفسه، فيشاهدون الواجهة دون أن يلمسوا الجهاز ويعرّضوه للضرر. أما الاستكشاف فيترك الطالب يجرّب بنفسه (وهو ما يُخشى منه هنا)، والتعليم التعاوني يقوم على عمل المجموعات، والتعليم بالمشروع يعتمد على مهام ومشاريع ينفذها الطلاب.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">29</div><div class="qtext">يدرس الطالب في مقرر المهارات الرقمية لمرحلة ثالث متوسط:</div></div>
+  <input type="radio" name="q29" id="q29o1" class="i1">
+  <input type="radio" name="q29" id="q29o2" class="i2">
+  <input type="radio" name="q29" id="q29o3" class="i3">
+  <input type="radio" name="q29" id="q29o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q29o1"><span class="obadge">أ</span><span class="optxt">بنسل</span></label>
+    <label class="opt o2" for="q29o2"><span class="obadge">ب</span><span class="optxt">الفوتوشوب</span></label>
+    <label class="opt o3 correct" for="q29o3"><span class="obadge">ج</span><span class="optxt">قواعد البيانات</span></label>
+    <label class="opt o4" for="q29o4"><span class="obadge">د</span><span class="optxt">سكراتش وبايثون</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: قواعد البيانات. وحدة «قواعد البيانات» (إنشاء قاعدة البيانات، الاستعلام فيها، إنشاء التقارير) مقررة في ثالث متوسط الفصل الأول باستخدام Microsoft Access. أما Pencil والفوتوشوب فليسا ضمن البرامج المقررة في هذه المرحلة، وسكراتش تدرس في الابتدائي لا في ثالث متوسط.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">30</div><div class="qtext">مناهج الحاسب الآلي في التعليم تدرس:</div></div>
+  <input type="radio" name="q30" id="q30o1" class="i1">
+  <input type="radio" name="q30" id="q30o2" class="i2">
+  <input type="radio" name="q30" id="q30o3" class="i3">
+  <input type="radio" name="q30" id="q30o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q30o1"><span class="obadge">أ</span><span class="optxt">تحليل البيانات الضخمة</span></label>
+    <label class="opt o2 correct" for="q30o2"><span class="obadge">ب</span><span class="optxt">أمن المعلومات</span></label>
+    <label class="opt o3" for="q30o3"><span class="obadge">ج</span><span class="optxt">البرمجة بلغة C</span></label>
+    <label class="opt o4" for="q30o4"><span class="obadge">د</span><span class="optxt">البرمجة بلغة Java</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: أمن المعلومات. حماية البيانات والمواطنة الرقمية والأمن السيبراني محور أساسي وثابت في مناهج الحاسب والمهارات الرقمية للمرحلتين المتوسطة والثانوية، بهدف توعية الطلاب بحماية البيانات ومواجهة المخاطر السيبرانية. أما لغتا C وJava فلا تُدرَّسان في التعليم العام، فلغة البرمجة الأساسية هي بايثون لسهولتها وملاءمتها للطلاب، وتُستبعد اللغات المعقدة. وتحليل البيانات الضخمة لا يُدرَّس بصورته التخصصية المتقدمة المتروكة للدراسة الجامعية، وإنما يُعرض كمفهوم مبسط ضمن وحدة «تحليل البيانات».</div>
+</div>
+</div>
+<div class="brand">مبني وفق منهجية الفلتر الخماسي — محمد السواط | alsuwatedu.com</div>
+</body>
+</html>
