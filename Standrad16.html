@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اختبار المعيار السادس عشر - تحليل وتصنيف البيانات باستخدام تطبيقات الحاسب الآلي</title>
+<style>
+  :root{
+    --navy:#084B8C;
+    --navy-deep:#054084;
+    --gold:#E8AD28;
+    --gold-light:#F4B12C;
+    --green:#059548;
+    --red:#D64541;
+    --bg:#FFFFFF;
+    --text:#16233C;
+    --text2:#5B6B85;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:'Tajawal','Segoe UI',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    margin:0;
+    padding:0;
+    direction:rtl;
+  }
+  .topbar{
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-deep) 100%);
+    color:#fff;
+    padding:22px 18px;
+    text-align:center;
+    border-bottom:5px solid var(--gold);
+  }
+  .topbar h1{
+    margin:0 0 6px;
+    font-size:22px;
+    font-family:'Cairo','Tajawal',sans-serif;
+    font-weight:800;
+  }
+  .topbar p{margin:0;color:var(--gold-light);font-size:14px;font-weight:600;}
+  .wrap{max-width:760px;margin:0 auto;padding:18px 14px 60px;}
+  .qcard{
+    background:#fff;
+    border:1px solid #e3e8f0;
+    border-radius:14px;
+    margin-bottom:18px;
+    padding:16px 16px 4px;
+    position:relative;
+    box-shadow:0 2px 10px rgba(8,75,140,0.07);
+    overflow:hidden;
+  }
+  .qcard::before{
+    content:"";
+    position:absolute;
+    top:0;right:0;
+    width:6px;height:100%;
+    background:var(--gold);
+  }
+  .qhead{display:flex;gap:10px;align-items:flex-start;margin-bottom:14px;}
+  .qnum{
+    flex:0 0 auto;
+    background:var(--navy);
+    color:#fff;
+    width:30px;height:30px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:14px;
+  }
+  .qtext{flex:1;font-size:16px;font-weight:700;line-height:1.6;padding-top:3px;}
+  .opts{display:flex;flex-direction:column;gap:8px;}
+  .opt{
+    display:flex;align-items:center;gap:10px;
+    border:1.5px solid #e3e8f0;
+    border-radius:10px;
+    padding:9px 12px;
+    cursor:pointer;
+    transition:.15s;
+    position:relative;
+  }
+  .opt:hover{border-color:var(--gold);background:#fffaf0;}
+  .obadge{
+    flex:0 0 auto;
+    width:26px;height:26px;
+    border-radius:50%;
+    background:var(--navy);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:800;
+  }
+  .optxt{font-size:14.5px;line-height:1.5;}
+  .exp{
+    display:none;
+    margin-top:12px;
+    background:#f3f7fc;
+    border-right:4px solid var(--navy);
+    border-radius:8px;
+    padding:12px 14px;
+    font-size:13.5px;
+    line-height:1.85;
+    color:var(--text);
+  }
+  .etitle{font-weight:800;color:var(--navy);margin-bottom:6px;font-size:13.5px;}
+  .qcard.revealed .exp{display:block;}
+  .qcard.revealed .opt.correct{border-color:var(--green);background:#eafaf1;}
+  .qcard.revealed .opt.correct .obadge{background:var(--green);}
+  .qcard.revealed .opt.wrong-picked{border-color:var(--red);background:#fdecea;}
+  .qcard.revealed .opt.wrong-picked .obadge{background:var(--red);}
+  .brand{
+    text-align:center;padding:14px;color:var(--text2);font-size:12px;
+  }
+
+  .tbl{margin:0 0 12px;overflow-x:auto}.tbl table{border-collapse:collapse;width:100%;font-size:13px;text-align:center}.tbl th{background:#E8AD28;color:#16233C;padding:6px 4px;font-size:12px}.tbl td{border:1px solid #e3e8f0;padding:5px 4px}.tbl tr:nth-child(even) td{background:#fff8e6}.cap{font-size:12px;color:#5B6B85;text-align:center;margin-top:4px}
+  .ref{font-size:12.5px;color:#5B6B85;background:#f3f7fc;border-radius:8px;padding:6px 10px;margin:0 0 10px}
+  .ar{unicode-bidi:isolate;direction:rtl}
+
+  .fig{text-align:center;margin:0 0 12px;direction:ltr}.fig svg{max-width:100%;height:auto}
+  pre.code{direction:ltr;text-align:left;background:#f3f7fc;border:1px solid #dde5f0;border-radius:8px;padding:10px 12px;font-family:Consolas,Menlo,monospace;font-size:13px;line-height:1.6;overflow-x:auto;margin:0 0 12px;white-space:pre}
+  .q input{position:absolute;opacity:0;pointer-events:none;width:0;height:0}
+  .q .opt{cursor:pointer;margin:0}
+  .q input:checked ~ .opts{pointer-events:none}
+  .q input:checked ~ .exp{display:block}
+  .q input:checked ~ .opts .opt.correct{border-color:var(--green);background:#eafaf1}
+  .q input:checked ~ .opts .opt.correct .obadge{background:var(--green)}
+  .q input.i1:checked ~ .opts .opt.o1:not(.correct){border-color:var(--red);background:#fdecea}
+  .q input.i1:checked ~ .opts .opt.o1:not(.correct) .obadge{background:var(--red)}
+  .q input.i2:checked ~ .opts .opt.o2:not(.correct){border-color:var(--red);background:#fdecea}
+  .q input.i2:checked ~ .opts .opt.o2:not(.correct) .obadge{background:var(--red)}
+  .q input.i3:checked ~ .opts .opt.o3:not(.correct){border-color:var(--red);background:#fdecea}
+  .q input.i3:checked ~ .opts .opt.o3:not(.correct) .obadge{background:var(--red)}
+  .q input.i4:checked ~ .opts .opt.o4:not(.correct){border-color:var(--red);background:#fdecea}
+  .q input.i4:checked ~ .opts .opt.o4:not(.correct) .obadge{background:var(--red)}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <h1>🖥️ اختبار المتابعين – حاسب</h1>
+  <p>المعيار السادس عشر - تحليل وتصنيف البيانات باستخدام تطبيقات الحاسب الآلي</p>
+</div>
+<div class="wrap">
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">1</div><div class="qtext">بعد تطبيق المعادلة التالية، فإن الناتج يساوي:</div></div>
+  <div class="tbl"><table dir="rtl"><tr><th></th><th>A<br>الاسم</th><th>B<br>درجة الاختبار الأول</th><th>C<br>درجة الاختبار الثاني</th><th>D<br>المجموع</th></tr><tr><td>2</td><td>محمد</td><td>15</td><td>11</td><td>26</td></tr><tr><td>3</td><td>خالد</td><td>13</td><td>11</td><td>24</td></tr><tr><td>4</td><td>طلال</td><td>15</td><td>13</td><td>28</td></tr><tr><td>5</td><td>راكان</td><td>20</td><td>8</td><td>28</td></tr><tr><td>6</td><td>رامي</td><td>8</td><td>18</td><td>26</td></tr></table></div>
+  <pre class="code" dir="ltr">=MAX(B2:C6)</pre>
+  <input type="radio" name="q1" id="q1o1" class="i1">
+  <input type="radio" name="q1" id="q1o2" class="i2">
+  <input type="radio" name="q1" id="q1o3" class="i3">
+  <input type="radio" name="q1" id="q1o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q1o1"><span class="obadge">أ</span><span class="optxt">18</span></label>
+    <label class="opt o2" for="q1o2"><span class="obadge">ب</span><span class="optxt">12</span></label>
+    <label class="opt o3 correct" for="q1o3"><span class="obadge">ج</span><span class="optxt">20</span></label>
+    <label class="opt o4" for="q1o4"><span class="obadge">د</span><span class="optxt">14</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: 20. الدالة MAX ترجع أكبر قيمة في النطاق، والنطاق B2:C6 يضم درجتي الاختبارين الأول والثاني للطلاب الخمسة، وأكبر قيمة فيه 20 (درجة راكان في الاختبار الأول). أما 18 فأكبر درجة في الاختبار الثاني فقط.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">2</div><div class="qtext">في الجدول أعلاه بعد تطبيق المعادلة التالية، فإن الناتج يساوي:</div></div>
+  <div class="tbl"><table dir="rtl"><tr><th></th><th>A<br>الاسم</th><th>B<br>درجة الاختبار الأول</th><th>C<br>درجة الاختبار الثاني</th><th>D<br>المجموع</th></tr><tr><td>2</td><td>محمد</td><td>15</td><td>11</td><td>26</td></tr><tr><td>3</td><td>خالد</td><td>13</td><td>11</td><td>24</td></tr><tr><td>4</td><td>طلال</td><td>15</td><td>13</td><td>28</td></tr><tr><td>5</td><td>راكان</td><td>20</td><td>8</td><td>28</td></tr><tr><td>6</td><td>رامي</td><td>8</td><td>18</td><td>26</td></tr></table></div>
+  <pre class="code" dir="ltr">=LOOKUP(20; B2:B6; A2:A6)</pre>
+  <input type="radio" name="q2" id="q2o1" class="i1">
+  <input type="radio" name="q2" id="q2o2" class="i2">
+  <input type="radio" name="q2" id="q2o3" class="i3">
+  <input type="radio" name="q2" id="q2o4" class="i4">
+  <div class="opts">
+    <label class="opt o1 correct" for="q2o1"><span class="obadge">أ</span><span class="optxt">راكان</span></label>
+    <label class="opt o2" for="q2o2"><span class="obadge">ب</span><span class="optxt">محمد</span></label>
+    <label class="opt o3" for="q2o3"><span class="obadge">ج</span><span class="optxt">طلال</span></label>
+    <label class="opt o4" for="q2o4"><span class="obadge">د</span><span class="optxt">رامي</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: راكان. تبحث الدالة LOOKUP عن القيمة 20 في النطاق B2:B6 (الاختبار الأول) وترجع القيمة المقابلة من النطاق A2:A6 (الأسماء). القيمة 20 في الصف الخامس، واسمه راكان.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">3</div><div class="qtext">في الجدول أعلاه بعد تطبيق المعادلة التالية، فإن الناتج يساوي:</div></div>
+  <div class="tbl"><table dir="rtl"><tr><th></th><th>A<br>الاسم</th><th>B<br>درجة الاختبار الأول</th><th>C<br>درجة الاختبار الثاني</th><th>D<br>المجموع</th></tr><tr><td>2</td><td>محمد</td><td>15</td><td>11</td><td>26</td></tr><tr><td>3</td><td>خالد</td><td>13</td><td>11</td><td>24</td></tr><tr><td>4</td><td>طلال</td><td>15</td><td>13</td><td>28</td></tr><tr><td>5</td><td>راكان</td><td>20</td><td>8</td><td>28</td></tr><tr><td>6</td><td>رامي</td><td>8</td><td>18</td><td>26</td></tr></table></div>
+  <pre class="code" dir="ltr">=IF(C4 &lt; 10; "<span class="ar">جيد</span>"; "<span class="ar">ممتاز</span>")</pre>
+  <input type="radio" name="q3" id="q3o1" class="i1">
+  <input type="radio" name="q3" id="q3o2" class="i2">
+  <input type="radio" name="q3" id="q3o3" class="i3">
+  <input type="radio" name="q3" id="q3o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q3o1"><span class="obadge">أ</span><span class="optxt">جيد</span></label>
+    <label class="opt o2 correct" for="q3o2"><span class="obadge">ب</span><span class="optxt">ممتاز</span></label>
+    <label class="opt o3" for="q3o3"><span class="obadge">ج</span><span class="optxt">مقبول</span></label>
+    <label class="opt o4" for="q3o4"><span class="obadge">د</span><span class="optxt">جيد جدًا</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: ممتاز. الدالة IF تفحص الشرط C4&lt;10؛ وقيمة C4 هي 13 (درجة طلال في الاختبار الثاني)، فالشرط غير متحقق، ولذلك تُنفَّذ القيمة الثالثة في الدالة وهي «ممتاز».</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">4</div><div class="qtext">في الجدول أعلاه بعد تطبيق المعادلة التالية، فإن الناتج يساوي:</div></div>
+  <div class="tbl"><table dir="rtl"><tr><th></th><th>A<br>الاسم</th><th>B<br>درجة الاختبار الأول</th><th>C<br>درجة الاختبار الثاني</th><th>D<br>المجموع</th></tr><tr><td>2</td><td>محمد</td><td>15</td><td>11</td><td>26</td></tr><tr><td>3</td><td>خالد</td><td>13</td><td>11</td><td>24</td></tr><tr><td>4</td><td>طلال</td><td>15</td><td>13</td><td>28</td></tr><tr><td>5</td><td>راكان</td><td>20</td><td>8</td><td>28</td></tr><tr><td>6</td><td>رامي</td><td>8</td><td>18</td><td>26</td></tr></table></div>
+  <pre class="code" dir="ltr">=MIN(B2:C6)</pre>
+  <input type="radio" name="q4" id="q4o1" class="i1">
+  <input type="radio" name="q4" id="q4o2" class="i2">
+  <input type="radio" name="q4" id="q4o3" class="i3">
+  <input type="radio" name="q4" id="q4o4" class="i4">
+  <div class="opts">
+    <label class="opt o1 correct" for="q4o1"><span class="obadge">أ</span><span class="optxt">8</span></label>
+    <label class="opt o2" for="q4o2"><span class="obadge">ب</span><span class="optxt">9</span></label>
+    <label class="opt o3" for="q4o3"><span class="obadge">ج</span><span class="optxt">13</span></label>
+    <label class="opt o4" for="q4o4"><span class="obadge">د</span><span class="optxt">7</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: 8. الدالة MIN ترجع أصغر قيمة في النطاق B2:C6، وأصغر درجة فيه 8 (رامي في الاختبار الأول وراكان في الثاني).</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">5</div><div class="qtext">في الجدول أعلاه بعد تطبيق المعادلة التالية، فإن الناتج يساوي:</div></div>
+  <div class="tbl"><table dir="rtl"><tr><th></th><th>A<br>الاسم</th><th>B<br>درجة الاختبار الأول</th><th>C<br>درجة الاختبار الثاني</th><th>D<br>المجموع</th></tr><tr><td>2</td><td>محمد</td><td>15</td><td>11</td><td>26</td></tr><tr><td>3</td><td>خالد</td><td>13</td><td>11</td><td>24</td></tr><tr><td>4</td><td>طلال</td><td>15</td><td>13</td><td>28</td></tr><tr><td>5</td><td>راكان</td><td>20</td><td>8</td><td>28</td></tr><tr><td>6</td><td>رامي</td><td>8</td><td>18</td><td>26</td></tr></table></div>
+  <pre class="code" dir="ltr">=COUNTIFS(A2:B6; "<span class="ar">محمد</span>")</pre>
+  <input type="radio" name="q5" id="q5o1" class="i1">
+  <input type="radio" name="q5" id="q5o2" class="i2">
+  <input type="radio" name="q5" id="q5o3" class="i3">
+  <input type="radio" name="q5" id="q5o4" class="i4">
+  <div class="opts">
+    <label class="opt o1 correct" for="q5o1"><span class="obadge">أ</span><span class="optxt">1</span></label>
+    <label class="opt o2" for="q5o2"><span class="obadge">ب</span><span class="optxt">17</span></label>
+    <label class="opt o3" for="q5o3"><span class="obadge">ج</span><span class="optxt">14</span></label>
+    <label class="opt o4" for="q5o4"><span class="obadge">د</span><span class="optxt">13</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: 1. الدالة COUNTIFS تعدّ الخلايا التي يتحقق فيها الشرط، وهنا تعدّ الخلايا في A2:B6 التي تساوي «محمد»، ولا توجد إلا خلية واحدة (A2).</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">6</div><div class="qtext">في الجدول أعلاه بعد تطبيق المعادلة التالية، فإن الناتج يساوي:</div></div>
+  <div class="tbl"><table dir="rtl"><tr><th></th><th>A<br>الاسم</th><th>B<br>درجة الاختبار الأول</th><th>C<br>درجة الاختبار الثاني</th><th>D<br>المجموع</th></tr><tr><td>2</td><td>محمد</td><td>15</td><td>11</td><td>26</td></tr><tr><td>3</td><td>خالد</td><td>13</td><td>11</td><td>24</td></tr><tr><td>4</td><td>طلال</td><td>15</td><td>13</td><td>28</td></tr><tr><td>5</td><td>راكان</td><td>20</td><td>8</td><td>28</td></tr><tr><td>6</td><td>رامي</td><td>8</td><td>18</td><td>26</td></tr></table></div>
+  <pre class="code" dir="ltr">=LARGE(B2:C4; 2)</pre>
+  <input type="radio" name="q6" id="q6o1" class="i1">
+  <input type="radio" name="q6" id="q6o2" class="i2">
+  <input type="radio" name="q6" id="q6o3" class="i3">
+  <input type="radio" name="q6" id="q6o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q6o1"><span class="obadge">أ</span><span class="optxt">13</span></label>
+    <label class="opt o2" for="q6o2"><span class="obadge">ب</span><span class="optxt">11</span></label>
+    <label class="opt o3 correct" for="q6o3"><span class="obadge">ج</span><span class="optxt">15</span></label>
+    <label class="opt o4" for="q6o4"><span class="obadge">د</span><span class="optxt">20</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: 15. الدالة LARGE ترجع ثاني أكبر قيمة وفق الرقم n=2. قيم النطاق B2:C4 مرتبة تنازليًا: 15، 15، 13، 13، 11، 11؛ والتكرار يُحسب، فالقيمة الثانية 15.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">7</div><div class="qtext">في الجدول أعلاه بعد تطبيق المعادلة التالية، فإن الناتج يساوي:</div></div>
+  <div class="tbl"><table dir="rtl"><tr><th></th><th>A<br>الاسم</th><th>B<br>درجة الاختبار الأول</th><th>C<br>درجة الاختبار الثاني</th><th>D<br>المجموع</th></tr><tr><td>2</td><td>محمد</td><td>15</td><td>11</td><td>26</td></tr><tr><td>3</td><td>خالد</td><td>13</td><td>11</td><td>24</td></tr><tr><td>4</td><td>طلال</td><td>15</td><td>13</td><td>28</td></tr><tr><td>5</td><td>راكان</td><td>20</td><td>8</td><td>28</td></tr><tr><td>6</td><td>رامي</td><td>8</td><td>18</td><td>26</td></tr></table></div>
+  <pre class="code" dir="ltr">=COUNTA(B2:B5)</pre>
+  <input type="radio" name="q7" id="q7o1" class="i1">
+  <input type="radio" name="q7" id="q7o2" class="i2">
+  <input type="radio" name="q7" id="q7o3" class="i3">
+  <input type="radio" name="q7" id="q7o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q7o1"><span class="obadge">أ</span><span class="optxt">12</span></label>
+    <label class="opt o2 correct" for="q7o2"><span class="obadge">ب</span><span class="optxt">4</span></label>
+    <label class="opt o3" for="q7o3"><span class="obadge">ج</span><span class="optxt">10</span></label>
+    <label class="opt o4" for="q7o4"><span class="obadge">د</span><span class="optxt">14</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: 4. الدالة COUNTA تعدّ الخلايا غير الفارغة، والنطاق B2:B5 يحوي أربع قيم (15، 13، 15، 20).</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">8</div><div class="qtext">من البرامج المستخدمة لتحليل البيانات:</div></div>
+  <input type="radio" name="q8" id="q8o1" class="i1">
+  <input type="radio" name="q8" id="q8o2" class="i2">
+  <input type="radio" name="q8" id="q8o3" class="i3">
+  <input type="radio" name="q8" id="q8o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q8o1"><span class="obadge">أ</span><span class="optxt"><bdi dir="ltr">POWER BI</bdi></span></label>
+    <label class="opt o2" for="q8o2"><span class="obadge">ب</span><span class="optxt"><bdi dir="ltr">MATLAB</bdi></span></label>
+    <label class="opt o3" for="q8o3"><span class="obadge">ج</span><span class="optxt"><bdi dir="ltr">SPSS</bdi></span></label>
+    <label class="opt o4 correct" for="q8o4"><span class="obadge">د</span><span class="optxt">جميع ما سبق</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: جميع ما سبق. Power BI وMATLAB وSPSS كلها برامج وأدوات تُستخدم في تحليل البيانات.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">9</div><div class="qtext">لفحص الخلية أو المعادلة الحاوية من أي نوع من الأخطاء باستثناء الخطأ #N/A ، نستخدم الدالة:</div></div>
+  <input type="radio" name="q9" id="q9o1" class="i1">
+  <input type="radio" name="q9" id="q9o2" class="i2">
+  <input type="radio" name="q9" id="q9o3" class="i3">
+  <input type="radio" name="q9" id="q9o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q9o1"><span class="obadge">أ</span><span class="optxt"><bdi dir="ltr">ISERROR</bdi></span></label>
+    <label class="opt o2" for="q9o2"><span class="obadge">ب</span><span class="optxt"><bdi dir="ltr">ISNA</bdi></span></label>
+    <label class="opt o3" for="q9o3"><span class="obadge">ج</span><span class="optxt"><bdi dir="ltr">ISRFFF</bdi></span></label>
+    <label class="opt o4 correct" for="q9o4"><span class="obadge">د</span><span class="optxt"><bdi dir="ltr">ISERR</bdi></span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: ISERR. تكشف الدالة ISERR كل أنواع الأخطاء ما عدا #N/A، وهذا هو شرط السؤال. أما ISERROR فتكشف جميع الأخطاء بما فيها #N/A، وISNA تكشف #N/A فقط.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">10</div><div class="qtext">الترتيب الصحيح لتصنيف البيانات هو:</div></div>
+  <input type="radio" name="q10" id="q10o1" class="i1">
+  <input type="radio" name="q10" id="q10o2" class="i2">
+  <input type="radio" name="q10" id="q10o3" class="i3">
+  <input type="radio" name="q10" id="q10o4" class="i4">
+  <div class="opts">
+    <label class="opt o1 correct" for="q10o1"><span class="obadge">أ</span><span class="optxt">جلب – تنظيف – استكشاف - تحليل</span></label>
+    <label class="opt o2" for="q10o2"><span class="obadge">ب</span><span class="optxt">جلب – استكشاف – تحليل – تنظيف</span></label>
+    <label class="opt o3" for="q10o3"><span class="obadge">ج</span><span class="optxt">جلب – استكشاف – تنظيف – تحليل</span></label>
+    <label class="opt o4" for="q10o4"><span class="obadge">د</span><span class="optxt">جلب – تنظيف – تحليل – استكشاف</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: جلب – تنظيف – استكشاف – تحليل. هو ترتيب مراحل مسار تحليل البيانات (Data Analysis Pipeline): جلب البيانات، ثم تنظيفها، ثم استكشافها لفهم خصائصها، ثم تحليلها. فالتنظيف يسبق الاستكشاف والتحليل لضمان دقة النتائج.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">11</div><div class="qtext">تقوم الدالة ................... بالبحث عن قيمة معينة في عمود أو صف، وتقوم بإظهار رقم الصف أو العمود الموجود به هذه القيمة</div></div>
+  <input type="radio" name="q11" id="q11o1" class="i1">
+  <input type="radio" name="q11" id="q11o2" class="i2">
+  <input type="radio" name="q11" id="q11o3" class="i3">
+  <input type="radio" name="q11" id="q11o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q11o1"><span class="obadge">أ</span><span class="optxt"><bdi dir="ltr">HLOOKUP</bdi></span></label>
+    <label class="opt o2" for="q11o2"><span class="obadge">ب</span><span class="optxt"><bdi dir="ltr">INDEX</bdi></span></label>
+    <label class="opt o3 correct" for="q11o3"><span class="obadge">ج</span><span class="optxt"><bdi dir="ltr">MATCH</bdi></span></label>
+    <label class="opt o4" for="q11o4"><span class="obadge">د</span><span class="optxt">جميع ما سبق</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: MATCH. ترجع الدالة موقع القيمة (رقم الصف أو العمود) داخل النطاق. أما HLOOKUP فترجع قيمة من صف آخر، وINDEX ترجع قيمة الخلية بناءً على رقم الصف والعمود المعطى.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">12</div><div class="qtext">في برنامج الإكسل NOT تعني:</div></div>
+  <input type="radio" name="q12" id="q12o1" class="i1">
+  <input type="radio" name="q12" id="q12o2" class="i2">
+  <input type="radio" name="q12" id="q12o3" class="i3">
+  <input type="radio" name="q12" id="q12o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q12o1"><span class="obadge">أ</span><span class="optxt">دوال مثلثية</span></label>
+    <label class="opt o2 correct" for="q12o2"><span class="obadge">ب</span><span class="optxt">عملية منطقية</span></label>
+    <label class="opt o3" for="q12o3"><span class="obadge">ج</span><span class="optxt">عملية رياضية</span></label>
+    <label class="opt o4" for="q12o4"><span class="obadge">د</span><span class="optxt">عملية شرطية</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: عملية منطقية. NOT من الدوال المنطقية (مع AND وOR) وتعكس القيمة المنطقية: TRUE إلى FALSE والعكس.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">13</div><div class="qtext">تسمى بدالة البحث الأفقي:</div></div>
+  <input type="radio" name="q13" id="q13o1" class="i1">
+  <input type="radio" name="q13" id="q13o2" class="i2">
+  <input type="radio" name="q13" id="q13o3" class="i3">
+  <input type="radio" name="q13" id="q13o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q13o1"><span class="obadge">أ</span><span class="optxt"><bdi dir="ltr">INDEX</bdi></span></label>
+    <label class="opt o2" for="q13o2"><span class="obadge">ب</span><span class="optxt"><bdi dir="ltr">VLOOKUP</bdi></span></label>
+    <label class="opt o3" for="q13o3"><span class="obadge">ج</span><span class="optxt"><bdi dir="ltr">MATCH</bdi></span></label>
+    <label class="opt o4 correct" for="q13o4"><span class="obadge">د</span><span class="optxt"><bdi dir="ltr">HLOOKUP</bdi></span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: HLOOKUP. الحرف H اختصار Horizontal، وتبحث عن القيمة في الصف الأول من الجدول وترجع قيمة من صف آخر في نفس العمود. أما VLOOKUP فللبحث العمودي.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">14</div><div class="qtext">أي دالة تُستخدم لفحص الخلية أو المعادلة التي تحتوي على أي نوع من الأخطاء؟</div></div>
+  <input type="radio" name="q14" id="q14o1" class="i1">
+  <input type="radio" name="q14" id="q14o2" class="i2">
+  <input type="radio" name="q14" id="q14o3" class="i3">
+  <input type="radio" name="q14" id="q14o4" class="i4">
+  <div class="opts">
+    <label class="opt o1 correct" for="q14o1"><span class="obadge">أ</span><span class="optxt"><bdi dir="ltr">ISERROR</bdi></span></label>
+    <label class="opt o2" for="q14o2"><span class="obadge">ب</span><span class="optxt"><bdi dir="ltr">ISERR</bdi></span></label>
+    <label class="opt o3" for="q14o3"><span class="obadge">ج</span><span class="optxt"><bdi dir="ltr">ISNA</bdi></span></label>
+    <label class="opt o4" for="q14o4"><span class="obadge">د</span><span class="optxt"><bdi dir="ltr">ISRFFF</bdi></span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: ISERROR. تكشف جميع أنواع الأخطاء بلا استثناء. أما ISERR فتستثني #N/A، وISNA تكشف #N/A فقط.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">15</div><div class="qtext">أول عملية سوف يتم تنفيذها في 3/2 (5+2) هي:</div></div>
+  <pre class="code" dir="ltr">3/2 (5+2)</pre>
+  <input type="radio" name="q15" id="q15o1" class="i1">
+  <input type="radio" name="q15" id="q15o2" class="i2">
+  <input type="radio" name="q15" id="q15o3" class="i3">
+  <input type="radio" name="q15" id="q15o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q15o1"><span class="obadge">أ</span><span class="optxt">الطرح</span></label>
+    <label class="opt o2" for="q15o2"><span class="obadge">ب</span><span class="optxt">الضرب</span></label>
+    <label class="opt o3 correct" for="q15o3"><span class="obadge">ج</span><span class="optxt">الجمع</span></label>
+    <label class="opt o4" for="q15o4"><span class="obadge">د</span><span class="optxt">القسمة</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: الجمع. العمليات داخل الأقواس لها الأولوية الأولى، فيُنفَّذ (5+2) قبل القسمة أو الضرب.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">16</div><div class="qtext">يعني الخطأ ................ أن القيمة ليست متاحة في هذه المعادلة:</div></div>
+  <input type="radio" name="q16" id="q16o1" class="i1">
+  <input type="radio" name="q16" id="q16o2" class="i2">
+  <input type="radio" name="q16" id="q16o3" class="i3">
+  <input type="radio" name="q16" id="q16o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q16o1"><span class="obadge">أ</span><span class="optxt">#REF!</span></label>
+    <label class="opt o2" for="q16o2"><span class="obadge">ب</span><span class="optxt">#NAME?</span></label>
+    <label class="opt o3" for="q16o3"><span class="obadge">ج</span><span class="optxt">#NULL!</span></label>
+    <label class="opt o4 correct" for="q16o4"><span class="obadge">د</span><span class="optxt">#N/A</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: #N/A. يظهر عندما لا تجد دالة البحث القيمة المطلوبة (غير متاحة). أما #REF! فمرجع غير صالح، و#NAME? اسم غير معروف، و#NULL! تقاطع غير موجود.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">17</div><div class="qtext">عملية فرز ووضع البيانات في مجموعات لكي يتم تحديد المخاطر التي تحيط بكل مجموعة وتقييم هذه المخاطر ومعرفة الثغرات ووضع الخطط اللازمة لحماية هذه البيانات تسمى:</div></div>
+  <input type="radio" name="q17" id="q17o1" class="i1">
+  <input type="radio" name="q17" id="q17o2" class="i2">
+  <input type="radio" name="q17" id="q17o3" class="i3">
+  <input type="radio" name="q17" id="q17o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q17o1"><span class="obadge">أ</span><span class="optxt">البيانات الخام</span></label>
+    <label class="opt o2" for="q17o2"><span class="obadge">ب</span><span class="optxt">معالجة البيانات</span></label>
+    <label class="opt o3 correct" for="q17o3"><span class="obadge">ج</span><span class="optxt">تصنيف البيانات</span></label>
+    <label class="opt o4" for="q17o4"><span class="obadge">د</span><span class="optxt">تقسيم البيانات</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: تصنيف البيانات. هو تنظيم البيانات في فئات أو مجموعات بحسب خصائصها (كدرجة الحساسية) لتحديد المخاطر المحيطة بكل مجموعة ووضع الحماية المناسبة لها.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">18</div><div class="qtext">اختصار العملية A10+A11+A12+A13 في الإكسل هو:</div></div>
+  <input type="radio" name="q18" id="q18o1" class="i1">
+  <input type="radio" name="q18" id="q18o2" class="i2">
+  <input type="radio" name="q18" id="q18o3" class="i3">
+  <input type="radio" name="q18" id="q18o4" class="i4">
+  <div class="opts">
+    <label class="opt o1 correct" for="q18o1"><span class="obadge">أ</span><span class="optxt"><bdi dir="ltr">Sum=A10:A13</bdi></span></label>
+    <label class="opt o2" for="q18o2"><span class="obadge">ب</span><span class="optxt"><bdi dir="ltr">Max=A10:A13</bdi></span></label>
+    <label class="opt o3" for="q18o3"><span class="obadge">ج</span><span class="optxt"><bdi dir="ltr">Sub=A10:A13</bdi></span></label>
+    <label class="opt o4" for="q18o4"><span class="obadge">د</span><span class="optxt"><bdi dir="ltr">Mult=A10:A13</bdi></span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Sum=A10:A13 (أي دالة الجمع SUM على النطاق A10:A13). جمع عدة خلايا متتالية يُختصر بدالة SUM مع تحديد النطاق. أما Max فلأكبر قيمة، وSub وMult ليستا دالتين في الإكسل لهذا الغرض.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">19</div><div class="qtext">تسمى بدالة البحث العمودي:</div></div>
+  <input type="radio" name="q19" id="q19o1" class="i1">
+  <input type="radio" name="q19" id="q19o2" class="i2">
+  <input type="radio" name="q19" id="q19o3" class="i3">
+  <input type="radio" name="q19" id="q19o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q19o1"><span class="obadge">أ</span><span class="optxt"><bdi dir="ltr">HLOOKUP</bdi></span></label>
+    <label class="opt o2 correct" for="q19o2"><span class="obadge">ب</span><span class="optxt"><bdi dir="ltr">VLOOKUP</bdi></span></label>
+    <label class="opt o3" for="q19o3"><span class="obadge">ج</span><span class="optxt"><bdi dir="ltr">INDEX</bdi></span></label>
+    <label class="opt o4" for="q19o4"><span class="obadge">د</span><span class="optxt"><bdi dir="ltr">MATCH</bdi></span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: VLOOKUP. الحرف V اختصار Vertical، وتبحث عن القيمة في العمود الأول من الجدول وترجع قيمة من عمود آخر في نفس الصف. أما HLOOKUP فللبحث الأفقي.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">20</div><div class="qtext">أول عملية يتم تنفيذها في = 10-3 + 2×4 بحسب الأولوية هي:</div></div>
+  <pre class="code" dir="ltr">= 10-3 + 2×4</pre>
+  <input type="radio" name="q20" id="q20o1" class="i1">
+  <input type="radio" name="q20" id="q20o2" class="i2">
+  <input type="radio" name="q20" id="q20o3" class="i3">
+  <input type="radio" name="q20" id="q20o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q20o1"><span class="obadge">أ</span><span class="optxt">الطرح</span></label>
+    <label class="opt o2 correct" for="q20o2"><span class="obadge">ب</span><span class="optxt">الضرب</span></label>
+    <label class="opt o3" for="q20o3"><span class="obadge">ج</span><span class="optxt">الجمع</span></label>
+    <label class="opt o4" for="q20o4"><span class="obadge">د</span><span class="optxt">القسمة</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: الضرب. في أولوية العمليات الحسابية يسبق الضرب والقسمة الجمع والطرح، فتُنفَّذ 2×4 أولًا ثم يُجرى الطرح والجمع من اليسار.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">21</div><div class="qtext">بعد انتهاء العرض التقديمي، يطلب المقدّم من الجمهور آراءهم في العرض لتقييم أدائه وتحسينه مستقبلًا، وهذا يسمى:</div></div>
+  <input type="radio" name="q21" id="q21o1" class="i1">
+  <input type="radio" name="q21" id="q21o2" class="i2">
+  <input type="radio" name="q21" id="q21o3" class="i3">
+  <input type="radio" name="q21" id="q21o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q21o1"><span class="obadge">أ</span><span class="optxt">الاستبيانات</span></label>
+    <label class="opt o2 correct" for="q21o2"><span class="obadge">ب</span><span class="optxt">التغذية الراجعة</span></label>
+    <label class="opt o3" for="q21o3"><span class="obadge">ج</span><span class="optxt">الأسئلة الختامية</span></label>
+    <label class="opt o4" for="q21o4"><span class="obadge">د</span><span class="optxt">المقابلة</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: التغذية الراجعة. هي آراء الجمهور وملاحظاتهم على العرض، وتساعد المقدّم على تقييم أدائه وتحسينه مستقبلًا، وهي من خطوات ما بعد العرض. أما الأسئلة الختامية فاستفسارات عن المحتوى، والاستبيانات والمقابلة أدوات لجمع الآراء لا الاسم العام لهذه العملية.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">22</div><div class="qtext">برامج فيها ميزة تصنيف البيانات وفق خصائص ومواصفات معينة هي:</div></div>
+  <input type="radio" name="q22" id="q22o1" class="i1">
+  <input type="radio" name="q22" id="q22o2" class="i2">
+  <input type="radio" name="q22" id="q22o3" class="i3">
+  <input type="radio" name="q22" id="q22o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q22o1"><span class="obadge">أ</span><span class="optxt">برامج التصميم</span></label>
+    <label class="opt o2" for="q22o2"><span class="obadge">ب</span><span class="optxt">برامج الجداول الحسابية</span></label>
+    <label class="opt o3" for="q22o3"><span class="obadge">ج</span><span class="optxt">برامج معالج النصوص</span></label>
+    <label class="opt o4 correct" for="q22o4"><span class="obadge">د</span><span class="optxt">برامج قواعد البيانات</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: برامج قواعد البيانات. هي المخصصة لتنظيم البيانات وتصنيفها وفق خصائص ومواصفات محددة وإدارتها والاستعلام عنها. أما الجداول الحسابية فتركّز على العمليات الحسابية، والتصميم ومعالج النصوص لا يصنّفان البيانات.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">23</div><div class="qtext">لتحليل البيانات نستخدم برامج:</div></div>
+  <input type="radio" name="q23" id="q23o1" class="i1">
+  <input type="radio" name="q23" id="q23o2" class="i2">
+  <input type="radio" name="q23" id="q23o3" class="i3">
+  <input type="radio" name="q23" id="q23o4" class="i4">
+  <div class="opts">
+    <label class="opt o1 correct" for="q23o1"><span class="obadge">أ</span><span class="optxt">الجداول الإلكترونية</span></label>
+    <label class="opt o2" for="q23o2"><span class="obadge">ب</span><span class="optxt">قواعد البيانات</span></label>
+    <label class="opt o3" for="q23o3"><span class="obadge">ج</span><span class="optxt">معالج النصوص</span></label>
+    <label class="opt o4" for="q23o4"><span class="obadge">د</span><span class="optxt">تصميم الصور</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: الجداول الإلكترونية. مثل Excel، لما فيها من دوال حسابية وإحصائية ومخططات لتحليل البيانات. أما قواعد البيانات فلتخزينها وتنظيمها، ومعالج النصوص وتصميم الصور لا يحللان البيانات.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">24</div><div class="qtext">عمود (العمر) فرز:</div></div>
+  <input type="radio" name="q24" id="q24o1" class="i1">
+  <input type="radio" name="q24" id="q24o2" class="i2">
+  <input type="radio" name="q24" id="q24o3" class="i3">
+  <input type="radio" name="q24" id="q24o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q24o1"><span class="obadge">أ</span><span class="optxt">فئوي</span></label>
+    <label class="opt o2" for="q24o2"><span class="obadge">ب</span><span class="optxt">تسلسلي</span></label>
+    <label class="opt o3 correct" for="q24o3"><span class="obadge">ج</span><span class="optxt">تصاعدي</span></label>
+    <label class="opt o4" for="q24o4"><span class="obadge">د</span><span class="optxt">جميع ما سبق</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: تصاعدي. أنواع الفرز في الإكسل: تصاعدي (من الأصغر إلى الأكبر) وتنازلي (من الأكبر إلى الأصغر) ومخصص. وعمود العمر قيم رقمية تُرتَّب فرزًا تصاعديًا. أما «فئوي» و«تسلسلي» فليسا من أنواع الفرز.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">25</div><div class="qtext">عند استخدام الطلاب لأحد العروض التقديمية فإن ذلك يعزز لديهم مهارة:</div></div>
+  <input type="radio" name="q25" id="q25o1" class="i1">
+  <input type="radio" name="q25" id="q25o2" class="i2">
+  <input type="radio" name="q25" id="q25o3" class="i3">
+  <input type="radio" name="q25" id="q25o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q25o1"><span class="obadge">أ</span><span class="optxt">تنمية المفاهيم أو تطويرها</span></label>
+    <label class="opt o2 correct" for="q25o2"><span class="obadge">ب</span><span class="optxt">تركيز الانتباه ودقة الملاحظة</span></label>
+    <label class="opt o3" for="q25o3"><span class="obadge">ج</span><span class="optxt">حل المشكلات وطرح الأسئلة</span></label>
+    <label class="opt o4" for="q25o4"><span class="obadge">د</span><span class="optxt">التصنيف ووضع المعايير</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: تركيز الانتباه ودقة الملاحظة. العروض التقديمية بما فيها من عناصر بصرية ومسموعة تشدّ انتباه الطلاب وتدرّبهم على الملاحظة الدقيقة للمعلومات المعروضة.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">26</div><div class="qtext">دالة في برنامج (Excel) تستخدم لحساب عدد الحقول الفارغة في نطاق محدد داخل الجدول:</div></div>
+  <input type="radio" name="q26" id="q26o1" class="i1">
+  <input type="radio" name="q26" id="q26o2" class="i2">
+  <input type="radio" name="q26" id="q26o3" class="i3">
+  <input type="radio" name="q26" id="q26o4" class="i4">
+  <div class="opts">
+    <label class="opt o1 correct" for="q26o1"><span class="obadge">أ</span><span class="optxt">دالة COUNTBLANK</span></label>
+    <label class="opt o2" for="q26o2"><span class="obadge">ب</span><span class="optxt">الدالة VLOOKUP</span></label>
+    <label class="opt o3" for="q26o3"><span class="obadge">ج</span><span class="optxt">الدالة INDEX</span></label>
+    <label class="opt o4" for="q26o4"><span class="obadge">د</span><span class="optxt">الدالة LOOKUP</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: COUNTBLANK. تعدّ الخلايا الفارغة في نطاق محدد. أما VLOOKUP وLOOKUP وINDEX فدوال بحث وإرجاع قيم.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">27</div><div class="qtext">دالة تقوم بحساب المتوسط الحسابي في برنامج الإكسل هي:</div></div>
+  <input type="radio" name="q27" id="q27o1" class="i1">
+  <input type="radio" name="q27" id="q27o2" class="i2">
+  <input type="radio" name="q27" id="q27o3" class="i3">
+  <input type="radio" name="q27" id="q27o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q27o1"><span class="obadge">أ</span><span class="optxt"><bdi dir="ltr">Max</bdi></span></label>
+    <label class="opt o2" for="q27o2"><span class="obadge">ب</span><span class="optxt"><bdi dir="ltr">Min</bdi></span></label>
+    <label class="opt o3" for="q27o3"><span class="obadge">ج</span><span class="optxt"><bdi dir="ltr">Sum</bdi></span></label>
+    <label class="opt o4 correct" for="q27o4"><span class="obadge">د</span><span class="optxt"><bdi dir="ltr">Average</bdi></span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: Average. تحسب المتوسط الحسابي لمجموعة قيم. أما Max فلأكبر قيمة، وMin لأصغر قيمة، وSum للمجموع.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">28</div><div class="qtext">عند الرغبة في عرض البيانات على شكل رسوم بيانية ببرنامج اكسل يتم إدراج:</div></div>
+  <input type="radio" name="q28" id="q28o1" class="i1">
+  <input type="radio" name="q28" id="q28o2" class="i2">
+  <input type="radio" name="q28" id="q28o3" class="i3">
+  <input type="radio" name="q28" id="q28o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q28o1"><span class="obadge">أ</span><span class="optxt">صورة</span></label>
+    <label class="opt o2 correct" for="q28o2"><span class="obadge">ب</span><span class="optxt">مخطط</span></label>
+    <label class="opt o3" for="q28o3"><span class="obadge">ج</span><span class="optxt">قصاصة فنية</span></label>
+    <label class="opt o4" for="q28o4"><span class="obadge">د</span><span class="optxt">ارتباط تشعبي</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: مخطط (أي مخطط بياني Chart). تُعرض البيانات برسوم بيانية بإدراج مخطط من تبويب «إدراج». أما الصورة والقصاصة الفنية والارتباط التشعبي فعناصر لا تمثّل البيانات برسوم بيانية.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">29</div><div class="qtext">قام مجموعة من معلمي الحاسب للصف الثاني الثانوي في تحديد مشروع الوحدة السادسة (دراسة مقارنة بين مواصفات وأداء الحاسبات المحمولة وكيفية توجيه الطلاب لتحليل البيانات وتصنيفها تقنيًا)، وبعد الرجوع إلى معايير معلمي الحاسب اتفقوا على أن تكون لإحدى متطلبات المشروع تقديم النتائج بعد تحليل البيانات وإخراجها برسوم بيانية بحيث يستخدم الطالب أحد برامج:</div></div>
+  <input type="radio" name="q29" id="q29o1" class="i1">
+  <input type="radio" name="q29" id="q29o2" class="i2">
+  <input type="radio" name="q29" id="q29o3" class="i3">
+  <input type="radio" name="q29" id="q29o4" class="i4">
+  <div class="opts">
+    <label class="opt o1 correct" for="q29o1"><span class="obadge">أ</span><span class="optxt">الجداول الحسابية</span></label>
+    <label class="opt o2" for="q29o2"><span class="obadge">ب</span><span class="optxt">تحرير النصوص</span></label>
+    <label class="opt o3" for="q29o3"><span class="obadge">ج</span><span class="optxt">الرسم</span></label>
+    <label class="opt o4" for="q29o4"><span class="obadge">د</span><span class="optxt">العروض التقديمية</span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: الجداول الحسابية. هي البرامج التي تحلل البيانات وتنتج منها رسومًا بيانية (مخططات)، مثل Excel. أما تحرير النصوص فللكتابة، والرسم للتصميم، والعروض التقديمية لعرض النتائج لا لتحليلها وإنتاج مخططاتها من البيانات.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">30</div><div class="qtext">لعمل تصفية في الإكسل نستخدم الدالة:</div></div>
+  <input type="radio" name="q30" id="q30o1" class="i1">
+  <input type="radio" name="q30" id="q30o2" class="i2">
+  <input type="radio" name="q30" id="q30o3" class="i3">
+  <input type="radio" name="q30" id="q30o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q30o1"><span class="obadge">أ</span><span class="optxt"><bdi dir="ltr">SELECT</bdi></span></label>
+    <label class="opt o2" for="q30o2"><span class="obadge">ب</span><span class="optxt"><bdi dir="ltr">FORMAT</bdi></span></label>
+    <label class="opt o3 correct" for="q30o3"><span class="obadge">ج</span><span class="optxt"><bdi dir="ltr">FILTER</bdi></span></label>
+    <label class="opt o4" for="q30o4"><span class="obadge">د</span><span class="optxt"><bdi dir="ltr">SORT</bdi></span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: FILTER. تُرجع الدالة البيانات التي تحقق شرطًا معينًا، أي تصفية. أما SORT فللفرز، وFORMAT للتنسيق، وSELECT ليست دالة تصفية في الإكسل.</div>
+</div>
+<div class="qcard q">
+  <div class="qhead"><div class="qnum">31</div><div class="qtext">صيغة دالة الجمع في الإكسل هي:</div></div>
+  <input type="radio" name="q31" id="q31o1" class="i1">
+  <input type="radio" name="q31" id="q31o2" class="i2">
+  <input type="radio" name="q31" id="q31o3" class="i3">
+  <input type="radio" name="q31" id="q31o4" class="i4">
+  <div class="opts">
+    <label class="opt o1" for="q31o1"><span class="obadge">أ</span><span class="optxt"><bdi dir="ltr">TOTAL(A1 + B1)</bdi></span></label>
+    <label class="opt o2 correct" for="q31o2"><span class="obadge">ب</span><span class="optxt">=Sum (a:a)</span></label>
+    <label class="opt o3" for="q31o3"><span class="obadge">ج</span><span class="optxt"><bdi dir="ltr">Sum=(a,a)</bdi></span></label>
+    <label class="opt o4" for="q31o4"><span class="obadge">د</span><span class="optxt"><bdi dir="ltr">ADD(A1, B1)</bdi></span></label>
+  </div>
+  <div class="exp"><div class="etitle">💡 شرح الإجابة</div>الإجابة: =Sum (a:a). صيغة الدالة تبدأ بعلامة المساواة ثم اسم الدالة SUM ثم النطاق بين قوسين. أما TOTAL وADD فليستا دالتي جمع في الإكسل، وSum=(a,a) مكتوبة بترتيب خاطئ.</div>
+</div>
+</div>
+<div class="brand">مبني وفق منهجية الفلتر الخماسي — محمد السواط | alsuwatedu.com</div>
+</body>
+</html>
